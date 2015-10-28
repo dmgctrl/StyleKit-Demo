@@ -1,0 +1,3 @@
+[submodule "Libraries/StyleKit"]
+	path = Libraries/StyleKit
+	url = https://github.com/dmgctrl/StyleKit.git
