@@ -24,7 +24,8 @@
 		44C503BF1BD82AA000972D6E /* Brandon_thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 44C503B91BD82AA000972D6E /* Brandon_thin.otf */; };
 		44C503C11BD9716E00972D6E /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C503C01BD9716E00972D6E /* TableViewController.swift */; };
 		44C503C31BD972CE00972D6E /* TableViewCellTest1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C503C21BD972CE00972D6E /* TableViewCellTest1.swift */; };
-		44ECB7951BE16C6D005E43B6 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44ECB7941BE16C6D005E43B6 /* Theme.swift */; };
+		44ECB7991BE1753C005E43B6 /* Style.json in Resources */ = {isa = PBXBuildFile; fileRef = 44ECB7971BE1753C005E43B6 /* Style.json */; };
+		44ECB79A1BE1753C005E43B6 /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44ECB7981BE1753C005E43B6 /* Style.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,7 +69,8 @@
 		44C503B91BD82AA000972D6E /* Brandon_thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Brandon_thin.otf; sourceTree = "<group>"; };
 		44C503C01BD9716E00972D6E /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		44C503C21BD972CE00972D6E /* TableViewCellTest1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewCellTest1.swift; sourceTree = "<group>"; };
-		44ECB7941BE16C6D005E43B6 /* Theme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		44ECB7971BE1753C005E43B6 /* Style.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = Style.json; path = "StyleKit-Demo/Style/Style.json"; sourceTree = "<group>"; };
+		44ECB7981BE1753C005E43B6 /* Style.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Style.swift; path = "StyleKit-Demo/Style/Style.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +101,7 @@
 		44337F881BC2EBEE0051B576 = {
 			isa = PBXGroup;
 			children = (
+				44ECB79B1BE175EC005E43B6 /* Style */,
 				44337F931BC2EBEE0051B576 /* StyleKit-Demo */,
 				44337FA81BC2EBEE0051B576 /* StyleKit-DemoTests */,
 				44337FB31BC2EBEE0051B576 /* StyleKit-DemoUITests */,
@@ -119,7 +122,6 @@
 		44337F931BC2EBEE0051B576 /* StyleKit-Demo */ = {
 			isa = PBXGroup;
 			children = (
-				44ECB7941BE16C6D005E43B6 /* Theme.swift */,
 				44C503B41BD82AA000972D6E /* Brandon_bld.otf */,
 				44C503B51BD82AA000972D6E /* Brandon_blk.otf */,
 				44C503B61BD82AA000972D6E /* Brandon_light_it.otf */,
@@ -160,6 +162,15 @@
 			path = ThemerDemoUITests;
 			sourceTree = "<group>";
 		};
+		44ECB79B1BE175EC005E43B6 /* Style */ = {
+			isa = PBXGroup;
+			children = (
+				44ECB7971BE1753C005E43B6 /* Style.json */,
+				44ECB7981BE1753C005E43B6 /* Style.swift */,
+			);
+			name = Style;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -167,6 +178,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 44337FB91BC2EBEE0051B576 /* Build configuration list for PBXNativeTarget "StyleKit-Demo" */;
 			buildPhases = (
+				44ECB7961BE17525005E43B6 /* ShellScript */,
 				44337F8D1BC2EBEE0051B576 /* Sources */,
 				44337F8E1BC2EBEE0051B576 /* Frameworks */,
 				44337F8F1BC2EBEE0051B576 /* Resources */,
@@ -266,6 +278,7 @@
 				44337F9F1BC2EBEE0051B576 /* LaunchScreen.storyboard in Resources */,
 				44C503BE1BD82AA000972D6E /* Brandon_med.otf in Resources */,
 				447E172D1BC5A10D0017603B /* Asul-Regular.ttf in Resources */,
+				44ECB7991BE1753C005E43B6 /* Style.json in Resources */,
 				44C503BC1BD82AA000972D6E /* Brandon_light_it.otf in Resources */,
 				44C503BF1BD82AA000972D6E /* Brandon_thin.otf in Resources */,
 				44C503BB1BD82AA000972D6E /* Brandon_blk.otf in Resources */,
@@ -293,6 +306,22 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		44ECB7961BE17525005E43B6 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export PATH=\"$PATH:/usr/local/bin/\"\n\nif [ ! -d Libraries/StyleKit/ ]; then\necho \"error: Missing submodules run : $ git submodule update --init\"\nexit 1\nfi\n\npip list | grep jsonschema\nif [ $? -ne 0 ]; then\npip install --user jsonschema\nfi\n\n./Libraries/StyleKit/ParserJSON.py -i ${TARGET_NAME}/Style/Style.json -o ${TARGET_NAME}/Style/Style.swift";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		44337F8D1BC2EBEE0051B576 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -300,9 +329,9 @@
 			files = (
 				44337F971BC2EBEE0051B576 /* ViewController.swift in Sources */,
 				44337F951BC2EBEE0051B576 /* AppDelegate.swift in Sources */,
-				44ECB7951BE16C6D005E43B6 /* Theme.swift in Sources */,
 				44C503C11BD9716E00972D6E /* TableViewController.swift in Sources */,
 				44C503C31BD972CE00972D6E /* TableViewCellTest1.swift in Sources */,
+				44ECB79A1BE1753C005E43B6 /* Style.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
