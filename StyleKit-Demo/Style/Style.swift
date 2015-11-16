@@ -1,4 +1,4 @@
-//Theme Generated:2015-10-28 20:24:17
+//Theme Generated:2015-11-16 12:05:42
 
 import UIKit
 
@@ -12,8 +12,9 @@ class Theme: NSObject {
     let primaryFontLightItalic: String = "BrandonGrotesque-LightItalic"    
     let primaryFontBold: String = "BrandonGrotesque-Bold"    
     
-    let secondaryColor = UIColor(red: 0.00, green: 0.00, blue: 0.00, alpha: 1.00)    
-    let primaryColor = UIColor(red: 1.00, green: 1.00, blue: 1.00, alpha: 1.00)    
+    let purpleColor = UIColor(red: 0.00, green: 0.00, blue: 0.00, alpha: 1.00)    
+    let whiteColor = UIColor(red: 1.00, green: 1.00, blue: 1.00, alpha: 1.00)    
+    let blackColor = UIColor(red: 0.00, green: 0.00, blue: 0.00, alpha: 1.00)    
     
     let buttonImage1 = UIImage(named: "black_button_image")    
     
@@ -68,7 +69,7 @@ class Theme: NSObject {
     func styleH2Label(objects: [UILabel]) {        
         for object in objects {        
             object.font = UIFont (name: primaryFontLightItalic, size: 20)            
-            object.textColor = secondaryColor            
+            object.textColor = blackColor            
             }            
         }    
     
@@ -81,52 +82,52 @@ class Theme: NSObject {
     func styleH1Label(objects: [UILabel]) {        
         for object in objects {        
             object.font = UIFont (name: primaryFontLight, size: 34)            
-            object.textColor = primaryColor            
+            object.textColor = whiteColor            
             }            
         }    
     
     func styleB4Button(objects: [UIButton]) {        
         for object in objects {        
-            object.setTitleColor(primaryColor, forState: .Normal)            
-            object.titleLabel?.font = UIFont (name: primaryFontMedium, size: 22)            
-            object.layer.borderColor = primaryColor.CGColor            
-            object.layer.borderWidth = 2            
+            object.setTitleColor(blackColor, forState: .Normal)            
+            object.titleLabel?.font = UIFont (name: primaryFontBlack, size: 26)            
+            object.layer.borderColor = blackColor.CGColor            
+            object.layer.borderWidth = 1            
             }            
         }    
     
     func styleB1Button(objects: [UIButton]) {        
         for object in objects {        
-            object.backgroundColor = secondaryColor            
-            object.setTitleColor(primaryColor, forState: .Normal)            
-            object.titleLabel?.font = UIFont (name: primaryFontBold, size: 34)            
-            object.layer.cornerRadius = 22            
+            object.backgroundColor = blackColor            
+            object.setTitleColor(whiteColor, forState: .Normal)            
+            object.titleLabel?.font = UIFont (name: primaryFontLight, size: 20)            
+            object.layer.cornerRadius = 15            
             }            
         }    
     
     func styleB2Button(objects: [UIButton]) {        
         for object in objects {        
-            object.backgroundColor = primaryColor            
-            object.setTitleColor(secondaryColor, forState: .Normal)            
-            object.titleLabel?.font = UIFont (name: primaryFontBold, size: 24)            
-            object.layer.cornerRadius = 8            
+            object.backgroundColor = whiteColor            
+            object.setTitleColor(blackColor, forState: .Normal)            
+            object.titleLabel?.font = UIFont (name: primaryFontMedium, size: 22)            
+            object.layer.cornerRadius = 10            
             }            
         }    
     
     func styleB3Button(objects: [UIButton]) {        
         for object in objects {        
-            object.setTitleColor(primaryColor, forState: .Normal)            
-            object.titleLabel?.font = UIFont (name: primaryFontMedium, size: 22)            
-            object.layer.borderColor = primaryColor.CGColor            
-            object.layer.borderWidth = 2            
+            object.setTitleColor(whiteColor, forState: .Normal)            
+            object.titleLabel?.font = UIFont (name: primaryFontBold, size: 24)            
+            object.layer.cornerRadius = 5            
+            object.layer.borderColor = whiteColor.CGColor            
+            object.layer.borderWidth = 5            
             }            
         }    
     
     func styleT1TextField(objects: [UITextField]) {        
         for object in objects {        
-            object.textColor = primaryColor            
-            object.backgroundColor = secondaryColor            
-            object.layer.borderColor = primaryColor.CGColor            
-            object.layer.borderWidth = 1            
+            object.textColor = blackColor            
+            object.backgroundColor = whiteColor            
+            object.layer.borderColor = blackColor.CGColor            
             }            
         }    
     
