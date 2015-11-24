@@ -21,8 +21,11 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to StyleKit" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="goe-IS-t1P">
-                                        <rect key="frame" x="83" y="15" width="154" height="21"/>
+                                        <rect key="frame" x="8" y="15" width="304" height="21"/>
                                         <animations/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="304" id="aMd-Ao-ScV"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -50,7 +53,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KNc-Px-qTM">
                                         <rect key="frame" x="0.0" y="127" width="320" height="139"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t2D-Fz-sYb">
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t2D-Fz-sYb">
                                                 <rect key="frame" x="8" y="15" width="155" height="54"/>
                                                 <animations/>
                                                 <state key="normal" title="Button 1"/>
@@ -90,15 +93,41 @@
                                             <constraint firstAttribute="width" constant="320" id="QKs-d0-pm9"/>
                                         </constraints>
                                     </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B3g-8g-aTZ">
+                                        <rect key="frame" x="78" y="274" width="165" height="89"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This is a UIView with styling applied to it." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yg4-o9-nD3">
+                                                <rect key="frame" x="11" y="12" width="142" height="66"/>
+                                                <animations/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="142" id="cF0-Vq-sek"/>
+                                                    <constraint firstAttribute="height" constant="66" id="s8l-zD-W25"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <animations/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstItem="yg4-o9-nD3" firstAttribute="centerX" secondItem="B3g-8g-aTZ" secondAttribute="centerX" id="9kk-bf-9Bw"/>
+                                            <constraint firstAttribute="width" constant="165" id="Q8w-C6-AN1"/>
+                                            <constraint firstAttribute="height" constant="89" id="Y5I-A9-h7J"/>
+                                            <constraint firstItem="yg4-o9-nD3" firstAttribute="centerY" secondItem="B3g-8g-aTZ" secondAttribute="centerY" id="sOH-Tm-rUD"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                                 <animations/>
                                 <color key="backgroundColor" red="0.7019608021" green="0.7019608021" blue="0.7019608021" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="4eG-HK-pBv" firstAttribute="leading" secondItem="qXe-tG-I9Q" secondAttribute="leading" constant="37" id="0fA-f1-NEW"/>
                                     <constraint firstItem="rqf-Ec-jF7" firstAttribute="centerX" secondItem="4a5-7i-flv" secondAttribute="centerX" constant="-1" id="59F-bL-Ckr"/>
+                                    <constraint firstItem="B3g-8g-aTZ" firstAttribute="centerX" secondItem="KNc-Px-qTM" secondAttribute="centerX" id="7gB-z7-ujK"/>
+                                    <constraint firstItem="B3g-8g-aTZ" firstAttribute="top" secondItem="KNc-Px-qTM" secondAttribute="bottom" constant="8" id="Ify-gM-lrA"/>
                                     <constraint firstItem="4eG-HK-pBv" firstAttribute="centerX" secondItem="rqf-Ec-jF7" secondAttribute="centerX" constant="-0.5" id="J9h-2w-xHZ"/>
                                     <constraint firstAttribute="bottom" secondItem="KNc-Px-qTM" secondAttribute="bottom" constant="238" id="NfV-sY-7sJ"/>
-                                    <constraint firstItem="4a5-7i-flv" firstAttribute="top" secondItem="goe-IS-t1P" secondAttribute="bottom" constant="1" id="Qtf-y2-q2v"/>
+                                    <constraint firstItem="4a5-7i-flv" firstAttribute="top" secondItem="goe-IS-t1P" secondAttribute="bottom" id="Qtf-y2-q2v"/>
                                     <constraint firstItem="4eG-HK-pBv" firstAttribute="top" secondItem="rqf-Ec-jF7" secondAttribute="bottom" constant="7" id="T6t-aw-2f9"/>
                                     <constraint firstItem="KNc-Px-qTM" firstAttribute="centerX" secondItem="4eG-HK-pBv" secondAttribute="centerX" id="Y4H-9z-IFR"/>
                                     <constraint firstItem="rqf-Ec-jF7" firstAttribute="top" secondItem="4a5-7i-flv" secondAttribute="bottom" constant="4" id="dOB-4b-a2O"/>
@@ -122,16 +151,17 @@
                     <navigationItem key="navigationItem" title="StyleKit" id="rcv-vc-JAJ"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
-                <customObject id="QDR-eZ-pbk" customClass="Theme" customModule="StyleKit_Demo" customModuleProvider="target">
+                <customObject id="QDR-eZ-pbk" customClass="Style" customModule="StyleKit_Demo" customModuleProvider="target">
                     <connections>
-                        <outletCollection property="H1Label" destination="goe-IS-t1P" collectionClass="NSMutableArray" id="HJ1-LY-MhY"/>
-                        <outletCollection property="B3Button" destination="n1O-Ud-sjE" collectionClass="NSMutableArray" id="T25-Hv-b6M"/>
-                        <outletCollection property="B2Button" destination="iFb-Gw-sld" collectionClass="NSMutableArray" id="rox-Mt-YY4"/>
-                        <outletCollection property="B4Button" destination="Ff2-LS-4FT" collectionClass="NSMutableArray" id="YJq-qd-14o"/>
-                        <outletCollection property="B1Button" destination="t2D-Fz-sYb" collectionClass="NSMutableArray" id="4Zi-R4-vdH"/>
-                        <outletCollection property="T1TextField" destination="4eG-HK-pBv" collectionClass="NSMutableArray" id="aZY-nu-vo7"/>
-                        <outletCollection property="H2Label" destination="rqf-Ec-jF7" collectionClass="NSMutableArray" id="PMo-KU-TRI"/>
-                        <outletCollection property="H3Label" destination="4a5-7i-flv" collectionClass="NSMutableArray" id="Xaw-Ii-JeR"/>
+                        <outletCollection property="B1Button" destination="t2D-Fz-sYb" collectionClass="NSMutableArray" id="Ldn-B6-Usb"/>
+                        <outletCollection property="B2Button" destination="iFb-Gw-sld" collectionClass="NSMutableArray" id="1Nj-tM-g1B"/>
+                        <outletCollection property="B3Button" destination="n1O-Ud-sjE" collectionClass="NSMutableArray" id="Y5O-Jr-73u"/>
+                        <outletCollection property="B4Button" destination="Ff2-LS-4FT" collectionClass="NSMutableArray" id="HYo-K8-ivo"/>
+                        <outletCollection property="H1Label" destination="goe-IS-t1P" collectionClass="NSMutableArray" id="K14-B9-OcB"/>
+                        <outletCollection property="H2Label" destination="4a5-7i-flv" collectionClass="NSMutableArray" id="bWm-2N-ece"/>
+                        <outletCollection property="H3Label" destination="rqf-Ec-jF7" collectionClass="NSMutableArray" id="gad-D6-E5k"/>
+                        <outletCollection property="T1TextField" destination="4eG-HK-pBv" collectionClass="NSMutableArray" id="37Z-lA-d5n"/>
+                        <outletCollection property="specialView" destination="B3g-8g-aTZ" collectionClass="NSMutableArray" id="XJs-7K-1lt"/>
                     </connections>
                 </customObject>
             </objects>
@@ -158,7 +188,7 @@
                                         <rect key="frame" x="0.0" y="28" width="320" height="88"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="4HI-sM-sCy" id="lNP-v3-61w">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="87.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="87"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hyg-34-3gm">
