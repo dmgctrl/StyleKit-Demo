@@ -122,14 +122,6 @@
 		44337F931BC2EBEE0051B576 /* StyleKit-Demo */ = {
 			isa = PBXGroup;
 			children = (
-				44C503B41BD82AA000972D6E /* Brandon_bld.otf */,
-				44C503B51BD82AA000972D6E /* Brandon_blk.otf */,
-				44C503B61BD82AA000972D6E /* Brandon_light_it.otf */,
-				44C503B71BD82AA000972D6E /* Brandon_light.otf */,
-				44C503B81BD82AA000972D6E /* Brandon_med.otf */,
-				44C503B91BD82AA000972D6E /* Brandon_thin.otf */,
-				447E172A1BC5A10D0017603B /* Asul-Bold.ttf */,
-				447E172B1BC5A10D0017603B /* Asul-Regular.ttf */,
 				44337F941BC2EBEE0051B576 /* AppDelegate.swift */,
 				44337F961BC2EBEE0051B576 /* ViewController.swift */,
 				44337F981BC2EBEE0051B576 /* Main.storyboard */,
@@ -138,6 +130,7 @@
 				44337FA01BC2EBEE0051B576 /* Info.plist */,
 				44C503C01BD9716E00972D6E /* TableViewController.swift */,
 				44C503C21BD972CE00972D6E /* TableViewCellTest1.swift */,
+				F710A3361BFA399C005CD47C /* Fonts */,
 			);
 			path = "StyleKit-Demo";
 			sourceTree = "<group>";
@@ -169,6 +162,21 @@
 				44ECB7981BE1753C005E43B6 /* Style.swift */,
 			);
 			name = Style;
+			sourceTree = "<group>";
+		};
+		F710A3361BFA399C005CD47C /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				44C503B41BD82AA000972D6E /* Brandon_bld.otf */,
+				44C503B51BD82AA000972D6E /* Brandon_blk.otf */,
+				44C503B61BD82AA000972D6E /* Brandon_light_it.otf */,
+				44C503B71BD82AA000972D6E /* Brandon_light.otf */,
+				44C503B81BD82AA000972D6E /* Brandon_med.otf */,
+				44C503B91BD82AA000972D6E /* Brandon_thin.otf */,
+				447E172A1BC5A10D0017603B /* Asul-Bold.ttf */,
+				447E172B1BC5A10D0017603B /* Asul-Regular.ttf */,
+			);
+			name = Fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

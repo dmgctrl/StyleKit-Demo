@@ -7,16 +7,22 @@
         "primaryFontLightItalic":"BrandonGrotesque-LightItalic"
     },
     "Colors": {
-        "primaryColor": {
-            "red": 1,
-            "green": 1,
-            "blue": 1,
+        "whiteColor": {
+            "red": 255,
+            "green": 255,
+            "blue": 255,
             "alpha": 1
         },
-        "secondaryColor": {
+        "blackColor": {
             "red": 0,
             "green": 0,
             "blue": 0,
+            "alpha": 1
+        },
+        "blueColor": {
+            "red": 0,
+            "green": 84,
+            "blue": 136,
             "alpha": 1
         }
     },
@@ -25,70 +31,101 @@
     },
     "Labels": {
         "H1": {
+          "fontStyle": {
             "font": "primaryFontLight",
-            "size": 34,
-            "textColor": "primaryColor"
+            "size": 34
+          },
+          "textColor": "whiteColor",
+          "textAlignment": "Center"
         },
         "H2": {
+          "fontStyle": {
             "font": "primaryFontLightItalic",
-            "size": 20,
-            "textColor": "secondaryColor"
+            "size": 20
+          },
+          "textColor": "blackColor"
         },
         "H3": {
+          "fontStyle": {
             "font": "primaryFontBlack",
             "size": 24
+          },
+          "textColor": "blueColor"
         }
     },
     "Buttons": {
         "B1": {
-            "titleLabelFont": "primaryFontBold",
-            "size": 34,
-            "backgroundColor": "secondaryColor",
-            "cornerRadius": 22,
+            "fontStyle": {
+              "font": "primaryFontLight",
+              "size": 34
+            },
+            "backgroundColor": "blackColor",
+            "borderColor": "whiteColor",
+            "borderWidth": 3,
+            "cornerRadius": 10,
             "normal": {
-                "titleColor": "primaryColor",
-                "titleShadowColor" : "primaryColor"
+                "titleColor": "whiteColor",
+                "titleShadowColor" : "whiteColor"
             },
             "highlighted": {
-                "titleColor": "secondaryColor"
+                "titleColor": "blueColor",
+                "backgroundColor": "whiteColor"
             }
         },
         "B2": {
-            "titleLabelFont": "primaryFontBold",
-            "size": 24,
-            "backgroundColor": "primaryColor",
-            "cornerRadius": 8,
+            "fontStyle": {
+              "font": "primaryFontLight",
+              "size": 28
+            },
+            "backgroundColor": "whiteColor",
+            "borderColor": "blueColor",
+            "borderWidth": 5,
+            "cornerRadius": 3,
             "normal": {
-                "titleColor": "secondaryColor",
-                "titleShadowColor" : "primaryColor"
+                "titleColor": "blueColor",
+                "titleShadowColor" : "whiteColor"
             }
         },
         "B3": {
-            "titleLabelFont": "primaryFontMedium",
-            "size": 22,
-            "borderColor": "primaryColor",
-            "borderWidth": 2,
+            "fontStyle": {
+              "font": "primaryFontMedium",
+              "size": 20
+            },
+            "backgroundColor": "blackColor",
+            "borderColor": "blueColor",
+            "borderWidth": 3,
+            "cornerRadius": 15,
             "normal": {
-                "titleColor": "primaryColor"
+                "titleColor": "blueColor"
             }
         },
         "B4": {
-            "titleLabelFont": "primaryFontMedium",
-            "size": 22,
-            "borderColor": "primaryColor",
-            "borderWidth": 2,
+            "fontStyle": {
+              "font": "primaryFontBold",
+              "size": 17
+            },
+            "backgroundColor": "whiteColor",
+            "borderColor": "blackColor",
+            "borderWidth": 3,
+            "cornerRadius": 0,
             "normal": {
-                "titleColor": "primaryColor"
+                "titleColor": "blackColor"
             }
         }
     },
     "TextFields": {
         "T1": {
-            "textColor": "primaryColor",
-            "backgroundColor": "secondaryColor",
-            "borderColor": "primaryColor",
-            "borderWidth": 1,
-            "cornerRadius": 8
+          "fontStyle": {
+            "font": "primaryFontMedium",
+            "size": 15
+          },
+          "textColor": "whiteColor",
+          "backgroundColor": "blueColor",
+          "borderColor": "blackColor",
+          "textAlignment": "Center",
+          "borderWidth": 2,
+          "cornerRadius": 5,
+          "borderStyle": "RoundedRect"
         }
     }
 }
