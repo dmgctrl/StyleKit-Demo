@@ -34,12 +34,6 @@ class Style: NSObject {
         }        
     }    
     
-    @IBOutlet var specialView: [UIView]! {        
-        didSet {            
-            stylespecialView(specialView)            
-        }        
-    }    
-    
     @IBOutlet var B4Button: [UIButton]! {        
         didSet {            
             styleB4Button(B4Button)            
@@ -89,15 +83,6 @@ class Style: NSObject {
             object.textColor = whiteColor            
             object.font = UIFont (name: primaryFontLight, size: 34)            
             object.textAlignment = NSTextAlignment.Center            
-            }            
-        }    
-    
-    func stylespecialView(objects: [UIView]) {        
-        for object in objects {        
-            object.backgroundColor = blueColor            
-            object.layer.cornerRadius = 5            
-            object.layer.borderColor = blackColor.CGColor            
-            object.layer.borderWidth = 5            
             }            
         }    
     
