@@ -29,6 +29,14 @@
     "Images": {
         "buttonImage1": "black_button_image"
     },
+    "Views": {
+        "special": {
+            "backgroundColor": "blueColor",
+            "borderColor": "blackColor",
+            "borderWidth": 5,
+            "cornerRadius": 5
+        }
+    },
     "Labels": {
         "H1": {
           "fontStyle": {

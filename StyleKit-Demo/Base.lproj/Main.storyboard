@@ -93,18 +93,44 @@
                                             <constraint firstAttribute="width" constant="320" id="QKs-d0-pm9"/>
                                         </constraints>
                                     </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jWZ-N9-hSa">
+                                        <rect key="frame" x="40" y="279" width="240" height="128"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This is a styled UIView" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EPk-JK-78v">
+                                                <rect key="frame" x="48" y="37" width="144" height="53"/>
+                                                <animations/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="53" id="PbU-lP-Z1U"/>
+                                                    <constraint firstAttribute="width" constant="144" id="sDq-8P-g7t"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <animations/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstItem="EPk-JK-78v" firstAttribute="centerY" secondItem="jWZ-N9-hSa" secondAttribute="centerY" id="3A2-Go-kdY"/>
+                                            <constraint firstAttribute="height" constant="128" id="3xu-pT-kGt"/>
+                                            <constraint firstAttribute="width" constant="240" id="KoN-xp-ah4"/>
+                                            <constraint firstItem="EPk-JK-78v" firstAttribute="centerX" secondItem="jWZ-N9-hSa" secondAttribute="centerX" id="L5S-hU-gzS"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                                 <animations/>
                                 <color key="backgroundColor" red="0.7019608021" green="0.7019608021" blue="0.7019608021" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="4eG-HK-pBv" firstAttribute="leading" secondItem="qXe-tG-I9Q" secondAttribute="leading" constant="37" id="0fA-f1-NEW"/>
                                     <constraint firstItem="rqf-Ec-jF7" firstAttribute="centerX" secondItem="4a5-7i-flv" secondAttribute="centerX" constant="-1" id="59F-bL-Ckr"/>
+                                    <constraint firstItem="jWZ-N9-hSa" firstAttribute="centerX" secondItem="KNc-Px-qTM" secondAttribute="centerX" id="G2Z-Jh-qWz"/>
                                     <constraint firstItem="4eG-HK-pBv" firstAttribute="centerX" secondItem="rqf-Ec-jF7" secondAttribute="centerX" constant="-0.5" id="J9h-2w-xHZ"/>
                                     <constraint firstAttribute="bottom" secondItem="KNc-Px-qTM" secondAttribute="bottom" constant="238" id="NfV-sY-7sJ"/>
                                     <constraint firstItem="4a5-7i-flv" firstAttribute="top" secondItem="goe-IS-t1P" secondAttribute="bottom" id="Qtf-y2-q2v"/>
                                     <constraint firstItem="4eG-HK-pBv" firstAttribute="top" secondItem="rqf-Ec-jF7" secondAttribute="bottom" constant="7" id="T6t-aw-2f9"/>
                                     <constraint firstItem="KNc-Px-qTM" firstAttribute="centerX" secondItem="4eG-HK-pBv" secondAttribute="centerX" id="Y4H-9z-IFR"/>
                                     <constraint firstItem="rqf-Ec-jF7" firstAttribute="top" secondItem="4a5-7i-flv" secondAttribute="bottom" constant="4" id="dOB-4b-a2O"/>
+                                    <constraint firstItem="jWZ-N9-hSa" firstAttribute="top" secondItem="KNc-Px-qTM" secondAttribute="bottom" constant="13" id="fnZ-Hx-VKR"/>
                                     <constraint firstItem="4a5-7i-flv" firstAttribute="centerX" secondItem="goe-IS-t1P" secondAttribute="centerX" constant="1.5" id="iEw-wO-hfC"/>
                                     <constraint firstItem="goe-IS-t1P" firstAttribute="top" secondItem="qXe-tG-I9Q" secondAttribute="top" constant="15" id="kfw-6P-h0H"/>
                                     <constraint firstAttribute="trailing" secondItem="4eG-HK-pBv" secondAttribute="trailing" constant="37" id="lrf-56-kUw"/>
@@ -135,6 +161,7 @@
                         <outletCollection property="H2Label" destination="4a5-7i-flv" collectionClass="NSMutableArray" id="bWm-2N-ece"/>
                         <outletCollection property="H3Label" destination="rqf-Ec-jF7" collectionClass="NSMutableArray" id="gad-D6-E5k"/>
                         <outletCollection property="T1TextField" destination="4eG-HK-pBv" collectionClass="NSMutableArray" id="37Z-lA-d5n"/>
+                        <outletCollection property="specialView" destination="jWZ-N9-hSa" collectionClass="NSMutableArray" id="g04-0g-8fs"/>
                     </connections>
                 </customObject>
             </objects>
