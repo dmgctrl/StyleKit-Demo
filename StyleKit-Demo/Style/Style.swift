@@ -10,9 +10,9 @@ class Style: NSObject {
     let primaryFontLightItalic: String = "BrandonGrotesque-LightItalic"    
     let primaryFontBold: String = "BrandonGrotesque-Bold"    
     
-    let blueColor = UIColor(red: 0.0/255.0, green: 84.0/255.0, blue: 136.0/255.0, alpha: 1.0)    
-    let whiteColor = UIColor(red: 255.0/255.0, green: 255.0/255.0, blue: 255.0/255.0, alpha: 1.0)    
     let blackColor = UIColor(red: 0.0/255.0, green: 0.0/255.0, blue: 0.0/255.0, alpha: 1.0)    
+    let whiteColor = UIColor(red: 255.0/255.0, green: 255.0/255.0, blue: 255.0/255.0, alpha: 1.0)    
+    let purpleColor = UIColor(red: 162.0/255.0, green: 57.0/255.0, blue: 181.0/255.0, alpha: 0.5)    
     
     let buttonImage1 = UIImage(named: "black_button_image")    
     
@@ -79,7 +79,7 @@ class Style: NSObject {
     
     func styleH3Label(objects: [UILabel]) {        
         for object in objects {        
-            object.textColor = blueColor            
+            object.textColor = purpleColor            
             object.font = UIFont (name: primaryFontBlack, size: 24)            
             }            
         }    
@@ -94,7 +94,7 @@ class Style: NSObject {
     
     func stylespecialView(objects: [UIView]) {        
         for object in objects {        
-            object.backgroundColor = blueColor            
+            object.backgroundColor = purpleColor            
             object.layer.cornerRadius = 5            
             object.layer.borderColor = blackColor.CGColor            
             object.layer.borderWidth = 5            
@@ -118,7 +118,7 @@ class Style: NSObject {
             object.layer.borderColor = whiteColor.CGColor            
             object.layer.borderWidth = 3            
             object.setTitleColor(whiteColor, forState: .Normal)            
-            object.setTitleColor(blueColor, forState: .Highlighted)            
+            object.setTitleColor(purpleColor, forState: .Highlighted)            
             object.titleLabel?.font = UIFont (name: primaryFontLight, size: 34)            
             }            
         }    
@@ -127,9 +127,9 @@ class Style: NSObject {
         for object in objects {        
             object.backgroundColor = whiteColor            
             object.layer.cornerRadius = 3            
-            object.layer.borderColor = blueColor.CGColor            
+            object.layer.borderColor = purpleColor.CGColor            
             object.layer.borderWidth = 5            
-            object.setTitleColor(blueColor, forState: .Normal)            
+            object.setTitleColor(purpleColor, forState: .Normal)            
             object.titleLabel?.font = UIFont (name: primaryFontLight, size: 28)            
             }            
         }    
@@ -138,16 +138,16 @@ class Style: NSObject {
         for object in objects {        
             object.backgroundColor = blackColor            
             object.layer.cornerRadius = 15            
-            object.layer.borderColor = blueColor.CGColor            
+            object.layer.borderColor = purpleColor.CGColor            
             object.layer.borderWidth = 3            
-            object.setTitleColor(blueColor, forState: .Normal)            
+            object.setTitleColor(purpleColor, forState: .Normal)            
             object.titleLabel?.font = UIFont (name: primaryFontMedium, size: 20)            
             }            
         }    
     
     func styleT1TextField(objects: [UITextField]) {        
         for object in objects {        
-            object.backgroundColor = blueColor            
+            object.backgroundColor = purpleColor            
             object.layer.cornerRadius = 5            
             object.layer.borderColor = blackColor.CGColor            
             object.layer.borderWidth = 2            
