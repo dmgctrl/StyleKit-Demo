@@ -7,22 +7,18 @@
         "primaryFontLightItalic":"BrandonGrotesque-LightItalic"
     },
     "Colors": {
-        "whiteColor": {
-            "red": 255,
-            "green": 255,
-            "blue": 255,
-            "alpha": 1
+        "purpleColor": {
+            "hex": "#A239B5",
+            "alpha": 0.5
         },
         "blackColor": {
             "red": 0,
             "green": 0,
             "blue": 0,
-            "alpha": 1
+            "alpha": 1.0
         },
-        "blueColor": {
-            "red": 0,
-            "green": 84,
-            "blue": 136,
+        "whiteColor": {
+            "hex": "#FFFFFF",
             "alpha": 1
         }
     },
@@ -31,7 +27,7 @@
     },
     "Views": {
         "special": {
-            "backgroundColor": "blueColor",
+            "backgroundColor": "purpleColor",
             "borderColor": "blackColor",
             "borderWidth": 5,
             "cornerRadius": 5
@@ -39,33 +35,33 @@
     },
     "Labels": {
         "H1": {
-          "fontStyle": {
-            "font": "primaryFontLight",
-            "size": 34
-          },
-          "textColor": "whiteColor",
-          "textAlignment": "Center"
+            "fontStyle": {
+                "font": "primaryFontLight",
+                "size": 34
+            },
+            "textColor": "whiteColor",
+            "textAlignment": "Center"
         },
         "H2": {
-          "fontStyle": {
-            "font": "primaryFontLightItalic",
-            "size": 20
-          },
-          "textColor": "blackColor"
+            "fontStyle": {
+                "font": "primaryFontLightItalic",
+                "size": 20
+            },
+            "textColor": "blackColor"
         },
         "H3": {
-          "fontStyle": {
-            "font": "primaryFontBlack",
-            "size": 24
-          },
-          "textColor": "blueColor"
+            "fontStyle": {
+                "font": "primaryFontBlack",
+                "size": 24
+            },
+            "textColor": "purpleColor"
         }
     },
     "Buttons": {
         "B1": {
             "fontStyle": {
-              "font": "primaryFontLight",
-              "size": 34
+                "font": "primaryFontLight",
+                "size": 34
             },
             "backgroundColor": "blackColor",
             "borderColor": "whiteColor",
@@ -76,41 +72,41 @@
                 "titleShadowColor" : "whiteColor"
             },
             "highlighted": {
-                "titleColor": "blueColor",
+                "titleColor": "purpleColor",
                 "backgroundColor": "whiteColor"
             }
         },
         "B2": {
             "fontStyle": {
-              "font": "primaryFontLight",
-              "size": 28
+                "font": "primaryFontLight",
+                "size": 28
             },
             "backgroundColor": "whiteColor",
-            "borderColor": "blueColor",
+            "borderColor": "purpleColor",
             "borderWidth": 5,
             "cornerRadius": 3,
             "normal": {
-                "titleColor": "blueColor",
+                "titleColor": "purpleColor",
                 "titleShadowColor" : "whiteColor"
             }
         },
         "B3": {
             "fontStyle": {
-              "font": "primaryFontMedium",
-              "size": 20
+                "font": "primaryFontMedium",
+                "size": 20
             },
             "backgroundColor": "blackColor",
-            "borderColor": "blueColor",
+            "borderColor": "purpleColor",
             "borderWidth": 3,
             "cornerRadius": 15,
             "normal": {
-                "titleColor": "blueColor"
+                "titleColor": "purpleColor"
             }
         },
         "B4": {
             "fontStyle": {
-              "font": "primaryFontBold",
-              "size": 17
+                "font": "primaryFontBold",
+                "size": 17
             },
             "backgroundColor": "whiteColor",
             "borderColor": "blackColor",
@@ -123,17 +119,17 @@
     },
     "TextFields": {
         "T1": {
-          "fontStyle": {
-            "font": "primaryFontMedium",
-            "size": 15
-          },
-          "textColor": "whiteColor",
-          "backgroundColor": "blueColor",
-          "borderColor": "blackColor",
-          "textAlignment": "Center",
-          "borderWidth": 2,
-          "cornerRadius": 5,
-          "borderStyle": "RoundedRect"
+            "fontStyle": {
+                "font": "primaryFontMedium",
+                "size": 15
+            },
+            "textColor": "whiteColor",
+            "backgroundColor": "purpleColor",
+            "borderColor": "blackColor",
+            "textAlignment": "Center",
+            "borderWidth": 2,
+            "cornerRadius": 5,
+            "borderStyle": "RoundedRect"
         }
     }
 }
