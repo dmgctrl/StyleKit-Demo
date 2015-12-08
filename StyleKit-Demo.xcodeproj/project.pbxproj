@@ -26,6 +26,7 @@
 		44C503C31BD972CE00972D6E /* TableViewCellTest1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C503C21BD972CE00972D6E /* TableViewCellTest1.swift */; };
 		44ECB7991BE1753C005E43B6 /* Style.json in Resources */ = {isa = PBXBuildFile; fileRef = 44ECB7971BE1753C005E43B6 /* Style.json */; };
 		44ECB79A1BE1753C005E43B6 /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44ECB7981BE1753C005E43B6 /* Style.swift */; };
+		F7DB65541C1236A400683191 /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7DB65531C1236A400683191 /* UIImage+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +72,7 @@
 		44C503C21BD972CE00972D6E /* TableViewCellTest1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewCellTest1.swift; sourceTree = "<group>"; };
 		44ECB7971BE1753C005E43B6 /* Style.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = Style.json; path = "StyleKit-Demo/Style/Style.json"; sourceTree = "<group>"; };
 		44ECB7981BE1753C005E43B6 /* Style.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Style.swift; path = "StyleKit-Demo/Style/Style.swift"; sourceTree = "<group>"; };
+		F7DB65531C1236A400683191 /* UIImage+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIImage+Extensions.swift"; path = "StyleKit-Demo/UIImage+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -160,6 +162,7 @@
 			children = (
 				44ECB7971BE1753C005E43B6 /* Style.json */,
 				44ECB7981BE1753C005E43B6 /* Style.swift */,
+				F7DB65531C1236A400683191 /* UIImage+Extensions.swift */,
 			);
 			name = Style;
 			sourceTree = "<group>";
@@ -338,6 +341,7 @@
 				44337F971BC2EBEE0051B576 /* ViewController.swift in Sources */,
 				44337F951BC2EBEE0051B576 /* AppDelegate.swift in Sources */,
 				44C503C11BD9716E00972D6E /* TableViewController.swift in Sources */,
+				F7DB65541C1236A400683191 /* UIImage+Extensions.swift in Sources */,
 				44C503C31BD972CE00972D6E /* TableViewCellTest1.swift in Sources */,
 				44ECB79A1BE1753C005E43B6 /* Style.swift in Sources */,
 			);
