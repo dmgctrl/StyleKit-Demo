@@ -62,7 +62,7 @@
                     "font": "primaryFontMedium",
                     "size": 22
                 },
-                "kerning": 2,
+                "kerning": 60,
                 "ligature": 0
             }
         },
@@ -74,7 +74,7 @@
                     "font": "primaryFontLight",
                     "size": 18
                 },
-                "kerning": 0,
+                "kerning": 80,
                 "ligature": 0
             }
         }

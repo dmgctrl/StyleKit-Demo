@@ -66,6 +66,7 @@ class Style: NSObject {
     func attributesForH2Label() ->  Dictionary<String, AnyObject> {         
         let attributes = [             
             NSFontAttributeName: UIFont(name: primaryFontLight, size: 18)!,            
+            NSKernAttributeName: 5.4,            
          ]        
         return attributes        
     }    
@@ -81,7 +82,7 @@ class Style: NSObject {
     func attributesForH1Label() ->  Dictionary<String, AnyObject> {         
         let attributes = [             
             NSFontAttributeName: UIFont(name: primaryFontMedium, size: 22)!,            
-            NSKernAttributeName: 2,            
+            NSKernAttributeName: 1.32,            
          ]        
         return attributes        
     }    
