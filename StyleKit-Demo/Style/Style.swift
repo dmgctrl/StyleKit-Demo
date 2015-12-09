@@ -64,9 +64,12 @@ class Style: NSObject {
     }    
     
     func attributesForH2Label() ->  Dictionary<String, AnyObject> {         
+        let style = NSMutableParagraphStyle()        
+        style.alignment = NSTextAlignment.Center        
         let attributes = [             
             NSFontAttributeName: UIFont(name: primaryFontLight, size: 18)!,            
-            NSKernAttributeName: 5.4,            
+            NSKernAttributeName: 1.08,            
+            NSParagraphStyleAttributeName: style            
          ]        
         return attributes        
     }    
@@ -74,15 +77,18 @@ class Style: NSObject {
     func styleH2Label(objects: [UILabel]) {        
         for object in objects {        
             object.textColor = greenColor            
-            object.textAlignment = NSTextAlignment.Center            
             object.attributedText = NSAttributedString(string: object.text!, attributes:attributesForH2Label())            
             }            
         }    
     
     func attributesForH1Label() ->  Dictionary<String, AnyObject> {         
+        let style = NSMutableParagraphStyle()        
+        style.alignment = NSTextAlignment.Center        
+        style.lineSpacing = 5        
         let attributes = [             
             NSFontAttributeName: UIFont(name: primaryFontMedium, size: 22)!,            
-            NSKernAttributeName: 1.32,            
+            NSKernAttributeName: 11.0,            
+            NSParagraphStyleAttributeName: style,            
          ]        
         return attributes        
     }    
@@ -90,7 +96,6 @@ class Style: NSObject {
     func styleH1Label(objects: [UILabel]) {        
         for object in objects {        
             object.textColor = blueColor            
-            object.textAlignment = NSTextAlignment.Center            
             object.attributedText = NSAttributedString(string: object.text!, attributes:attributesForH1Label())            
             }            
         }    

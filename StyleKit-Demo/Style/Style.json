@@ -62,7 +62,8 @@
                     "font": "primaryFontMedium",
                     "size": 22
                 },
-                "kerning": 60,
+                "tracking": 100,
+                "lineSpacing": 5,
                 "ligature": 0
             }
         },
@@ -74,7 +75,8 @@
                     "font": "primaryFontLight",
                     "size": 18
                 },
-                "kerning": 80,
+                "tracking": 60,
+                "lineSpacing": 5,
                 "ligature": 0
             }
         }
