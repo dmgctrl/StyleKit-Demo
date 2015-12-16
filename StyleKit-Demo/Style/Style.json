@@ -9,16 +9,36 @@
     "Colors": {
         "purpleColor": {
             "hex": "#A239B5",
-            "alpha": 0.5
+            "alpha": 1
+        },
+        "blueColor": {
+            "hex": "#005488",
+            "alpha": 1
+        },
+        "greenColor": {
+            "hex": "#49B93A",
+            "alpha": 1
         },
         "blackColor": {
             "red": 0,
             "green": 0,
             "blue": 0,
-            "alpha": 1.0
+            "alpha": 1
         },
         "whiteColor": {
             "hex": "#FFFFFF",
+            "alpha": 1
+        },
+        "clearColor": {
+            "hex": "#000000",
+            "alpha": 0.1
+        },
+        "lightBlueColor": {
+            "hex": "#8BC0E0",
+            "alpha": 0.75
+        },
+        "lightGrayColor": {
+            "hex": "#EFEFF4",
             "alpha": 1
         }
     },
@@ -27,93 +47,81 @@
     },
     "Views": {
         "special": {
-            "backgroundColor": "purpleColor",
-            "borderColor": "blackColor",
-            "borderWidth": 5,
-            "cornerRadius": 5
+            "backgroundColor": "lightGrayColor",
+            "borderColor": "blueColor",
+            "borderWidth": 2,
+            "cornerRadius": 10
         }
     },
     "Labels": {
         "H1": {
-            "fontStyle": {
-                "font": "primaryFontLight",
-                "size": 34
-            },
-            "textColor": "whiteColor",
-            "textAlignment": "Center"
+            "textColor": "blueColor",
+            "textAlignment": "Center",
+            "attributes": {
+                "fontStyle": {
+                    "font": "primaryFontMedium",
+                    "size": 22
+                },
+                "tracking": 100,
+                "lineSpacing": 5,
+                "ligature": 0
+            }
         },
         "H2": {
-            "fontStyle": {
-                "font": "primaryFontLightItalic",
-                "size": 20
-            },
-            "textColor": "blackColor"
-        },
-        "H3": {
-            "fontStyle": {
-                "font": "primaryFontBlack",
-                "size": 24
-            },
-            "textColor": "purpleColor"
+            "textColor": "greenColor",
+            "textAlignment": "Center",
+            "attributes": {
+                "fontStyle": {
+                    "font": "primaryFontLight",
+                    "size": 18
+                },
+                "tracking": 60,
+                "lineSpacing": 5,
+                "ligature": 0
+            }
         }
     },
     "Buttons": {
         "B1": {
-            "fontStyle": {
-                "font": "primaryFontLight",
-                "size": 34
-            },
-            "backgroundColor": "blackColor",
-            "borderColor": "whiteColor",
+            "borderColor": "blueColor",
             "borderWidth": 3,
             "cornerRadius": 10,
-            "normal": {
-                "titleColor": "whiteColor",
-                "titleShadowColor" : "whiteColor"
+            "fontStyle": {
+                "font": "primaryFontMedium",
+                "size": 22
             },
-            "highlighted": {
-                "titleColor": "purpleColor",
-                "backgroundColor": "whiteColor"
+            "normalState": {
+                "backgroundColor": "blueColor",
+                "textColor": "whiteColor"
+            },
+            "selectedState": {
+                "backgroundColor": "blackColor",
+                "textColor": "purpleColor"
+            },
+            "highlightedState": {
+                "backgroundColor": "greenColor",
+                "textColor": "blueColor"
             }
         },
         "B2": {
-            "fontStyle": {
-                "font": "primaryFontLight",
-                "size": 28
-            },
-            "backgroundColor": "whiteColor",
             "borderColor": "purpleColor",
-            "borderWidth": 5,
-            "cornerRadius": 3,
-            "normal": {
-                "titleColor": "purpleColor",
-                "titleShadowColor" : "whiteColor"
-            }
-        },
-        "B3": {
-            "fontStyle": {
-                "font": "primaryFontMedium",
-                "size": 20
-            },
-            "backgroundColor": "blackColor",
-            "borderColor": "purpleColor",
-            "borderWidth": 3,
-            "cornerRadius": 15,
-            "normal": {
-                "titleColor": "purpleColor"
-            }
-        },
-        "B4": {
+            "borderWidth": 0,
+            "cornerRadius": 5,
             "fontStyle": {
                 "font": "primaryFontBold",
-                "size": 17
+                "size": 16
             },
-            "backgroundColor": "whiteColor",
-            "borderColor": "blackColor",
-            "borderWidth": 3,
-            "cornerRadius": 0,
-            "normal": {
-                "titleColor": "blackColor"
+            "normalState": {
+                "backgroundColor": "blueColor",
+                "textColor": "blackColor"
+            },
+            "selectedState": {
+                "backgroundColor": "blackColor",
+                "textColor": "purpleColor"
+            },
+            "highlightedState": {
+                "backgroundColor": "purpleColor",
+                "textColor": "whiteColor"
             }
         }
     },
@@ -121,15 +129,36 @@
         "T1": {
             "fontStyle": {
                 "font": "primaryFontMedium",
-                "size": 15
+                "size": 17
             },
             "textColor": "whiteColor",
-            "backgroundColor": "purpleColor",
-            "borderColor": "blackColor",
+            "backgroundColor": "lightBlueColor",
+            "borderColor": "greenColor",
             "textAlignment": "Center",
-            "borderWidth": 2,
-            "cornerRadius": 5,
-            "borderStyle": "RoundedRect"
+            "borderWidth": 3,
+            "cornerRadius": 10,
+            "borderStyle": "None"
+        }
+    },
+    "SegmentedControls": {
+        "default": {
+            "fontStyle": {
+                "font": "primaryFontBold",
+                "size": 15
+            },
+            "dividerColor": "clearColor",
+            "normalState": {
+                "backgroundColor": "greenColor",
+                "textColor": "whiteColor"
+            },
+            "selectedState": {
+                "backgroundColor": "blueColor",
+                "textColor": "whiteColor"
+            },
+            "highlightedState": {
+                "backgroundColor": "blackColor",
+                "textColor": "whiteColor"
+            }
         }
     }
 }

@@ -10,21 +10,20 @@ class Style: NSObject {
     let primaryFontLightItalic: String = "BrandonGrotesque-LightItalic"    
     let primaryFontBold: String = "BrandonGrotesque-Bold"    
     
+    let purpleColor = UIColor(red: 162.0/255.0, green: 57.0/255.0, blue: 181.0/255.0, alpha: 1.0)    
+    let blueColor = UIColor(red: 0.0/255.0, green: 84.0/255.0, blue: 136.0/255.0, alpha: 1.0)    
     let blackColor = UIColor(red: 0.0/255.0, green: 0.0/255.0, blue: 0.0/255.0, alpha: 1.0)    
+    let clearColor = UIColor(red: 0.0/255.0, green: 0.0/255.0, blue: 0.0/255.0, alpha: 0.1)    
+    let greenColor = UIColor(red: 73.0/255.0, green: 185.0/255.0, blue: 58.0/255.0, alpha: 1.0)    
+    let lightGrayColor = UIColor(red: 239.0/255.0, green: 239.0/255.0, blue: 244.0/255.0, alpha: 1.0)    
     let whiteColor = UIColor(red: 255.0/255.0, green: 255.0/255.0, blue: 255.0/255.0, alpha: 1.0)    
-    let purpleColor = UIColor(red: 162.0/255.0, green: 57.0/255.0, blue: 181.0/255.0, alpha: 0.5)    
+    let lightBlueColor = UIColor(red: 139.0/255.0, green: 192.0/255.0, blue: 224.0/255.0, alpha: 0.8)    
     
     let buttonImage1 = UIImage(named: "black_button_image")    
     
     @IBOutlet var H2Label: [UILabel]! {        
         didSet {            
             styleH2Label(H2Label)            
-        }        
-    }    
-    
-    @IBOutlet var H3Label: [UILabel]! {        
-        didSet {            
-            styleH3Label(H3Label)            
         }        
     }    
     
@@ -40,12 +39,6 @@ class Style: NSObject {
         }        
     }    
     
-    @IBOutlet var B4Button: [UIButton]! {        
-        didSet {            
-            styleB4Button(B4Button)            
-        }        
-    }    
-    
     @IBOutlet var B1Button: [UIButton]! {        
         didSet {            
             styleB1Button(B1Button)            
@@ -58,103 +51,132 @@ class Style: NSObject {
         }        
     }    
     
-    @IBOutlet var B3Button: [UIButton]! {        
-        didSet {            
-            styleB3Button(B3Button)            
-        }        
-    }    
-    
     @IBOutlet var T1TextField: [UITextField]! {        
         didSet {            
             styleT1TextField(T1TextField)            
         }        
     }    
     
+    @IBOutlet var defaultSegmentedControl: [UISegmentedControl]! {        
+        didSet {            
+            styledefaultSegmentedControl(defaultSegmentedControl)            
+        }        
+    }    
+    
+    func attributesForH2Label() ->  Dictionary<String, AnyObject> {         
+        let style = NSMutableParagraphStyle()        
+        style.alignment = NSTextAlignment.Center        
+        let attributes = [             
+            NSFontAttributeName: UIFont(name: primaryFontLight, size: 18)!,            
+            NSKernAttributeName: 1.08,            
+            NSParagraphStyleAttributeName: style            
+         ]        
+        return attributes        
+    }    
+    
     func styleH2Label(objects: [UILabel]) {        
         for object in objects {        
-            object.textColor = blackColor            
-            object.font = UIFont (name: primaryFontLightItalic, size: 20)            
+            object.textColor = greenColor            
+            object.attributedText = NSAttributedString(string: object.text!, attributes:attributesForH2Label())            
             }            
         }    
     
-    func styleH3Label(objects: [UILabel]) {        
-        for object in objects {        
-            object.textColor = purpleColor            
-            object.font = UIFont (name: primaryFontBlack, size: 24)            
-            }            
-        }    
+    func attributesForH1Label() ->  Dictionary<String, AnyObject> {         
+        let style = NSMutableParagraphStyle()        
+        style.alignment = NSTextAlignment.Center        
+        style.lineSpacing = 5        
+        let attributes = [             
+            NSFontAttributeName: UIFont(name: primaryFontMedium, size: 22)!,            
+            NSKernAttributeName: 11.0,            
+            NSParagraphStyleAttributeName: style,            
+         ]        
+        return attributes        
+    }    
     
     func styleH1Label(objects: [UILabel]) {        
         for object in objects {        
-            object.textColor = whiteColor            
-            object.font = UIFont (name: primaryFontLight, size: 34)            
-            object.textAlignment = NSTextAlignment.Center            
+            object.textColor = blueColor            
+            object.attributedText = NSAttributedString(string: object.text!, attributes:attributesForH1Label())            
             }            
         }    
     
     func stylespecialView(objects: [UIView]) {        
         for object in objects {        
-            object.backgroundColor = purpleColor            
-            object.layer.cornerRadius = 5            
-            object.layer.borderColor = blackColor.CGColor            
-            object.layer.borderWidth = 5            
-            }            
-        }    
-    
-    func styleB4Button(objects: [UIButton]) {        
-        for object in objects {        
-            object.backgroundColor = whiteColor            
-            object.layer.borderColor = blackColor.CGColor            
-            object.layer.borderWidth = 3            
-            object.setTitleColor(blackColor, forState: .Normal)            
-            object.titleLabel?.font = UIFont (name: primaryFontBold, size: 17)            
+            object.backgroundColor = lightGrayColor            
+            object.layer.cornerRadius = 10            
+            object.layer.borderColor = blueColor.CGColor            
+            object.layer.borderWidth = 2            
             }            
         }    
     
     func styleB1Button(objects: [UIButton]) {        
         for object in objects {        
-            object.backgroundColor = blackColor            
             object.layer.cornerRadius = 10            
-            object.layer.borderColor = whiteColor.CGColor            
+            object.layer.borderColor = blueColor.CGColor            
+            object.layer.borderWidth = 3            
+            object.layer.masksToBounds = true            
+            object.titleLabel?.font = UIFont(name: primaryFontMedium, size: 22)            
+            object.layer.cornerRadius = 10            
+            object.layer.borderColor = blueColor.CGColor            
             object.layer.borderWidth = 3            
             object.setTitleColor(whiteColor, forState: .Normal)            
-            object.setTitleColor(purpleColor, forState: .Highlighted)            
-            object.titleLabel?.font = UIFont (name: primaryFontLight, size: 34)            
+            object.setBackgroundImage(UIImage.imageWithColor(blueColor), forState: .Normal)            
+            object.backgroundColor = UIColor.clearColor()            
+            object.setTitleColor(blueColor, forState: .Highlighted)            
+            object.setBackgroundImage(UIImage.imageWithColor(greenColor), forState: .Highlighted)            
+            object.backgroundColor = UIColor.clearColor()            
+            object.setTitleColor(purpleColor, forState: .Selected)            
+            object.setBackgroundImage(UIImage.imageWithColor(blackColor), forState: .Selected)            
+            object.backgroundColor = UIColor.clearColor()            
             }            
         }    
     
     func styleB2Button(objects: [UIButton]) {        
         for object in objects {        
-            object.backgroundColor = whiteColor            
-            object.layer.cornerRadius = 3            
+            object.layer.cornerRadius = 5            
             object.layer.borderColor = purpleColor.CGColor            
-            object.layer.borderWidth = 5            
-            object.setTitleColor(purpleColor, forState: .Normal)            
-            object.titleLabel?.font = UIFont (name: primaryFontLight, size: 28)            
-            }            
-        }    
-    
-    func styleB3Button(objects: [UIButton]) {        
-        for object in objects {        
-            object.backgroundColor = blackColor            
-            object.layer.cornerRadius = 15            
+            object.layer.masksToBounds = true            
+            object.titleLabel?.font = UIFont(name: primaryFontBold, size: 16)            
+            object.layer.cornerRadius = 5            
             object.layer.borderColor = purpleColor.CGColor            
-            object.layer.borderWidth = 3            
-            object.setTitleColor(purpleColor, forState: .Normal)            
-            object.titleLabel?.font = UIFont (name: primaryFontMedium, size: 20)            
+            object.setTitleColor(blackColor, forState: .Normal)            
+            object.setBackgroundImage(UIImage.imageWithColor(blueColor), forState: .Normal)            
+            object.backgroundColor = UIColor.clearColor()            
+            object.setTitleColor(whiteColor, forState: .Highlighted)            
+            object.setBackgroundImage(UIImage.imageWithColor(purpleColor), forState: .Highlighted)            
+            object.backgroundColor = UIColor.clearColor()            
+            object.setTitleColor(purpleColor, forState: .Selected)            
+            object.setBackgroundImage(UIImage.imageWithColor(blackColor), forState: .Selected)            
+            object.backgroundColor = UIColor.clearColor()            
             }            
         }    
     
     func styleT1TextField(objects: [UITextField]) {        
         for object in objects {        
-            object.backgroundColor = purpleColor            
-            object.layer.cornerRadius = 5            
-            object.layer.borderColor = blackColor.CGColor            
-            object.layer.borderWidth = 2            
+            object.backgroundColor = lightBlueColor            
+            object.layer.cornerRadius = 10            
+            object.layer.borderColor = greenColor.CGColor            
+            object.layer.borderWidth = 3            
             object.textColor = whiteColor            
-            object.font = UIFont (name: primaryFontMedium, size: 15)            
+            object.backgroundColor = lightBlueColor            
+            object.font = UIFont(name: primaryFontMedium, size: 17)            
             object.textAlignment = NSTextAlignment.Center            
-            object.borderStyle = UITextBorderStyle.RoundedRect            
+            object.borderStyle = UITextBorderStyle.None            
+            object.layer.cornerRadius = 10            
+            object.layer.borderColor = greenColor.CGColor            
+            object.layer.borderWidth = 3            
+            }            
+        }    
+    
+    func styledefaultSegmentedControl(objects: [UISegmentedControl]) {        
+        for object in objects {        
+            object.setDividerImage(UIImage.imageWithColor(clearColor), forLeftSegmentState: .Normal, rightSegmentState: .Normal, barMetrics: .Default)            
+            object.setBackgroundImage(UIImage.imageWithColor(greenColor), forState: .Normal, barMetrics: .Default)            
+            object.setTitleTextAttributes([NSFontAttributeName: UIFont(name: primaryFontBold, size: 15)!, NSForegroundColorAttributeName: whiteColor], forState: .Normal)            
+            object.setBackgroundImage(UIImage.imageWithColor(blackColor), forState: .Highlighted, barMetrics: .Default)            
+            object.setTitleTextAttributes([NSFontAttributeName: UIFont(name: primaryFontBold, size: 15)!, NSForegroundColorAttributeName: whiteColor], forState: .Highlighted)            
+            object.setBackgroundImage(UIImage.imageWithColor(blueColor), forState: .Selected, barMetrics: .Default)            
+            object.setTitleTextAttributes([NSFontAttributeName: UIFont(name: primaryFontBold, size: 15)!, NSForegroundColorAttributeName: whiteColor], forState: .Selected)            
             }            
         }    
     
