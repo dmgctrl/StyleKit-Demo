@@ -140,6 +140,21 @@
             "borderStyle": "None"
         }
     },
+    "TextViews": {
+        "TV1": {
+            "textColor": "blueColor",
+            "textAlignment": "Center",
+            "attributes": {
+                "fontStyle": {
+                    "font": "primaryFontMedium",
+                    "size": 22
+                },
+                "tracking": 100,
+                "lineSpacing": 5,
+                "ligature": 0
+            }
+        }
+    },
     "SegmentedControls": {
         "default": {
             "fontStyle": {
