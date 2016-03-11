@@ -151,6 +151,7 @@
                         <outletCollection property="defaultSegmentedControl" destination="u9E-KA-31c" collectionClass="NSMutableArray" id="Zth-nV-YLF"/>
                         <outletCollection property="T1TextField" destination="ndU-mc-lo4" collectionClass="NSMutableArray" id="aiT-0k-FMg"/>
                         <outletCollection property="specialView" destination="ZOg-8M-Uee" collectionClass="NSMutableArray" id="uDB-DH-jgB"/>
+                        <outletCollection property="TV1TextView" destination="Kq1-Fz-YHM" collectionClass="NSMutableArray" id="ssc-Fb-Zcg"/>
                     </connections>
                 </customObject>
             </objects>

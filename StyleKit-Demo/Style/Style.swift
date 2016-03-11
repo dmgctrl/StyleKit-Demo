@@ -112,8 +112,8 @@ class StyleKit: NSObject {
         style.alignment = NSTextAlignment.Center        
         style.lineSpacing = 5        
         let attributes = [             
-            NSFontAttributeName: UIFont(name: primaryFontMedium, size: 22)!,            
-            NSKernAttributeName: 2.2,            
+            NSFontAttributeName: UIFont(name: primaryFontMedium, size: 11)!,            
+            NSKernAttributeName: 1.1,            
             NSParagraphStyleAttributeName: style,            
          ]        
         return attributes        
