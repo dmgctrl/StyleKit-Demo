@@ -1,8 +1,8 @@
 import UIKit
 
-class Style: NSObject {
+class StyleKit: NSObject {
 
-    static let sharedInstance = Style()    
+    static let sharedInstance = StyleKit()    
     
     let primaryFontMedium: String = "BrandonGrotesque-Medium"    
     let primaryFontBlack: String = "BrandonGrotesque-Black"    
@@ -30,6 +30,12 @@ class Style: NSObject {
     @IBOutlet var H1Label: [UILabel]! {        
         didSet {            
             styleH1Label(H1Label)            
+        }        
+    }    
+    
+    @IBOutlet var TV1TextView: [UITextView]! {        
+        didSet {            
+            styleTV1TextView(TV1TextView)            
         }        
     }    
     
@@ -66,10 +72,11 @@ class Style: NSObject {
     func attributesForH2Label() ->  Dictionary<String, AnyObject> {         
         let style = NSMutableParagraphStyle()        
         style.alignment = NSTextAlignment.Center        
+        style.lineSpacing = 5        
         let attributes = [             
             NSFontAttributeName: UIFont(name: primaryFontLight, size: 18)!,            
             NSKernAttributeName: 1.08,            
-            NSParagraphStyleAttributeName: style            
+            NSParagraphStyleAttributeName: style,            
          ]        
         return attributes        
     }    
@@ -78,8 +85,8 @@ class Style: NSObject {
         for object in objects {        
             object.textColor = greenColor            
             object.attributedText = NSAttributedString(string: object.text!, attributes:attributesForH2Label())            
-            }            
-        }    
+        }        
+    }    
     
     func attributesForH1Label() ->  Dictionary<String, AnyObject> {         
         let style = NSMutableParagraphStyle()        
@@ -87,7 +94,7 @@ class Style: NSObject {
         style.lineSpacing = 5        
         let attributes = [             
             NSFontAttributeName: UIFont(name: primaryFontMedium, size: 22)!,            
-            NSKernAttributeName: 11.0,            
+            NSKernAttributeName: 2.2,            
             NSParagraphStyleAttributeName: style,            
          ]        
         return attributes        
@@ -97,8 +104,27 @@ class Style: NSObject {
         for object in objects {        
             object.textColor = blueColor            
             object.attributedText = NSAttributedString(string: object.text!, attributes:attributesForH1Label())            
-            }            
-        }    
+        }        
+    }    
+    
+    func attributesForTV1TextView() ->  Dictionary<String, AnyObject> {         
+        let style = NSMutableParagraphStyle()        
+        style.alignment = NSTextAlignment.Center        
+        style.lineSpacing = 5        
+        let attributes = [             
+            NSFontAttributeName: UIFont(name: primaryFontMedium, size: 22)!,            
+            NSKernAttributeName: 2.2,            
+            NSParagraphStyleAttributeName: style,            
+         ]        
+        return attributes        
+    }    
+    
+    func styleTV1TextView(objects: [UITextView]) {        
+        for object in objects {        
+            object.attributedText = NSAttributedString(string: object.text!, attributes:attributesForTV1TextView())            
+            object.textColor = blueColor            
+        }        
+    }    
     
     func stylespecialView(objects: [UIView]) {        
         for object in objects {        
@@ -106,8 +132,8 @@ class Style: NSObject {
             object.layer.cornerRadius = 10            
             object.layer.borderColor = blueColor.CGColor            
             object.layer.borderWidth = 2            
-            }            
-        }    
+        }        
+    }    
     
     func styleB1Button(objects: [UIButton]) {        
         for object in objects {        
@@ -121,15 +147,12 @@ class Style: NSObject {
             object.layer.borderWidth = 3            
             object.setTitleColor(whiteColor, forState: .Normal)            
             object.setBackgroundImage(UIImage.imageWithColor(blueColor), forState: .Normal)            
-            object.backgroundColor = UIColor.clearColor()            
             object.setTitleColor(blueColor, forState: .Highlighted)            
             object.setBackgroundImage(UIImage.imageWithColor(greenColor), forState: .Highlighted)            
-            object.backgroundColor = UIColor.clearColor()            
             object.setTitleColor(purpleColor, forState: .Selected)            
             object.setBackgroundImage(UIImage.imageWithColor(blackColor), forState: .Selected)            
-            object.backgroundColor = UIColor.clearColor()            
-            }            
-        }    
+        }        
+    }    
     
     func styleB2Button(objects: [UIButton]) {        
         for object in objects {        
@@ -141,15 +164,12 @@ class Style: NSObject {
             object.layer.borderColor = purpleColor.CGColor            
             object.setTitleColor(blackColor, forState: .Normal)            
             object.setBackgroundImage(UIImage.imageWithColor(blueColor), forState: .Normal)            
-            object.backgroundColor = UIColor.clearColor()            
             object.setTitleColor(whiteColor, forState: .Highlighted)            
             object.setBackgroundImage(UIImage.imageWithColor(purpleColor), forState: .Highlighted)            
-            object.backgroundColor = UIColor.clearColor()            
             object.setTitleColor(purpleColor, forState: .Selected)            
             object.setBackgroundImage(UIImage.imageWithColor(blackColor), forState: .Selected)            
-            object.backgroundColor = UIColor.clearColor()            
-            }            
-        }    
+        }        
+    }    
     
     func styleT1TextField(objects: [UITextField]) {        
         for object in objects {        
@@ -165,8 +185,8 @@ class Style: NSObject {
             object.layer.cornerRadius = 10            
             object.layer.borderColor = greenColor.CGColor            
             object.layer.borderWidth = 3            
-            }            
-        }    
+        }        
+    }    
     
     func styledefaultSegmentedControl(objects: [UISegmentedControl]) {        
         for object in objects {        
@@ -177,7 +197,7 @@ class Style: NSObject {
             object.setTitleTextAttributes([NSFontAttributeName: UIFont(name: primaryFontBold, size: 15)!, NSForegroundColorAttributeName: whiteColor], forState: .Highlighted)            
             object.setBackgroundImage(UIImage.imageWithColor(blueColor), forState: .Selected, barMetrics: .Default)            
             object.setTitleTextAttributes([NSFontAttributeName: UIFont(name: primaryFontBold, size: 15)!, NSForegroundColorAttributeName: whiteColor], forState: .Selected)            
-            }            
-        }    
+        }        
+    }    
     
 }

@@ -142,7 +142,7 @@
                     <navigationItem key="navigationItem" title="StyleKit" id="rcv-vc-JAJ"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
-                <customObject id="QDR-eZ-pbk" customClass="Style" customModule="StyleKit_Demo" customModuleProvider="target">
+                <customObject id="QDR-eZ-pbk" customClass="StyleKit" customModule="StyleKit_Demo" customModuleProvider="target">
                     <connections>
                         <outletCollection property="H1Label" destination="K7c-w7-qF4" collectionClass="NSMutableArray" id="UVg-fK-1am"/>
                         <outletCollection property="H2Label" destination="xmj-ma-opp" collectionClass="NSMutableArray" id="87b-kd-mwF"/>
