@@ -66,10 +66,11 @@ class Style: NSObject {
     func attributesForH2Label() ->  Dictionary<String, AnyObject> {         
         let style = NSMutableParagraphStyle()        
         style.alignment = NSTextAlignment.Center        
+        style.lineSpacing = 5        
         let attributes = [             
             NSFontAttributeName: UIFont(name: primaryFontLight, size: 18)!,            
             NSKernAttributeName: 1.08,            
-            NSParagraphStyleAttributeName: style            
+            NSParagraphStyleAttributeName: style,            
          ]        
         return attributes        
     }    
@@ -87,7 +88,7 @@ class Style: NSObject {
         style.lineSpacing = 5        
         let attributes = [             
             NSFontAttributeName: UIFont(name: primaryFontMedium, size: 22)!,            
-            NSKernAttributeName: 11.0,            
+            NSKernAttributeName: 2.2,            
             NSParagraphStyleAttributeName: style,            
          ]        
         return attributes        
