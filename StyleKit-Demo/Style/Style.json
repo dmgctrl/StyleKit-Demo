@@ -160,5 +160,13 @@
                 "textColor": "whiteColor"
             }
         }
+    },
+    "Sliders": {
+        "S1": {
+            "filledTrackColor": "purpleColor",
+            "emptyTrackColor": "whiteColor",
+            "thumbImage": "thumbImageDefault"
+        }
     }
+    
 }
