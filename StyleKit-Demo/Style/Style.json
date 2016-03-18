@@ -43,7 +43,8 @@
         }
     },
     "Images": {
-        "buttonImage1": "black_button_image"
+        "buttonImage1": "black_button_image",
+        "thumbImageDefault" : "greenThumbImage"
     },
     "Views": {
         "special": {
@@ -164,7 +165,7 @@
     "Sliders": {
         "S1": {
             "filledTrackColor": "purpleColor",
-            "emptyTrackColor": "whiteColor",
+            "emptyTrackColor": "greenColor",
             "thumbImage": "thumbImageDefault"
         }
     }

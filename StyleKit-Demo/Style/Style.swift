@@ -1,8 +1,8 @@
 import UIKit
 
-class Style: NSObject {
+class StyleKit: NSObject {
 
-    static let sharedInstance = Style()    
+    static let sharedInstance = StyleKit()    
     
     let primaryFontMedium: String = "BrandonGrotesque-Medium"    
     let primaryFontBlack: String = "BrandonGrotesque-Black"    
@@ -19,6 +19,7 @@ class Style: NSObject {
     let whiteColor = UIColor(red: 255.0/255.0, green: 255.0/255.0, blue: 255.0/255.0, alpha: 1.0)    
     let lightBlueColor = UIColor(red: 139.0/255.0, green: 192.0/255.0, blue: 224.0/255.0, alpha: 0.8)    
     
+    let thumbImageDefault = UIImage(named: "greenThumbImage")    
     let buttonImage1 = UIImage(named: "black_button_image")    
     
     @IBOutlet var H2Label: [UILabel]! {        
@@ -63,6 +64,12 @@ class Style: NSObject {
         }        
     }    
     
+    @IBOutlet var S1Slider: [UISlider]! {        
+        didSet {            
+            styleS1Slider(S1Slider)            
+        }        
+    }    
+    
     func attributesForH2Label() ->  Dictionary<String, AnyObject> {         
         let style = NSMutableParagraphStyle()        
         style.alignment = NSTextAlignment.Center        
@@ -78,9 +85,11 @@ class Style: NSObject {
     func styleH2Label(objects: [UILabel]) {        
         for object in objects {        
             object.textColor = greenColor            
-            object.attributedText = NSAttributedString(string: object.text!, attributes:attributesForH2Label())            
+            if let text = object.text {            
+                object.attributedText = NSAttributedString(string: text, attributes:attributesForH2Label())                
             }            
-        }    
+        }        
+    }    
     
     func attributesForH1Label() ->  Dictionary<String, AnyObject> {         
         let style = NSMutableParagraphStyle()        
@@ -97,9 +106,19 @@ class Style: NSObject {
     func styleH1Label(objects: [UILabel]) {        
         for object in objects {        
             object.textColor = blueColor            
-            object.attributedText = NSAttributedString(string: object.text!, attributes:attributesForH1Label())            
+            if let text = object.text {            
+                object.attributedText = NSAttributedString(string: text, attributes:attributesForH1Label())                
             }            
-        }    
+        }        
+    }    
+    
+    func styleS1Slider(objects: [UISlider]) {        
+        for object in objects {        
+            object.minimumTrackTintColor = purpleColor            
+            object.maximumTrackTintColor = greenColor            
+            object.setThumbImage(thumbImageDefault, forState: UIControlState.Normal)            
+        }        
+    }    
     
     func stylespecialView(objects: [UIView]) {        
         for object in objects {        
@@ -107,8 +126,8 @@ class Style: NSObject {
             object.layer.cornerRadius = 10            
             object.layer.borderColor = blueColor.CGColor            
             object.layer.borderWidth = 2            
-            }            
-        }    
+        }        
+    }    
     
     func styleB1Button(objects: [UIButton]) {        
         for object in objects {        
@@ -122,15 +141,12 @@ class Style: NSObject {
             object.layer.borderWidth = 3            
             object.setTitleColor(whiteColor, forState: .Normal)            
             object.setBackgroundImage(UIImage.imageWithColor(blueColor), forState: .Normal)            
-            object.backgroundColor = UIColor.clearColor()            
             object.setTitleColor(blueColor, forState: .Highlighted)            
             object.setBackgroundImage(UIImage.imageWithColor(greenColor), forState: .Highlighted)            
-            object.backgroundColor = UIColor.clearColor()            
             object.setTitleColor(purpleColor, forState: .Selected)            
             object.setBackgroundImage(UIImage.imageWithColor(blackColor), forState: .Selected)            
-            object.backgroundColor = UIColor.clearColor()            
-            }            
-        }    
+        }        
+    }    
     
     func styleB2Button(objects: [UIButton]) {        
         for object in objects {        
@@ -142,15 +158,12 @@ class Style: NSObject {
             object.layer.borderColor = purpleColor.CGColor            
             object.setTitleColor(blackColor, forState: .Normal)            
             object.setBackgroundImage(UIImage.imageWithColor(blueColor), forState: .Normal)            
-            object.backgroundColor = UIColor.clearColor()            
             object.setTitleColor(whiteColor, forState: .Highlighted)            
             object.setBackgroundImage(UIImage.imageWithColor(purpleColor), forState: .Highlighted)            
-            object.backgroundColor = UIColor.clearColor()            
             object.setTitleColor(purpleColor, forState: .Selected)            
             object.setBackgroundImage(UIImage.imageWithColor(blackColor), forState: .Selected)            
-            object.backgroundColor = UIColor.clearColor()            
-            }            
-        }    
+        }        
+    }    
     
     func styleT1TextField(objects: [UITextField]) {        
         for object in objects {        
@@ -166,8 +179,8 @@ class Style: NSObject {
             object.layer.cornerRadius = 10            
             object.layer.borderColor = greenColor.CGColor            
             object.layer.borderWidth = 3            
-            }            
-        }    
+        }        
+    }    
     
     func styledefaultSegmentedControl(objects: [UISegmentedControl]) {        
         for object in objects {        
@@ -178,7 +191,7 @@ class Style: NSObject {
             object.setTitleTextAttributes([NSFontAttributeName: UIFont(name: primaryFontBold, size: 15)!, NSForegroundColorAttributeName: whiteColor], forState: .Highlighted)            
             object.setBackgroundImage(UIImage.imageWithColor(blueColor), forState: .Selected, barMetrics: .Default)            
             object.setTitleTextAttributes([NSFontAttributeName: UIFont(name: primaryFontBold, size: 15)!, NSForegroundColorAttributeName: whiteColor], forState: .Selected)            
-            }            
-        }    
+        }        
+    }    
     
 }

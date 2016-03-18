@@ -2,11 +2,11 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "Button_Blank_Green_Icon_256.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "filename" : "Button_Blank_Green_Icon_256.png",
       "scale" : "2x"
     },
     {
