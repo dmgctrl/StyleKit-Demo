@@ -43,7 +43,8 @@
         }
     },
     "Images": {
-        "buttonImage1": "black_button_image"
+        "buttonImage1": "black_button_image",
+        "thumbImageDefault" : "greenThumbImage"
     },
     "Views": {
         "special": {
@@ -147,7 +148,7 @@
             "attributes": {
                 "fontStyle": {
                     "font": "primaryFontMedium",
-                    "size": 11
+                    "size": 14
                 },
                 "tracking": 100,
                 "lineSpacing": 5,
@@ -175,5 +176,13 @@
                 "textColor": "whiteColor"
             }
         }
+    },
+    "Sliders": {
+        "S1": {
+            "filledTrackColor": "purpleColor",
+            "emptyTrackColor": "greenColor",
+            "thumbImage": "thumbImageDefault"
+        }
     }
+    
 }

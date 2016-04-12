@@ -19,6 +19,7 @@ class StyleKit: NSObject {
     let whiteColor = UIColor(red: 255.0/255.0, green: 255.0/255.0, blue: 255.0/255.0, alpha: 1.0)    
     let lightBlueColor = UIColor(red: 139.0/255.0, green: 192.0/255.0, blue: 224.0/255.0, alpha: 0.8)    
     
+    let thumbImageDefault = UIImage(named: "greenThumbImage")    
     let buttonImage1 = UIImage(named: "black_button_image")    
     
     @IBOutlet var H2Label: [UILabel]! {        
@@ -69,6 +70,12 @@ class StyleKit: NSObject {
         }        
     }    
     
+    @IBOutlet var S1Slider: [UISlider]! {        
+        didSet {            
+            styleS1Slider(S1Slider)            
+        }        
+    }    
+    
     func attributesForH2Label() ->  Dictionary<String, AnyObject> {         
         let style = NSMutableParagraphStyle()        
         style.alignment = NSTextAlignment.Center        
@@ -84,7 +91,9 @@ class StyleKit: NSObject {
     func styleH2Label(objects: [UILabel]) {        
         for object in objects {        
             object.textColor = greenColor            
-            object.attributedText = NSAttributedString(string: object.text!, attributes:attributesForH2Label())            
+            if let text = object.text {            
+                object.attributedText = NSAttributedString(string: text, attributes:attributesForH2Label())                
+            }            
         }        
     }    
     
@@ -103,7 +112,17 @@ class StyleKit: NSObject {
     func styleH1Label(objects: [UILabel]) {        
         for object in objects {        
             object.textColor = blueColor            
-            object.attributedText = NSAttributedString(string: object.text!, attributes:attributesForH1Label())            
+            if let text = object.text {            
+                object.attributedText = NSAttributedString(string: text, attributes:attributesForH1Label())                
+            }            
+        }        
+    }    
+    
+    func styleS1Slider(objects: [UISlider]) {        
+        for object in objects {        
+            object.minimumTrackTintColor = purpleColor            
+            object.maximumTrackTintColor = greenColor            
+            object.setThumbImage(thumbImageDefault, forState: UIControlState.Normal)            
         }        
     }    
     
@@ -112,8 +131,8 @@ class StyleKit: NSObject {
         style.alignment = NSTextAlignment.Center        
         style.lineSpacing = 5        
         let attributes = [             
-            NSFontAttributeName: UIFont(name: primaryFontMedium, size: 11)!,            
-            NSKernAttributeName: 1.1,            
+            NSFontAttributeName: UIFont(name: primaryFontMedium, size: 14)!,            
+            NSKernAttributeName: 1.4,            
             NSParagraphStyleAttributeName: style,            
          ]        
         return attributes        
