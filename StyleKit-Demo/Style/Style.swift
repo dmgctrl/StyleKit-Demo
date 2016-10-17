@@ -1,8 +1,8 @@
 import UIKit
 
-class StyleKit: NSObject {
+class Style: NSObject {
 
-    static let sharedInstance = StyleKit()    
+    static let sharedInstance = Style()    
     
     let primaryFontMedium: String = "BrandonGrotesque-Medium"    
     let primaryFontBlack: String = "BrandonGrotesque-Black"    

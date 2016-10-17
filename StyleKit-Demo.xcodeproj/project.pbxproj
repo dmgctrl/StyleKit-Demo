@@ -250,13 +250,16 @@
 				TargetAttributes = {
 					44337F901BC2EBEE0051B576 = {
 						CreatedOnToolsVersion = 7.0;
+						LastSwiftMigration = 0800;
 					};
 					44337FA41BC2EBEE0051B576 = {
 						CreatedOnToolsVersion = 7.0;
+						LastSwiftMigration = 0800;
 						TestTargetID = 44337F901BC2EBEE0051B576;
 					};
 					44337FAF1BC2EBEE0051B576 = {
 						CreatedOnToolsVersion = 7.0;
+						LastSwiftMigration = 0800;
 						TestTargetID = 44337F901BC2EBEE0051B576;
 					};
 				};
@@ -489,6 +492,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = thinkupllc.ThemerDemo;
 				PRODUCT_NAME = "StyleKit-Demo";
+				SWIFT_VERSION = 2.3;
 			};
 			name = Debug;
 		};
@@ -500,6 +504,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = thinkupllc.ThemerDemo;
 				PRODUCT_NAME = "StyleKit-Demo";
+				SWIFT_VERSION = 2.3;
 			};
 			name = Release;
 		};
@@ -511,6 +516,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = thinkupllc.ThemerDemoTests;
 				PRODUCT_NAME = "StyleKit-Demo";
+				SWIFT_VERSION = 2.3;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/StyleKit-Demo.app/StyleKit-Demo";
 			};
 			name = Debug;
@@ -523,6 +529,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = thinkupllc.ThemerDemoTests;
 				PRODUCT_NAME = "StyleKit-Demo";
+				SWIFT_VERSION = 2.3;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/StyleKit-Demo.app/StyleKit-Demo";
 			};
 			name = Release;
@@ -534,6 +541,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = thinkupllc.ThemerDemoUITests;
 				PRODUCT_NAME = "StyleKit-Demo";
+				SWIFT_VERSION = 2.3;
 				TEST_TARGET_NAME = ThemerDemo;
 				USES_XCTRUNNER = YES;
 			};
@@ -546,6 +554,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = thinkupllc.ThemerDemoUITests;
 				PRODUCT_NAME = "StyleKit-Demo";
+				SWIFT_VERSION = 2.3;
 				TEST_TARGET_NAME = ThemerDemo;
 				USES_XCTRUNNER = YES;
 			};
