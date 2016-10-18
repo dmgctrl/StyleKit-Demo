@@ -1,0 +1,796 @@
+import UIKit
+import Foundation
+
+struct FontStyle {
+    let fontName: String
+    let size: Int
+}
+
+class CommonResources {
+    var fontLabels = [String: String]()
+    var colors = [String: UIColor]()
+    var imageNames = [String: String]()
+}
+
+class Stylist: NSObject {
+    
+    @IBOutlet var buttons: [UIButton]! {
+        didSet {
+            buttons.forEach { $0.style() }
+        }
+    }
+    
+    @IBOutlet var segmentedControls: [UISegmentedControl]! {
+        didSet {
+            segmentedControls.forEach { $0.style() }
+        }
+    }
+    
+    @IBOutlet var textFields: [UITextField]! {
+        didSet {
+            textFields.forEach { $0.style() }
+        }
+    }
+    
+    @IBOutlet var labels: [UILabel]! {
+        didSet {
+            labels.forEach { $0.style() }
+        }
+    }
+    
+    @IBOutlet var sliders: [UISlider]! {
+        didSet {
+            sliders.forEach { $0.style() }
+        }
+    }
+    
+    @IBOutlet var steppers: [UIStepper]! {
+        didSet {
+            steppers.forEach { $0.style() }
+        }
+    }
+    
+    @IBOutlet var progressViews: [UIProgressView]! {
+        didSet {
+            progressViews.forEach { $0.style() }
+        }
+    }
+}
+
+class Style: NSObject {
+    
+    static let sharedInstance = Style()
+    
+
+    var resources = CommonResources()
+    
+    var textFieldStyles = StyleMap()
+    var segmentedControlStyles = StyleMap()
+    var sliderStyles = StyleMap()
+    var stepperStyles = StyleMap()
+    var progressViewStyles = StyleMap()
+    
+    typealias StyleMap = [String: AnyObject]
+
+    var styleMap = [UIElement:StyleMap]()
+    
+    var fileName = "Style.json"
+    
+    private override init() {
+        super.init()
+        serialize(fileName)
+    }
+
+    private func configurationStyleURL(styleFile:String) -> NSURL? {
+        let documentsDirPath = urlForFileInDocumentsDirectory(styleFile)
+        if NSFileManager.defaultManager().fileExistsAtPath(documentsDirPath.path!)   {
+            return documentsDirPath
+        }
+        let bundlePath = NSBundle.mainBundle().pathForResource(styleFile, ofType: nil)
+        return NSURL(fileURLWithPath: bundlePath!)
+    }
+    
+    private func urlForFileInDocumentsDirectory(fileName: String) -> NSURL {
+        let docsDir = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)[0]
+        return docsDir.URLByAppendingPathComponent(fileName)!
+    }
+    
+    private func serialize(styleFile:String) {
+        
+        let stylePath = configurationStyleURL(styleFile)!
+        
+        do {
+            
+            let data = try NSData(contentsOfURL: stylePath, options: NSDataReadingOptions.DataReadingMappedIfSafe)
+            let json = try NSJSONSerialization.JSONObjectWithData(data, options: .AllowFragments)
+            
+            if let items = json[CommonObjects.Fonts.rawValue] as? [String: String] {
+                resources.fontLabels = items
+            }
+            
+            if let colorDict = json[CommonObjects.Colors.rawValue] as? [String: [String: AnyObject]] {
+                for (colorKey, components) in colorDict {
+                    if let red = components[ColorProperties.Red.rawValue] as? Int,
+                        let green = components[ColorProperties.Green.rawValue] as? Int,
+                        let blue = components[ColorProperties.Blue.rawValue] as? Int,
+                        let alpha = components[ColorProperties.Alpha.rawValue] as? Int {
+                            resources.colors[colorKey] = UIColor(red: CGFloat(red)/255, green: CGFloat(green)/255, blue: CGFloat(blue)/255, alpha: CGFloat(alpha))
+                    } else if let hex = components[ColorProperties.Hex.rawValue] as? String,
+                       let alpha = components[ColorProperties.Alpha.rawValue] as? Float {
+                        if let hexInt = hex.hexColorToInt() {
+                            resources.colors[colorKey] = UIColor(withHex: hexInt, alpha: alpha)
+                        }
+                    }
+                }
+            }
+            
+            if let items = json[CommonObjects.Images.rawValue] as? [String: String] {
+                resources.imageNames = items
+            }
+            
+            for element in UIElement.allValues {
+                // Look for instances of supported UIElement types in json spec
+                guard let elementDict = json[element.rawValue] as? [String: [String:AnyObject]] else { continue }
+                
+                var styles = StyleMap()
+                for (labelKey, specification) in elementDict {
+                    switch element {
+                    case .button:
+                        styles[labelKey] = try serializeButtonSpec(specification) as AnyObject
+                    case .label:
+                        styles[labelKey] = try serializeLabelSpec(specification) as AnyObject
+                    case .progressView:
+                        styles[labelKey] = try serializeProgressSpec(specification) as AnyObject
+                    case .segmentedControl:
+                        styles[labelKey] = try serializeSegmentControlSpec(specification) as AnyObject
+                    case .slider:
+                        styles[labelKey] = try serializeSliderSpec(specification) as AnyObject
+                    case .stepper:
+                        styles[labelKey] = try serializeStepperSpec(specification) as AnyObject
+                    case .textField:
+                        styles[labelKey] = try serializeTextFieldSpec(specification) as AnyObject
+                    }
+                }
+                styleMap[element] = styles
+            }
+        } catch {
+            assert(false,"error serializing JSON: \(error)")
+        }
+    }
+    
+    
+    enum ParseError: ErrorType {
+        case invalidFontStyle
+        case invalidTextFieldProperty
+        case invalidLabelStyle
+    }
+
+    private func mapTextAlignmentType(styleStr:String) -> NSTextAlignment?  {
+        let allowedValues = ["Left","Center","Right","Justified","Natural"]
+        if let index = allowedValues.indexOf(styleStr) {
+            return NSTextAlignment(rawValue: index)
+        }
+        return nil
+    }
+
+    private func mapBorderStyle(styleStr:String) -> UITextBorderStyle?  {
+        let allowedValues = ["None","Line","Bezel","RoundedRect"]
+        if let index = allowedValues.indexOf(styleStr) {
+            return UITextBorderStyle(rawValue: index)
+        }
+        return nil
+    }
+    
+    
+    //--------------------------------------
+    // MARK: - Serialize JSON into Objects
+    //--------------------------------------
+
+
+    private func serializeTextFieldSpec(spec: [String:AnyObject]) throws -> TextFieldStyle {
+        let result = TextFieldStyle()
+        for (key,value) in spec {
+            guard let property = TextFieldStyle.Properties(rawValue: key) else {
+                print("StyleKit: Warning: \(key) is not a recognized property. Ignoring.")
+                continue
+            }
+            
+            switch property {
+                case TextFieldStyle.Properties.FontStyle:
+                    if let fontSpec = value as? [String:AnyObject] {
+                        result.fontStyle = try serializeFontSpec(fontSpec)
+                    }
+                case TextFieldStyle.Properties.BorderWidth:
+                    if let borderWidth = spec[key] as? Int {
+                        result.borderWidth = borderWidth
+                    }
+                case TextFieldStyle.Properties.TextColor:
+                    if let colorKey = value as? String, color = resources.colors[colorKey]  {
+                        result.textColor = color
+                    }
+                case TextFieldStyle.Properties.BorderColor:
+                    if let colorKey = value as? String, color = resources.colors[colorKey]  {
+                        result.borderColor = color
+                    }
+                case TextFieldStyle.Properties.TextAlignment:
+                    if let styleStr = value as? String, let alignment = mapTextAlignmentType(styleStr) {
+                        result.textAlignment = alignment
+                    }
+                case TextFieldStyle.Properties.BorderStyle:
+                    if let styleStr = value as? String, let border = mapBorderStyle(styleStr) {
+                        result.borderStyle = border
+                    }
+                case TextFieldStyle.Properties.CornerRadius:
+                    if let cornerRadius = spec[key] as? Int {
+                        result.cornerRadius = cornerRadius
+                    }
+
+            }
+        }
+        
+        return result
+    }
+    
+    private func serializeLabelSpec(spec: [String:AnyObject]) throws -> LabelStyle {
+        let labelStyle = LabelStyle()
+        for (key,value) in spec {
+            guard let property = LabelStyle.Properties(rawValue: key) else {
+                print("StyleKit: Warning: \(key) is not a recognized property. Ignoring")
+                continue
+            }
+            switch property {
+            case LabelStyle.Properties.FontStyle:
+                if let fontSpec = value as? [String:AnyObject] {
+                    let font = try serializeFontSpec(fontSpec)
+                    labelStyle.fontStyle = font
+                    return labelStyle
+                }
+            }
+        }
+        return labelStyle
+    }
+
+    private func serializeButtonSpec(spec: [String:AnyObject]) throws -> ButtonStyle {
+        let style = ButtonStyle()
+        for (key,value) in spec {
+            guard let property = ButtonStyle.Properties(rawValue: key) else {
+                print("StyleKit: Warning: \(key) is not a recognized property. Ignoring")
+                continue
+            }
+            switch property {
+            case .FontStyle:
+                if let fontSpec = value as? [String:AnyObject] {
+                    let font = try serializeFontSpec(fontSpec)
+                    style.fontStyle = font
+                }
+            case .BorderColor:
+                if let colorKey = value as? String,
+                    let color = resources.colors[colorKey] {
+                    style.borderColor = color
+                }
+            case .BorderWidth:
+                if let width = value as? Int {
+                    style.borderWidth = width
+                }
+            case .CornerRadius:
+                if let radius = value as? Int {
+                    style.cornerRadius = radius
+                }
+            case .TitleColor:
+                if let colorStates = value as? [String:String] {
+                    var states:[ButtonStyle.AllowedStates:UIColor] = [:]
+                    for state in colorStates {
+                        if let allowedState = ButtonStyle.AllowedStates(rawValue: state.0),
+                            let color = resources.colors[state.1] {
+                            states[allowedState] = color
+                        }
+                    }
+                    if states.keys.count > 0 {
+                        style.titleColorStates = states
+                    }
+                }
+            }
+        }
+        return style
+    }
+
+    private func serializeSegmentControlSpec(spec: [String:AnyObject]) throws -> SegmentedControlStyle {
+        let style = SegmentedControlStyle()
+        for (key,value) in spec {
+            guard let property = SegmentedControlStyle.Properties(rawValue: key) else {
+                print("StyleKit: Warning: \(key) is not a recognized property. Ignoring")
+                continue
+            }
+            switch property {
+            case .FontStyle:
+                if let fontSpec = value as? [String:AnyObject] {
+                    let font = try serializeFontSpec(fontSpec)
+                    style.fontStyle = font
+                }
+            case .TextColor:
+                if let colorStates = value as? [String:String] {
+                    var states:[SegmentedControlStyle.AllowedStates:UIColor] = [:]
+                    for state in colorStates {
+                        if let allowedState = SegmentedControlStyle.AllowedStates(rawValue: state.0),
+                            let color = resources.colors[state.1] {
+                            states[allowedState] = color
+                        }
+                    }
+                    if states.keys.count > 0 {
+                        style.textColor = states
+                    }
+                }
+            case .TintColor:
+                if let colorKey = value as? String,
+                    let color = resources.colors[colorKey] {
+                    style.tintColor = color
+                }
+            }
+        }
+        return style
+    }
+    
+    func serializeSliderSpec(spec: [String:AnyObject]) throws -> SliderStyle {
+        let style = SliderStyle()
+        for (key,value) in spec {
+            guard let property = SliderStyle.Properties(rawValue: key) else {
+                print("StyleKit: Warning: \(key) is not a recognized property. Ignoring")
+                continue
+            }
+            switch property {
+                
+            case .MaximumTrackTintColor:
+                if let colorKey = value as? String, color = resources.colors[colorKey] {
+                    style.maximumTrackTintColor = color
+                }
+            case .MinimumTrackTintColor:
+                if let colorKey = value as? String, color = resources.colors[colorKey] {
+                    style.minimumTrackTintColor = color
+                }
+            case .ThumbImage:
+                if let imageKey = value as? String, imageName = resources.imageNames[imageKey],
+                    image = UIImage(named:imageName){
+                    style.thumbImage = image
+                }
+            case .MinimumTrackImage:
+                if let imageKey = value as? String, imageName = resources.imageNames[imageKey],
+                    image = UIImage(named:imageName){
+                    style.minimumTrackImage = image
+                }
+            case .MaximumTrackImage:
+                if let imageKey = value as? String, imageName = resources.imageNames[imageKey],
+                    image = UIImage(named:imageName){
+                    style.maximumTrackImage = image
+                }
+        }
+        
+        }
+        return style
+    }
+   
+    func serializeStepperSpec(spec: [String:AnyObject]) throws -> StepperStyle {
+        let style = StepperStyle()
+        for (key,value) in spec {
+            guard let property = StepperStyle.Properties(rawValue: key) else {
+                print("StyleKit: Warning: \(key) is not a recognized property. Ignoring")
+                continue
+            }
+            switch property {
+            case .TintColor:
+                if let colorKey = value as? String, color = resources.colors[colorKey] {
+                    style.tintColor = color
+                }
+            case .IncrementImage:
+                if let states = value as? [String: String] {
+                    var values:[StepperStyle.AllowedStates:UIImage] = [:]
+                    for (key, value) in states {
+                        if let state = StepperStyle.AllowedStates(rawValue: key),
+                            let imageKey = resources.imageNames[value],
+                            let image = UIImage(named: imageKey) {
+                            values[state] = image
+                        }
+                    }
+                    style.incrementImage = values
+                }
+            case .DecrementImage:
+                if let states = value as? [String: String] {
+                    var values:[StepperStyle.AllowedStates:UIImage] = [:]
+                    for (key, value) in states {
+                        if let state = StepperStyle.AllowedStates(rawValue: key),
+                            let imageKey = resources.imageNames[value],
+                            let image = UIImage(named: imageKey) {
+                            values[state] = image
+                        }
+                    }
+                    style.decrementImage = values
+                }
+            case .BackgroundImage:
+                if let states = value as? [String: String] {
+                    var values:[StepperStyle.AllowedStates:UIImage] = [:]
+                    for (key, value) in states {
+                        if let state = StepperStyle.AllowedStates(rawValue: key),
+                            let imageKey = resources.imageNames[value],
+                            let image = UIImage(named: imageKey) {
+                            values[state] = image
+                        }
+                    }
+                    style.backgroundImage = values
+                }
+            }
+        }
+        return style
+    }
+    
+    func serializeProgressSpec(spec: [String:AnyObject]) throws -> ProgressViewStyle {
+        let style = ProgressViewStyle()
+        for (key,value) in spec {
+            guard let property = ProgressViewStyle.Properties(rawValue: key) else {
+                print("StyleKit: Warning: \(key) is not a recognized property. Ignoring")
+                continue
+            }
+            switch property {
+            case .Style:
+                if let theValue = value as? Int, let viewStyle = UIProgressViewStyle(rawValue: theValue) {
+                    style.style = viewStyle
+                }
+            case .ProgressTintColor:
+                if let colorKey = value as? String, color = resources.colors[colorKey] {
+                    style.progressTintColor = color
+                }
+            case .TrackTintColor:
+                if let colorKey = value as? String, color = resources.colors[colorKey] {
+                    style.trackTintColor = color
+                }
+            case .ProgressImage:
+                if let imageKey = value as? String, imageName = resources.imageNames[imageKey] {
+                    style.progressImage = UIImage(named: imageName)
+                }
+            case .TrackImage:
+                if let imageKey = value as? String, imageName = resources.imageNames[imageKey] {
+                    style.trackImage = UIImage(named: imageName)
+                }
+            }
+        }
+        return style
+    }
+    
+    func serializeFontSpec(spec: [String:AnyObject]) throws -> FontStyle {
+        if let nameKey = spec[FontProperty.name.rawValue] as? String,
+            let fontName = resources.fontLabels[nameKey],
+            let size = spec[FontProperty.size.rawValue] as? Int {
+            return FontStyle(fontName: fontName, size: size)
+        } else {
+            throw ParseError.invalidFontStyle
+        }
+    }
+
+}
+
+protocol Stylizer {
+    func style()
+}
+
+//--------------------------------------
+// MARK: - Extensions
+//--------------------------------------
+
+
+extension UITextField: Stylizer {
+    
+    func applyStyle(style:TextFieldStyle, resources:CommonResources) {
+        for property in TextFieldStyle.allValues {
+            switch property {
+            case .FontStyle:
+                if let fontStyle = style.fontStyle {
+                    self.font = UIFont(name: fontStyle.fontName, size: CGFloat(fontStyle.size))
+                }
+            case .BorderWidth:
+                if let borderWidth = style.borderWidth {
+                    self.layer.borderWidth = CGFloat(borderWidth)
+                }
+            case .BorderColor:
+                if let borderColor = style.borderColor {
+                    self.layer.borderColor = borderColor.CGColor
+                }
+            case .TextAlignment:
+                if let aValue = style.textAlignment {
+                    self.textAlignment = aValue
+                }
+            case .BorderStyle:
+                if let aValue = style.borderStyle {
+                    self.borderStyle = aValue
+                }
+            case .CornerRadius:
+                if let cornerRadius = style.cornerRadius {
+                    self.layer.cornerRadius = CGFloat(cornerRadius)
+                }
+            case .TextColor:
+                if let color = style.textColor {
+                    self.textColor = color
+                }
+            }
+        }
+    }
+    
+    // Conform to Stylizer
+        
+    func style() {
+        if let styleTag = self.styleTag,
+            let elementStyles = Style.sharedInstance.styleMap[.textField],
+            let styles = elementStyles[styleTag],
+            let styleObject = styles as? TextFieldStyle {
+            self.applyStyle(styleObject, resources: Style.sharedInstance.resources)
+        }
+    }
+    
+}
+
+extension UISegmentedControl: Stylizer {
+    
+    func applyStyle(style:SegmentedControlStyle, resources:CommonResources) {
+        for property in SegmentedControlStyle.allValues {
+            
+            var normalAttributes: [NSObject: AnyObject] = [:]
+            var selectedAttributes: [NSObject: AnyObject] = [:]
+            
+            switch property {
+            case .FontStyle:
+                if let fontStyle = style.fontStyle {
+                    let font = UIFont(name: fontStyle.fontName, size: CGFloat(fontStyle.size))
+                    normalAttributes[NSFontAttributeName] = font
+                    selectedAttributes[NSFontAttributeName] = font
+                }
+            case .TextColor:
+                if let colorInfo = style.textColor {
+                    for (stateKey, color) in colorInfo {
+                        switch stateKey {
+                        case .Normal:
+                            normalAttributes[NSForegroundColorAttributeName] = color
+                        case .Selected:
+                            selectedAttributes[NSForegroundColorAttributeName] = color
+                        }
+                    }
+                }
+            case .TintColor:
+                if let tintColor = style.tintColor {
+                    self.tintColor = tintColor
+                }
+            }
+            
+            self.setTitleTextAttributes(normalAttributes, forState: .Normal)
+            self.setTitleTextAttributes(selectedAttributes, forState: .Selected)
+        }
+    }
+    
+    // Conform to Stylizer
+    
+    func style() {
+        if let styleTag = self.styleTag,
+            let elementStyles = Style.sharedInstance.styleMap[.segmentedControl],
+            let styles = elementStyles[styleTag],
+            let styleObject = styles as? SegmentedControlStyle {
+            self.applyStyle(styleObject, resources: Style.sharedInstance.resources)
+        }
+    }
+
+}
+
+
+extension UISlider: Stylizer {
+    
+    func applyStyle(style:SliderStyle, resources:CommonResources) {
+        for property in SliderStyle.allValues {
+            switch property {
+            case .MaximumTrackTintColor:
+            if let color = style.tintColor {
+                self.maximumTrackTintColor = color
+            }
+            case .MinimumTrackTintColor:
+            if let color = style.minimumTrackTintColor {
+                self.minimumTrackTintColor = color
+            }
+            case .ThumbImage:
+            if let image = style.thumbImage {
+                self.setThumbImage(image, forState: .Normal)
+            }
+            case .MinimumTrackImage:
+            if let image = style.minimumTrackImage {
+                self.setMinimumTrackImage(image, forState: .Normal)
+            }
+            case .MaximumTrackImage:
+            if let image = style.maximumTrackImage {
+                self.setMaximumTrackImage(image, forState: .Normal)
+            }
+            }
+        }
+    }
+    
+    // Conform to Stylizer
+    
+    func style() {
+        if let styleTag = self.styleTag,
+            let elementStyles = Style.sharedInstance.styleMap[.slider],
+            let styles = elementStyles[styleTag],
+            let styleObject = styles as? SliderStyle {
+            self.applyStyle(styleObject, resources: Style.sharedInstance.resources)
+        }
+    }
+
+}
+
+
+extension UIStepper: Stylizer {
+    
+    func applyStyle(style:StepperStyle, resources:CommonResources) {
+        for property in StepperStyle.allValues {
+            switch property {
+            case .TintColor:
+                if let color = style.tintColor {
+                    self.tintColor = color
+                }
+            case .IncrementImage:
+                if let states = style.incrementImage {
+                    for (key, value) in states {
+                        let controlState = StepperStyle.controlStateForAllowedState(key)
+                        self.setIncrementImage(value, forState: controlState)
+                    }
+                }
+            case .DecrementImage:
+                if let states = style.decrementImage {
+                    for (key, value) in states {
+                        let controlState = StepperStyle.controlStateForAllowedState(key)
+                        self.setDecrementImage(value, forState: controlState)
+                    }
+                }
+            case .BackgroundImage:
+                if let states = style.backgroundImage {
+                    for (key, value) in states {
+                        let controlState = StepperStyle.controlStateForAllowedState(key)
+                        self.setBackgroundImage(value, forState: controlState)
+                    }
+                }
+            }
+        }
+    }
+    
+    // Conform to Stylizer
+    
+    func style() {
+        if let styleTag = self.styleTag,
+            let elementStyles = Style.sharedInstance.styleMap[.stepper],
+            let styles = elementStyles[styleTag],
+            let styleObject = styles as? StepperStyle {
+            self.applyStyle(styleObject, resources: Style.sharedInstance.resources)
+        }
+    }
+
+}
+
+extension UIProgressView: Stylizer {
+    
+    func applyStyle(style:ProgressViewStyle, resources:CommonResources) {
+        for property in ProgressViewStyle.allValues {
+            switch property {
+            case .Style:
+                if let theValue = style.style {
+                    self.progressViewStyle = theValue
+                }
+            case .ProgressTintColor:
+                if let color = style.progressTintColor {
+                    self.progressTintColor = color
+                }
+            case .TrackTintColor:
+                if let color = style.trackTintColor {
+                    self.trackTintColor = color
+                }
+            case .ProgressImage:
+                if let image = style.progressImage {
+                    self.progressImage = image
+                }
+            case .TrackImage:
+                if let trackImage = style.trackImage {
+                    self.trackImage = trackImage
+                }
+            }
+        }
+    }
+    
+    // Conform to Stylizer
+    
+    func style() {
+        if let styleTag = self.styleTag,
+            let elementStyles = Style.sharedInstance.styleMap[.progressView],
+            let styles = elementStyles[styleTag],
+            let styleObject = styles as? ProgressViewStyle {
+            self.applyStyle(styleObject, resources: Style.sharedInstance.resources)
+        }
+    }
+
+}
+
+extension UILabel: Stylizer {
+    
+    func applyStyle(style:LabelStyle, resources:CommonResources) {
+        for property in LabelStyle.allValues {
+            switch property {
+            case .FontStyle:
+                if let fontStyle = style.fontStyle {
+                    self.font = UIFont(name: fontStyle.fontName, size: CGFloat(fontStyle.size))
+                }
+            }
+        }
+    }
+    
+    // Conform to Stylizer
+    
+    func style() {
+        if let styleTag = self.styleTag,
+            let elementStyles = Style.sharedInstance.styleMap[.label],
+            let styles = elementStyles[styleTag],
+            let styleObject = styles as? LabelStyle {
+            self.applyStyle(styleObject, resources: Style.sharedInstance.resources)
+        }
+    }
+
+}
+
+extension UIButton: Stylizer {
+    
+    func applyStyle(style:ButtonStyle, resources:CommonResources) {
+        for property in ButtonStyle.allValues {
+            switch property {
+            case .FontStyle:
+                if let fontStyle = style.fontStyle {
+                    self.titleLabel?.font = UIFont(name: fontStyle.fontName, size: CGFloat(fontStyle.size))
+                }
+            case .BorderWidth:
+                if let borderWidth = style.borderWidth {
+                    self.layer.borderWidth = CGFloat(borderWidth)
+                }
+            case .BorderColor:
+                if let borderColor = style.borderColor {
+                    self.layer.borderColor = borderColor.CGColor
+                }
+            case .CornerRadius:
+                if let cornerRadius = style.cornerRadius {
+                    self.layer.cornerRadius = CGFloat(cornerRadius)
+                }
+            case .TitleColor:
+                if let colorInfo = style.titleColorStates {
+                    self.assignTitleColor(colorInfo, resources: resources)
+                }
+            }
+        }
+    }
+    
+    func assignTitleColor(colorsAndStates: [ButtonStyle.AllowedStates: UIColor], resources:CommonResources) {
+        for (state, color) in colorsAndStates {
+            switch state {
+            case .Normal:
+                self.setTitleColor(color, forState: .Normal)
+            case .Highlighted:
+                self.setTitleColor(color, forState: .Highlighted)
+            case .Disabled:
+                self.setTitleColor(color, forState: .Disabled)
+            case .Selected:
+                self.setTitleColor(color, forState: .Selected)
+            }
+        }
+    }
+    
+    // Conform to Stylizer
+    
+    func style() {
+        if let styleTag = self.styleTag,
+            let elementStyles = Style.sharedInstance.styleMap[.button],
+            let styles = elementStyles[styleTag],
+            let styleObject = styles as? ButtonStyle {
+            self.applyStyle(styleObject, resources: Style.sharedInstance.resources)
+        }
+    }
+
+
+}
+
+
+
