@@ -111,6 +111,7 @@ class TextFieldStyle {
     var cornerRadius: Int?
     var textAlignment: NSTextAlignment?
     var borderStyle: UITextBorderStyle?
+    var backgroundColor: UIColor?
 
     enum Properties: String {
         case FontStyle = "fontStyle"
@@ -120,9 +121,10 @@ class TextFieldStyle {
         case TextAlignment = "textAlignment"
         case BorderStyle = "borderStyle"
         case TextColor = "textColor"
+        case BackgroundColor = "backgroundColor"
     }
     
-    static let allValues:[Properties] = [.FontStyle, .BorderWidth, .BorderColor, .CornerRadius, .TextAlignment, .BorderStyle, .TextColor]
+    static let allValues:[Properties] = [.BackgroundColor, .FontStyle, .BorderWidth, .BorderColor, .CornerRadius, .TextAlignment, .BorderStyle, .TextColor]
 
 }
 

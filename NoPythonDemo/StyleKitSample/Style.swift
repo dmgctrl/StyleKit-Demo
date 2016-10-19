@@ -158,7 +158,7 @@ class Style: NSObject {
                         result.fontStyle = try serializeFontSpec(fontSpec)
                     }
                 case TextFieldStyle.Properties.BorderWidth:
-                    if let borderWidth = spec[key] as? Int {
+                    if let borderWidth = value as? Int {
                         result.borderWidth = borderWidth
                     }
                 case TextFieldStyle.Properties.TextColor:
@@ -178,10 +178,13 @@ class Style: NSObject {
                         result.borderStyle = border
                     }
                 case TextFieldStyle.Properties.CornerRadius:
-                    if let cornerRadius = spec[key] as? Int {
+                    if let cornerRadius = value as? Int {
                         result.cornerRadius = cornerRadius
                     }
-
+                case TextFieldStyle.Properties.BackgroundColor:
+                    if let colorKey = value as? String, color = resources.colors[colorKey] {
+                        result.backgroundColor = color
+                    }
             }
         }
         
@@ -493,7 +496,10 @@ extension UIView {
     }
 
     func style() {
-        guard let styleTag = self.styleTag else { return }
+        guard let styleTag = self.styleTag else {
+            print("StyleKit: Warning: Instance of \(self.dynamicType) with no styleTag")
+            return
+        }
         switch self {
         case is UISegmentedControl:
             if let elementStyles = Style.sharedInstance.styleMap[.segmentedControl],
@@ -579,6 +585,10 @@ extension UITextField {
             case .TextColor:
                 if let color = style.textColor {
                     self.textColor = color
+                }
+            case .BackgroundColor:
+                if let color = style.backgroundColor {
+                    self.backgroundColor = color
                 }
             }
         }
@@ -783,45 +793,7 @@ extension UIButton {
             }
         }
     }
-    
-
-
 }
-
-
-//    func applyStyle(style:ViewStyle, resources:CommonResources) {
-//        for property in ViewStyle.allValues {
-//            switch property {
-//            case .BorderWidth:
-//                if let borderWidth = style.borderWidth {
-//                    self.layer.borderWidth = CGFloat(borderWidth)
-//                }
-//            case .BorderColor:
-//                if let borderColor = style.borderColor {
-//                    self.layer.borderColor = borderColor.CGColor
-//                }
-//            case .CornerRadius:
-//                if let cornerRadius = style.cornerRadius {
-//                    self.layer.cornerRadius = CGFloat(cornerRadius)
-//                }
-//            case .BackgroundColor:
-//                if let color = style.backgroundColor {
-//                    self.backgroundColor = color
-//                }
-//            }
-//        }
-//    }
-//    
-//    // Conform to Stylizer
-//    
-//    func style() {
-//        if let styleTag = self.styleTag,
-//            let elementStyles = Style.sharedInstance.styleMap[.view],
-//            let styles = elementStyles[styleTag],
-//            let styleObject = styles as? ViewStyle {
-//            self.applyStyle(styleObject, resources: Style.sharedInstance.resources)
-//        }
-//    }
 
 
 
