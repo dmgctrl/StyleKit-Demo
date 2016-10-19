@@ -12,55 +12,12 @@ class CommonResources {
     var imageNames = [String: String]()
 }
 
-class Stylist: NSObject {
-    
-    @IBOutlet var buttons: [UIButton]! {
-        didSet {
-            buttons.forEach { $0.style() }
-        }
-    }
-    
-    @IBOutlet var segmentedControls: [UISegmentedControl]! {
-        didSet {
-            segmentedControls.forEach { $0.style() }
-        }
-    }
-    
-    @IBOutlet var textFields: [UITextField]! {
-        didSet {
-            textFields.forEach { $0.style() }
-        }
-    }
-    
-    @IBOutlet var labels: [UILabel]! {
-        didSet {
-            labels.forEach { $0.style() }
-        }
-    }
-    
-    @IBOutlet var sliders: [UISlider]! {
-        didSet {
-            sliders.forEach { $0.style() }
-        }
-    }
-    
-    @IBOutlet var steppers: [UIStepper]! {
-        didSet {
-            steppers.forEach { $0.style() }
-        }
-    }
-    
-    @IBOutlet var progressViews: [UIProgressView]! {
-        didSet {
-            progressViews.forEach { $0.style() }
-        }
-    }
-}
 
 class Style: NSObject {
     
     static let sharedInstance = Style()
     
+    var fileName = "Style2.json"
 
     var resources = CommonResources()
     
@@ -73,8 +30,6 @@ class Style: NSObject {
     typealias StyleMap = [String: AnyObject]
 
     var styleMap = [UIElement:StyleMap]()
-    
-    var fileName = "Style.json"
     
     private override init() {
         super.init()
@@ -147,6 +102,8 @@ class Style: NSObject {
                         styles[labelKey] = try serializeSliderSpec(specification) as AnyObject
                     case .stepper:
                         styles[labelKey] = try serializeStepperSpec(specification) as AnyObject
+                    case .view:
+                        styles[labelKey] = try serializeViewSpec(specification) as AnyObject
                     case .textField:
                         styles[labelKey] = try serializeTextFieldSpec(specification) as AnyObject
                     }
@@ -294,6 +251,37 @@ class Style: NSObject {
         return style
     }
 
+    private func serializeViewSpec(spec: [String:AnyObject]) throws -> ViewStyle {
+        let style = ViewStyle()
+        for (key,value) in spec {
+            guard let property = ViewStyle.Properties(rawValue: key) else {
+                print("StyleKit: Warning: \(key) is not a recognized property. Ignoring")
+                continue
+            }
+            switch property {
+            case .BorderColor:
+                if let colorKey = value as? String,
+                    let color = resources.colors[colorKey] {
+                    style.borderColor = color
+                }
+            case .BorderWidth:
+                if let width = value as? Int {
+                    style.borderWidth = width
+                }
+            case .CornerRadius:
+                if let radius = value as? Int {
+                    style.cornerRadius = radius
+                }
+            case .BackgroundColor:
+                if let colorKey = value as? String,
+                    let color = resources.colors[colorKey] {
+                    style.backgroundColor = color
+                }
+            }
+        }
+        return style
+    }
+    
     private func serializeSegmentControlSpec(spec: [String:AnyObject]) throws -> SegmentedControlStyle {
         let style = SegmentedControlStyle()
         for (key,value) in spec {
@@ -466,16 +454,100 @@ class Style: NSObject {
 
 }
 
-protocol Stylizer {
-    func style()
+protocol CanBeStyled {
+    
+    associatedtype ViewType
+    
+    func style(viewType:ViewType)
+    
 }
+
 
 //--------------------------------------
 // MARK: - Extensions
 //--------------------------------------
 
+extension UIView {
+    
+    func applyStyle(style:ViewStyle, resources:CommonResources) {
+        for property in ViewStyle.allValues {
+            switch property {
+            case .BorderWidth:
+                if let borderWidth = style.borderWidth {
+                    self.layer.borderWidth = CGFloat(borderWidth)
+                }
+            case .BorderColor:
+                if let borderColor = style.borderColor {
+                    self.layer.borderColor = borderColor.CGColor
+                }
+            case .CornerRadius:
+                if let cornerRadius = style.cornerRadius {
+                    self.layer.cornerRadius = CGFloat(cornerRadius)
+                }
+            case .BackgroundColor:
+                if let color = style.backgroundColor {
+                    self.backgroundColor = color
+                }
+            }
+        }
+    }
 
-extension UITextField: Stylizer {
+    func style() {
+        guard let styleTag = self.styleTag else { return }
+        switch self {
+        case is UISegmentedControl:
+            if let elementStyles = Style.sharedInstance.styleMap[.segmentedControl],
+                let styles = elementStyles[styleTag],
+                let styleObject = styles as? SegmentedControlStyle {
+                (self as! UISegmentedControl).applyStyle(styleObject, resources: Style.sharedInstance.resources)
+            }
+        case is UITextField:
+            if let elementStyles = Style.sharedInstance.styleMap[.textField],
+                let styles = elementStyles[styleTag],
+                let styleObject = styles as? TextFieldStyle {
+                (self as! UITextField).applyStyle(styleObject, resources: Style.sharedInstance.resources)
+            }
+        case is UIButton:
+            if let elementStyles = Style.sharedInstance.styleMap[.button],
+                let styles = elementStyles[styleTag],
+                let styleObject = styles as? ButtonStyle {
+                (self as! UIButton).applyStyle(styleObject, resources: Style.sharedInstance.resources)
+            }
+        case is UILabel:
+            if let elementStyles = Style.sharedInstance.styleMap[.label],
+                let styles = elementStyles[styleTag],
+                let styleObject = styles as? LabelStyle {
+                (self as! UILabel).applyStyle(styleObject, resources: Style.sharedInstance.resources)
+            }
+        case is UISlider:
+            if let elementStyles = Style.sharedInstance.styleMap[.slider],
+                let styles = elementStyles[styleTag],
+                let styleObject = styles as? SliderStyle {
+                (self as! UISlider).applyStyle(styleObject, resources: Style.sharedInstance.resources)
+            }
+        case is UIStepper:
+            if let elementStyles = Style.sharedInstance.styleMap[.stepper],
+                let styles = elementStyles[styleTag],
+                let styleObject = styles as? StepperStyle {
+                (self as! UIStepper).applyStyle(styleObject, resources: Style.sharedInstance.resources)
+            }
+        case is UIProgressView:
+            if let elementStyles = Style.sharedInstance.styleMap[.progressView],
+                let styles = elementStyles[styleTag],
+                let styleObject = styles as? ProgressViewStyle {
+                (self as! UIProgressView).applyStyle(styleObject, resources: Style.sharedInstance.resources)
+            }
+        default:
+            if let elementStyles = Style.sharedInstance.styleMap[.view],
+                let styles = elementStyles[styleTag],
+                let styleObject = styles as? ViewStyle {
+                self.applyStyle(styleObject, resources: Style.sharedInstance.resources)
+            }
+        }
+    }
+}
+
+extension UITextField {
     
     func applyStyle(style:TextFieldStyle, resources:CommonResources) {
         for property in TextFieldStyle.allValues {
@@ -512,20 +584,9 @@ extension UITextField: Stylizer {
         }
     }
     
-    // Conform to Stylizer
-        
-    func style() {
-        if let styleTag = self.styleTag,
-            let elementStyles = Style.sharedInstance.styleMap[.textField],
-            let styles = elementStyles[styleTag],
-            let styleObject = styles as? TextFieldStyle {
-            self.applyStyle(styleObject, resources: Style.sharedInstance.resources)
-        }
-    }
-    
 }
 
-extension UISegmentedControl: Stylizer {
+extension UISegmentedControl {
     
     func applyStyle(style:SegmentedControlStyle, resources:CommonResources) {
         for property in SegmentedControlStyle.allValues {
@@ -562,21 +623,10 @@ extension UISegmentedControl: Stylizer {
         }
     }
     
-    // Conform to Stylizer
-    
-    func style() {
-        if let styleTag = self.styleTag,
-            let elementStyles = Style.sharedInstance.styleMap[.segmentedControl],
-            let styles = elementStyles[styleTag],
-            let styleObject = styles as? SegmentedControlStyle {
-            self.applyStyle(styleObject, resources: Style.sharedInstance.resources)
-        }
-    }
-
 }
 
 
-extension UISlider: Stylizer {
+extension UISlider {
     
     func applyStyle(style:SliderStyle, resources:CommonResources) {
         for property in SliderStyle.allValues {
@@ -605,21 +655,9 @@ extension UISlider: Stylizer {
         }
     }
     
-    // Conform to Stylizer
-    
-    func style() {
-        if let styleTag = self.styleTag,
-            let elementStyles = Style.sharedInstance.styleMap[.slider],
-            let styles = elementStyles[styleTag],
-            let styleObject = styles as? SliderStyle {
-            self.applyStyle(styleObject, resources: Style.sharedInstance.resources)
-        }
-    }
-
 }
 
-
-extension UIStepper: Stylizer {
+extension UIStepper {
     
     func applyStyle(style:StepperStyle, resources:CommonResources) {
         for property in StepperStyle.allValues {
@@ -653,20 +691,9 @@ extension UIStepper: Stylizer {
         }
     }
     
-    // Conform to Stylizer
-    
-    func style() {
-        if let styleTag = self.styleTag,
-            let elementStyles = Style.sharedInstance.styleMap[.stepper],
-            let styles = elementStyles[styleTag],
-            let styleObject = styles as? StepperStyle {
-            self.applyStyle(styleObject, resources: Style.sharedInstance.resources)
-        }
-    }
-
 }
 
-extension UIProgressView: Stylizer {
+extension UIProgressView {
     
     func applyStyle(style:ProgressViewStyle, resources:CommonResources) {
         for property in ProgressViewStyle.allValues {
@@ -695,20 +722,9 @@ extension UIProgressView: Stylizer {
         }
     }
     
-    // Conform to Stylizer
-    
-    func style() {
-        if let styleTag = self.styleTag,
-            let elementStyles = Style.sharedInstance.styleMap[.progressView],
-            let styles = elementStyles[styleTag],
-            let styleObject = styles as? ProgressViewStyle {
-            self.applyStyle(styleObject, resources: Style.sharedInstance.resources)
-        }
-    }
-
 }
 
-extension UILabel: Stylizer {
+extension UILabel {
     
     func applyStyle(style:LabelStyle, resources:CommonResources) {
         for property in LabelStyle.allValues {
@@ -721,20 +737,10 @@ extension UILabel: Stylizer {
         }
     }
     
-    // Conform to Stylizer
-    
-    func style() {
-        if let styleTag = self.styleTag,
-            let elementStyles = Style.sharedInstance.styleMap[.label],
-            let styles = elementStyles[styleTag],
-            let styleObject = styles as? LabelStyle {
-            self.applyStyle(styleObject, resources: Style.sharedInstance.resources)
-        }
-    }
 
 }
 
-extension UIButton: Stylizer {
+extension UIButton {
     
     func applyStyle(style:ButtonStyle, resources:CommonResources) {
         for property in ButtonStyle.allValues {
@@ -778,19 +784,46 @@ extension UIButton: Stylizer {
         }
     }
     
-    // Conform to Stylizer
-    
-    func style() {
-        if let styleTag = self.styleTag,
-            let elementStyles = Style.sharedInstance.styleMap[.button],
-            let styles = elementStyles[styleTag],
-            let styleObject = styles as? ButtonStyle {
-            self.applyStyle(styleObject, resources: Style.sharedInstance.resources)
-        }
-    }
 
 
 }
+
+
+//    func applyStyle(style:ViewStyle, resources:CommonResources) {
+//        for property in ViewStyle.allValues {
+//            switch property {
+//            case .BorderWidth:
+//                if let borderWidth = style.borderWidth {
+//                    self.layer.borderWidth = CGFloat(borderWidth)
+//                }
+//            case .BorderColor:
+//                if let borderColor = style.borderColor {
+//                    self.layer.borderColor = borderColor.CGColor
+//                }
+//            case .CornerRadius:
+//                if let cornerRadius = style.cornerRadius {
+//                    self.layer.cornerRadius = CGFloat(cornerRadius)
+//                }
+//            case .BackgroundColor:
+//                if let color = style.backgroundColor {
+//                    self.backgroundColor = color
+//                }
+//            }
+//        }
+//    }
+//    
+//    // Conform to Stylizer
+//    
+//    func style() {
+//        if let styleTag = self.styleTag,
+//            let elementStyles = Style.sharedInstance.styleMap[.view],
+//            let styles = elementStyles[styleTag],
+//            let styleObject = styles as? ViewStyle {
+//            self.applyStyle(styleObject, resources: Style.sharedInstance.resources)
+//        }
+//    }
+
+
 
 
 

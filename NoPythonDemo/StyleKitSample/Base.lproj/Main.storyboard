@@ -629,6 +629,9 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sda-Aq-YvI">
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="styleTag" value="special"/>
+                                </userDefinedRuntimeAttributes>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oXb-uF-MOV">
                                 <attributedString key="attributedText">
@@ -750,6 +753,7 @@
                         <outletCollection property="segmentedControls" destination="ba0-IN-AmL" collectionClass="NSMutableArray" id="CY4-hz-jNx"/>
                         <outletCollection property="sliders" destination="lX7-Kb-eRd" collectionClass="NSMutableArray" id="rWA-QR-IV0"/>
                         <outletCollection property="textFields" destination="kRn-ls-Urx" collectionClass="NSMutableArray" id="k90-XN-xpq"/>
+                        <outletCollection property="views" destination="Sda-Aq-YvI" collectionClass="NSMutableArray" id="yBG-s6-Qlw"/>
                     </connections>
                 </customObject>
             </objects>

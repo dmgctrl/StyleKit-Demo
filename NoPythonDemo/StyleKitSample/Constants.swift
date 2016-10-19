@@ -14,8 +14,9 @@ enum UIElement: String {
     case slider = "Sliders"
     case stepper = "Steppers"
     case progressView = "ProgressViews"
-    
-    static let allValues:[UIElement] = [.segmentedControl, .textField, .button, .label, .slider, .stepper, .progressView]
+    case view = "Views"
+        
+    static let allValues:[UIElement] = [.view, .segmentedControl, .textField, .button, .label, .slider, .stepper, .progressView]
 }
 
 enum CommonObjects: String {
@@ -75,6 +76,27 @@ class ButtonStyle {
     }
 
     static let allValues:[Properties] = [.FontStyle, .BorderWidth, .BorderColor, .CornerRadius, .TitleColor]
+}
+
+//--------------------------------------
+// MARK: - Views
+//--------------------------------------
+
+class ViewStyle {
+
+    var borderWidth: Int?
+    var borderColor: UIColor?
+    var cornerRadius: Int?
+    var backgroundColor: UIColor?
+    
+    enum Properties: String {
+        case BorderWidth = "borderWidth"
+        case BorderColor = "borderColor"
+        case CornerRadius = "cornerRadius"
+        case BackgroundColor = "backgroundColor"
+    }
+    
+    static let allValues:[Properties] = [.BorderWidth, .BorderColor, .CornerRadius, .BackgroundColor]
 }
 
 //--------------------------------------

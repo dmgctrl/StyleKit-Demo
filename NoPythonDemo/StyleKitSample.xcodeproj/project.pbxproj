@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2908BCD81DB7DAD10012C924 /* Stylist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2908BCD71DB7DAD10012C924 /* Stylist.swift */; };
 		295D21791C9214AA001626BD /* Style.json in Resources */ = {isa = PBXBuildFile; fileRef = 295D21781C9214AA001626BD /* Style.json */; };
 		298DC60B1C92073E00BB0D29 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 298DC60A1C92073E00BB0D29 /* AppDelegate.swift */; };
 		298DC60D1C92073E00BB0D29 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 298DC60C1C92073E00BB0D29 /* ViewController.swift */; };
@@ -28,6 +29,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2908BCD71DB7DAD10012C924 /* Stylist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stylist.swift; sourceTree = "<group>"; };
 		295D21781C9214AA001626BD /* Style.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; lineEnding = 0; path = Style.json; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.javascript; };
 		298DC6071C92073E00BB0D29 /* StyleKitSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StyleKitSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		298DC60A1C92073E00BB0D29 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -65,6 +67,7 @@
 			isa = PBXGroup;
 			children = (
 				C446D61C1CB540CA00EBC929 /* UIView+StyleKit.swift */,
+				2908BCD71DB7DAD10012C924 /* Stylist.swift */,
 				C446D61B1CB540CA00EBC929 /* Style.swift */,
 				29EBA4901DB69EA500CAFFEA /* Utils.swift */,
 				C446D61F1CB5430C00EBC929 /* Constants.swift */,
@@ -193,6 +196,7 @@
 				29EBA4911DB69EA500CAFFEA /* Utils.swift in Sources */,
 				C4DC5FF61CBD35300006132D /* LabelsViewController.swift in Sources */,
 				C4DC5FFC1CBD36D50006132D /* SegmentedControlsViewController.swift in Sources */,
+				2908BCD81DB7DAD10012C924 /* Stylist.swift in Sources */,
 				C4DC5FFA1CBD365C0006132D /* TextFieldsViewController.swift in Sources */,
 				C4DC5FF81CBD360E0006132D /* ButtonsViewController.swift in Sources */,
 				C46B9D3F1CBED54200B50F17 /* SlidersViewController.swift in Sources */,
