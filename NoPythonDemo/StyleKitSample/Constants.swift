@@ -58,24 +58,35 @@ class ButtonStyle {
     var borderWidth: Int?
     var borderColor: UIColor?
     var cornerRadius: Int?
-    var titleColorStates: [AllowedStates:UIColor]?
+    var normalColors: [ColorType: UIColor]
+    var highlightedColors: [ColorType: UIColor]
+    var selectedColors: [ColorType: UIColor]
+    var disabledColors: [ColorType: UIColor]
 
     enum Properties: String {
         case FontStyle = "fontStyle"
         case BorderWidth = "borderWidth"
         case BorderColor = "borderColor"
         case CornerRadius = "cornerRadius"
-        case TitleColor = "titleColor"
-    }
-
-    enum AllowedStates: String {
         case Normal = "normalState"
         case Highlighted = "highlightedState"
         case Selected = "selectedState"
         case Disabled = "disabledState"
     }
+    
+    enum ColorType: String {
+        case Background = "backgroundColor"
+        case Text = "textColor"
+    }
 
-    static let allValues:[Properties] = [.FontStyle, .BorderWidth, .BorderColor, .CornerRadius, .TitleColor]
+    static let allValues:[Properties] = [.FontStyle, .BorderWidth, .BorderColor, .CornerRadius, .Normal, .Highlighted, .Selected, .Disabled]
+    
+    init() {
+        self.normalColors = [ColorType: UIColor]()
+        self.highlightedColors = [ColorType: UIColor]()
+        self.selectedColors = [ColorType: UIColor]()
+        self.disabledColors = [ColorType: UIColor]()
+    }
 }
 
 //--------------------------------------

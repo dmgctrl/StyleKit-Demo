@@ -233,17 +233,40 @@ class Style: NSObject {
                 if let radius = value as? Int {
                     style.cornerRadius = radius
                 }
-            case .TitleColor:
-                if let colorStates = value as? [String:String] {
-                    var states:[ButtonStyle.AllowedStates:UIColor] = [:]
-                    for state in colorStates {
-                        if let allowedState = ButtonStyle.AllowedStates(rawValue: state.0),
-                            let color = resources.colors[state.1] {
-                            states[allowedState] = color
-                        }
+            case .Normal:
+                guard let normalColorEntries = value as? [String: String] else {
+                    break
+                }
+                for entry in normalColorEntries {
+                    if let color = resources.colors[entry.1], colorType = ButtonStyle.ColorType(rawValue: entry.0) {
+                        style.normalColors[colorType] = color
                     }
-                    if states.keys.count > 0 {
-                        style.titleColorStates = states
+                }
+            case .Selected:
+                guard let selectedColorEntries = value as? [String: String] else {
+                    break
+                }
+                for entry in selectedColorEntries {
+                    if let color = resources.colors[entry.1], colorType = ButtonStyle.ColorType(rawValue: entry.0) {
+                        style.selectedColors[colorType] = color
+                    }
+                }
+            case .Highlighted:
+                guard let highlightedColorEntries = value as? [String: String] else {
+                    break
+                }
+                for entry in highlightedColorEntries {
+                    if let color = resources.colors[entry.1], colorType = ButtonStyle.ColorType(rawValue: entry.0) {
+                        style.highlightedColors[colorType] = color
+                    }
+                }
+            case .Disabled:
+                guard let disabledColorEntries = value as? [String: String] else {
+                    break
+                }
+                for entry in disabledColorEntries {
+                    if let color = resources.colors[entry.1], colorType = ButtonStyle.ColorType(rawValue: entry.0) {
+                        style.disabledColors[colorType] = color
                     }
                 }
             }
@@ -760,31 +783,30 @@ extension UIButton {
             case .CornerRadius:
                 if let cornerRadius = style.cornerRadius {
                     self.layer.cornerRadius = CGFloat(cornerRadius)
+                    self.layer.masksToBounds = true
                 }
-            case .TitleColor:
-                if let colorInfo = style.titleColorStates {
-                    self.assignTitleColor(colorInfo, resources: resources)
-                }
-            }
-        }
-    }
-    
-    func assignTitleColor(colorsAndStates: [ButtonStyle.AllowedStates: UIColor], resources:CommonResources) {
-        for (state, color) in colorsAndStates {
-            switch state {
             case .Normal:
-                self.setTitleColor(color, forState: .Normal)
-            case .Highlighted:
-                self.setTitleColor(color, forState: .Highlighted)
-            case .Disabled:
-                self.setTitleColor(color, forState: .Disabled)
+                self.assignColors(style.normalColors, forState: .Normal)
             case .Selected:
-                self.setTitleColor(color, forState: .Selected)
+                self.assignColors(style.selectedColors, forState: .Selected)
+            case .Highlighted:
+                self.assignColors(style.highlightedColors, forState: .Highlighted)
+            case .Disabled:
+                self.assignColors(style.disabledColors, forState: .Disabled)
             }
         }
     }
     
-
+    func assignColors(colors: [ButtonStyle.ColorType: UIColor], forState state: UIControlState) {
+        for (type, color) in colors {
+            switch type {
+            case .Background:
+                self.setBackgroundImage(UIImage.imageWithColor(color), forState: state)
+            case .Text:
+                self.setTitleColor(color, forState: state)
+            }
+        }
+    }
 
 }
 
