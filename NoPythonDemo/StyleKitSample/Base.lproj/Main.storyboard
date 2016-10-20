@@ -520,7 +520,7 @@
             <objects>
                 <navigationController title="StyleKit Catalog" automaticallyAdjustsScrollViewInsets="NO" id="y3g-6O-uUf" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="Nno-YI-l6u">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="Nno-YI-l6u">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -723,18 +723,6 @@
                     <navigationItem key="navigationItem" title="StyleKit" id="cYX-Id-79P"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a8I-fd-UGl" sceneMemberID="firstResponder"/>
-                <customObject id="wz8-Wc-c2K" customClass="Stylist" customModule="StyleKitSample" customModuleProvider="target">
-                    <connections>
-                        <outletCollection property="buttons" destination="dd8-Fy-1jk" collectionClass="NSMutableArray" id="kbN-QC-Uos"/>
-                        <outletCollection property="buttons" destination="8df-Mv-OGs" collectionClass="NSMutableArray" id="nKb-Ku-I7v"/>
-                        <outletCollection property="labels" destination="oXb-uF-MOV" collectionClass="NSMutableArray" id="inB-PF-5ou"/>
-                        <outletCollection property="labels" destination="8ir-5e-6QN" collectionClass="NSMutableArray" id="Jjl-me-wDR"/>
-                        <outletCollection property="segmentedControls" destination="ba0-IN-AmL" collectionClass="NSMutableArray" id="CY4-hz-jNx"/>
-                        <outletCollection property="sliders" destination="lX7-Kb-eRd" collectionClass="NSMutableArray" id="rWA-QR-IV0"/>
-                        <outletCollection property="textFields" destination="kRn-ls-Urx" collectionClass="NSMutableArray" id="k90-XN-xpq"/>
-                        <outletCollection property="views" destination="Sda-Aq-YvI" collectionClass="NSMutableArray" id="yBG-s6-Qlw"/>
-                    </connections>
-                </customObject>
             </objects>
             <point key="canvasLocation" x="492" y="-281"/>
         </scene>
