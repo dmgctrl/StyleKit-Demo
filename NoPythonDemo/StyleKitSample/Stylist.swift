@@ -13,49 +13,49 @@ class Stylist: NSObject {
     
     @IBOutlet var buttons: [UIButton]! {
         didSet {
-            buttons.forEach { $0.style() }
+            //buttons.forEach { $0.style() }
         }
     }
     
     @IBOutlet var segmentedControls: [UISegmentedControl]! {
         didSet {
-            segmentedControls.forEach { $0.style() }
+            //segmentedControls.forEach { $0.style() }
         }
     }
     
     @IBOutlet var textFields: [UITextField]! {
         didSet {
-            textFields.forEach { $0.style() }
+            //textFields.forEach { $0.style() }
         }
     }
     
     @IBOutlet var labels: [UILabel]! {
         didSet {
-            labels.forEach { $0.style() }
+            //labels.forEach { $0.style() }
         }
     }
     
     @IBOutlet var sliders: [UISlider]! {
         didSet {
-            sliders.forEach { $0.style() }
+            //sliders.forEach { $0.style() }
         }
     }
     
     @IBOutlet var steppers: [UIStepper]! {
         didSet {
-            steppers.forEach { $0.style() }
+            //steppers.forEach { $0.style() }
         }
     }
     
     @IBOutlet var progressViews: [UIProgressView]! {
         didSet {
-            progressViews.forEach { $0.style() }
+            //progressViews.forEach { $0.style() }
         }
     }
     
     @IBOutlet var views: [UIView]! {
         didSet {
-            views.forEach { $0.style() }
+            //views.forEach { $0.style() }
         }
     }
 }

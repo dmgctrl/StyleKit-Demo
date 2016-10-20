@@ -51,17 +51,36 @@
     },
     "Labels": {
         "H1": {
-            "fontStyle": {
-                "font": "primaryFontLight",
-                "size": 20
+            "textColor": "blueColor",
+            "attributes": {
+                "fontStyle": {
+                    "font": "primaryFontLight",
+                    "size": 20
+                }
             }
         },
         "H2": {
-            "fontStyle": {
-                "font": "primaryFontMedium",
-                "size": 30
+            "textColor": "purpleColor",
+            "attributes": {
+                "fontStyle": {
+                    "font": "primaryFontMedium",
+                    "size": 30
+                }
             }
-        }        
+        },
+        "H3": {
+            "textColor": "blackColor",
+            "textAlignment": "Center",
+            "attributes": {
+                "fontStyle": {
+                    "font": "primaryFontMedium",
+                    "size": 22
+                },
+                "tracking": 100,
+                "lineSpacing": 5,
+                "ligature": 0
+            }
+        }
     },
     "Buttons": {
         "B1": {
