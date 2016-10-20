@@ -279,44 +279,42 @@ class Style: NSObject {
                     style.cornerRadius = radius
                 }
             case .Normal:
-                guard let normalColorEntries = value as? [String: String] else {
-                    break
-                }
-                for entry in normalColorEntries {
-                    if let color = resources.colors[entry.1], colorType = ButtonStyle.ColorType(rawValue: entry.0) {
-                        style.normalColors[colorType] = color
-                    }
+                if let normalColorEntries = value as? [String: String] {
+                    style.normalColors = try serializeColorsSpec(normalColorEntries)
                 }
             case .Selected:
-                guard let selectedColorEntries = value as? [String: String] else {
-                    break
-                }
-                for entry in selectedColorEntries {
-                    if let color = resources.colors[entry.1], colorType = ButtonStyle.ColorType(rawValue: entry.0) {
-                        style.selectedColors[colorType] = color
-                    }
+                if let selectedColorEntries = value as? [String: String] {
+                    style.selectedColors = try serializeColorsSpec(selectedColorEntries)
                 }
             case .Highlighted:
-                guard let highlightedColorEntries = value as? [String: String] else {
-                    break
-                }
-                for entry in highlightedColorEntries {
-                    if let color = resources.colors[entry.1], colorType = ButtonStyle.ColorType(rawValue: entry.0) {
-                        style.highlightedColors[colorType] = color
-                    }
+                if let highlightedColorEntries = value as? [String: String] {
+                    style.highlightedColors = try serializeColorsSpec(highlightedColorEntries)
                 }
             case .Disabled:
-                guard let disabledColorEntries = value as? [String: String] else {
-                    break
-                }
-                for entry in disabledColorEntries {
-                    if let color = resources.colors[entry.1], colorType = ButtonStyle.ColorType(rawValue: entry.0) {
-                        style.disabledColors[colorType] = color
-                    }
+                if let disabledColorEntries = value as? [String: String] {
+                    style.disabledColors = try serializeColorsSpec(disabledColorEntries)
                 }
             }
         }
         return style
+    }
+    
+    private func serializeColorsSpec(spec: [String:String]) throws -> ColorStyle {
+        
+        let styleSpec = ColorStyle()
+        for style in ColorStyle.Properties.allValues {
+            switch style {
+            case .Background:
+                if let value = spec[style.rawValue] {
+                    styleSpec.backgroundColor = value
+                }
+            case .Text:
+                if let value = spec[style.rawValue] {
+                    styleSpec.textColor = value
+                }
+            }
+        }
+        return styleSpec
     }
     
     private func serializeViewSpec(spec: [String:AnyObject]) throws -> ViewStyle {
@@ -363,25 +361,36 @@ class Style: NSObject {
                     let font = try serializeFontSpec(fontSpec)
                     style.fontStyle = font
                 }
-            case .TextColor:
-                if let colorStates = value as? [String:String] {
-                    var states:[SegmentedControlStyle.AllowedStates:UIColor] = [:]
-                    for state in colorStates {
-                        if let allowedState = SegmentedControlStyle.AllowedStates(rawValue: state.0),
-                            let color = resources.colors[state.1] {
-                            states[allowedState] = color
-                        }
-                    }
-                    if states.keys.count > 0 {
-                        style.textColor = states
-                    }
-                }
+
             case .TintColor:
                 if let colorKey = value as? String,
                     let color = resources.colors[colorKey] {
                     style.tintColor = color
                 }
+            case .DividerColor:
+                if let colorKey = value as? String,
+                    let color = resources.colors[colorKey] {
+                    style.dividerColor = color
+                }
+            case .Normal:
+                if let normalColorEntries = value as? [String: String] {
+                    style.normalColors = try serializeColorsSpec(normalColorEntries)
+                }
+            case .Selected:
+                if let selectedColorEntries = value as? [String: String] {
+                    style.selectedColors = try serializeColorsSpec(selectedColorEntries)
+                }
+            case .Highlighted:
+                if let highlightedColorEntries = value as? [String: String] {
+                    style.highlightedColors = try serializeColorsSpec(highlightedColorEntries)
+                }
+            case .Disabled:
+                if let disabledColorEntries = value as? [String: String] {
+                    style.disabledColors = try serializeColorsSpec(disabledColorEntries)
+                }
+                
             }
+            
         }
         return style
     }
@@ -670,36 +679,50 @@ extension UISegmentedControl {
             var selectedAttributes: [NSObject: AnyObject] = [:]
             
             switch property {
-            case .FontStyle:
-                if let fontStyle = style.fontStyle {
-                    let font = UIFont(name: fontStyle.fontName, size: CGFloat(fontStyle.size))
-                    normalAttributes[NSFontAttributeName] = font
-                    selectedAttributes[NSFontAttributeName] = font
-                }
-            case .TextColor:
-                if let colorInfo = style.textColor {
-                    for (stateKey, color) in colorInfo {
-                        switch stateKey {
-                        case .Normal:
-                            normalAttributes[NSForegroundColorAttributeName] = color
-                        case .Selected:
-                            selectedAttributes[NSForegroundColorAttributeName] = color
-                        }
+                case .FontStyle:
+                    if let fontStyle = style.fontStyle {
+                        let font = UIFont(name: fontStyle.fontName, size: CGFloat(fontStyle.size))
+                        normalAttributes[NSFontAttributeName] = font
+                        selectedAttributes[NSFontAttributeName] = font
                     }
-                }
-            case .TintColor:
-                if let tintColor = style.tintColor {
-                    self.tintColor = tintColor
-                }
+                case .TintColor:
+                    if let tintColor = style.tintColor {
+                        self.tintColor = tintColor
+                    }
+                case .Normal:
+                    if let colorStyles = style.normalColors {
+                        assignColors(colorStyles, forState: .Normal, resources: resources)
+                    }
+                case .Selected:
+                    if let colorStyles = style.selectedColors {
+                        assignColors(colorStyles, forState: .Selected, resources: resources)
+                    }
+                case .Highlighted:
+                    if let colorStyles = style.highlightedColors {
+                        assignColors(colorStyles, forState: .Highlighted, resources: resources)
+                    }
+                case .Disabled:
+                    if let colorStyles = style.disabledColors {
+                        assignColors(colorStyles, forState: .Disabled, resources: resources)
+                    }
+                case .DividerColor:
+                    if let divColor = style.dividerColor {
+                        self.setDividerImage(UIImage.imageWithColor(divColor), forLeftSegmentState: .Normal, rightSegmentState: .Normal, barMetrics: .Default)
+                    }
             }
-            
-            self.setTitleTextAttributes(normalAttributes, forState: .Normal)
-            self.setTitleTextAttributes(selectedAttributes, forState: .Selected)
         }
     }
     
+    func assignColors(colors: ColorStyle, forState state: UIControlState, resources:CommonResources) {
+        if let colorKey = colors.backgroundColor, let color = resources.colors[colorKey] {
+            self.setBackgroundImage(UIImage.imageWithColor(color), forState: state, barMetrics: .Default)
+        }
+        if let colorKey = colors.textColor, let color = resources.colors[colorKey] {
+            let attributes = [NSForegroundColorAttributeName: color]
+            self.setTitleTextAttributes(attributes, forState: state)
+        }
+    }
 }
-
 
 extension UISlider {
     
@@ -843,26 +866,34 @@ extension UIButton {
                     self.layer.masksToBounds = true
                 }
             case .Normal:
-                self.assignColors(style.normalColors, forState: .Normal)
+                if let value = style.normalColors {
+                    assignColors(value, forState: .Normal, resources: resources)
+                }
             case .Selected:
-                self.assignColors(style.selectedColors, forState: .Selected)
+                if let value = style.selectedColors {
+                    assignColors(value, forState: .Selected, resources: resources)
+                }
             case .Highlighted:
-                self.assignColors(style.highlightedColors, forState: .Highlighted)
+                if let value = style.highlightedColors {
+                    assignColors(value, forState: .Highlighted, resources: resources)
+                }
             case .Disabled:
-                self.assignColors(style.disabledColors, forState: .Disabled)
+                if let value = style.disabledColors {
+                    assignColors(value, forState: .Disabled, resources: resources)
+                }
             }
         }
     }
     
-    func assignColors(colors: [ButtonStyle.ColorType: UIColor], forState state: UIControlState) {
-        for (type, color) in colors {
-            switch type {
-            case .Background:
-                self.setBackgroundImage(UIImage.imageWithColor(color), forState: state)
-            case .Text:
-                self.setTitleColor(color, forState: state)
-            }
+    func assignColors(colors: ColorStyle, forState state: UIControlState, resources:CommonResources) {
+        
+        if let colorKey = colors.backgroundColor, let color = resources.colors[colorKey] {
+            self.setBackgroundImage(UIImage.imageWithColor(color), forState: state)
         }
+        if let colorKey = colors.textColor, let color = resources.colors[colorKey] {
+            self.setTitleColor(color, forState: state)
+        }
+
     }
 }
 

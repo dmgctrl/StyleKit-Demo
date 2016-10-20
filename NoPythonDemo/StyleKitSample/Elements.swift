@@ -33,6 +33,19 @@ enum ColorProperties: String {
     case Hex = "hex"
 }
 
+class ColorStyle {
+    
+    var backgroundColor: String?
+    var textColor: String?
+    
+    enum Properties: String {
+        case Background = "backgroundColor"
+        case Text = "textColor"
+        static let allValues:[Properties] = [.Background, .Text]
+    }
+}
+
+
 //--------------------------------------
 // MARK: - Labels
 //--------------------------------------
@@ -97,6 +110,7 @@ class AttributedTextStyle {
     }
 }
 
+
 //--------------------------------------
 // MARK: - Buttons
 //--------------------------------------
@@ -107,10 +121,10 @@ class ButtonStyle {
     var borderWidth: Int?
     var borderColor: UIColor?
     var cornerRadius: Int?
-    var normalColors: [ColorType: UIColor]
-    var highlightedColors: [ColorType: UIColor]
-    var selectedColors: [ColorType: UIColor]
-    var disabledColors: [ColorType: UIColor]
+    var normalColors: ColorStyle?
+    var highlightedColors: ColorStyle?
+    var selectedColors: ColorStyle?
+    var disabledColors: ColorStyle?
     
     enum Properties: String {
         case FontStyle = "fontStyle"
@@ -123,19 +137,8 @@ class ButtonStyle {
         case Disabled = "disabledState"
     }
     
-    enum ColorType: String {
-        case Background = "backgroundColor"
-        case Text = "textColor"
-    }
-    
     static let allValues:[Properties] = [.FontStyle, .BorderWidth, .BorderColor, .CornerRadius, .Normal, .Highlighted, .Selected, .Disabled]
     
-    init() {
-        self.normalColors = [ColorType: UIColor]()
-        self.highlightedColors = [ColorType: UIColor]()
-        self.selectedColors = [ColorType: UIColor]()
-        self.disabledColors = [ColorType: UIColor]()
-    }
 }
 
 //--------------------------------------
@@ -195,20 +198,24 @@ class TextFieldStyle {
 class SegmentedControlStyle {
     var fontStyle: FontStyle?
     var tintColor:UIColor?
-    var textColor: [AllowedStates:UIColor]?
+    var dividerColor:UIColor?
+    var normalColors: ColorStyle?
+    var highlightedColors: ColorStyle?
+    var selectedColors: ColorStyle?
+    var disabledColors: ColorStyle?
     
     enum Properties: String {
         case FontStyle = "fontStyle"
         case TintColor = "tintColor"
-        case TextColor = "textColor"
-    }
-    
-    enum AllowedStates: String {
+        case DividerColor = "dividerColor"
         case Normal = "normalState"
+        case Highlighted = "highlightedState"
         case Selected = "selectedState"
+        case Disabled = "disabledState"
     }
+
+    static let allValues:[Properties] = [.DividerColor, .FontStyle, .TintColor, .Normal, .Highlighted, .Selected, .Disabled]
     
-    static let allValues:[Properties] = [.FontStyle, .TintColor, .TextColor]
 }
 
 
