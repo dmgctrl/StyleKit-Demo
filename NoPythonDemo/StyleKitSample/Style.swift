@@ -50,6 +50,10 @@ class Style: NSObject {
         return docsDir.URLByAppendingPathComponent(fileName)!
     }
     
+    private func checkIfImageExist(name:String) -> Bool {
+        return UIImage(named: name) == nil ? false : true
+    }
+    
     private func serialize(styleFile:String) {
         
         let stylePath = configurationStyleURL(styleFile)!
@@ -81,6 +85,11 @@ class Style: NSObject {
             
             if let items = json[CommonObjects.Images.rawValue] as? [String: String] {
                 resources.imageNames = items
+                for (alias, fileName) in items {
+                    if checkIfImageExist(fileName) == false {
+                        print("StyleKit: Warning: Image file '\(fileName)' referenced by '\(alias)' does not exist in bundle")
+                    }
+                }
             }
             
             for element in UIElement.allValues {
@@ -402,16 +411,7 @@ class Style: NSObject {
                 print("StyleKit: Warning: \(key) is not a recognized property. Ignored.")
                 continue
             }
-            switch property {
-                
-            case .MaximumTrackTintColor:
-                if let colorKey = value as? String, color = resources.colors[colorKey] {
-                    style.maximumTrackTintColor = color
-                }
-            case .MinimumTrackTintColor:
-                if let colorKey = value as? String, color = resources.colors[colorKey] {
-                    style.minimumTrackTintColor = color
-                }
+            switch property {                
             case .ThumbImage:
                 if let imageKey = value as? String, imageName = resources.imageNames[imageKey],
                     image = UIImage(named:imageName){
@@ -426,6 +426,14 @@ class Style: NSObject {
                 if let imageKey = value as? String, imageName = resources.imageNames[imageKey],
                     image = UIImage(named:imageName){
                     style.maximumTrackImage = image
+                }
+            case .FilledTrackColor:
+                if let colorKey = value as? String, color = resources.colors[colorKey] {
+                    style.filledTrackColor = color
+                }
+            case .EmptyTrackColor:
+                if let colorKey = value as? String, color = resources.colors[colorKey] {
+                    style.emptyTrackColor = color
                 }
             }
             
@@ -729,14 +737,6 @@ extension UISlider {
     func applyStyle(style:SliderStyle, resources:CommonResources) {
         for property in SliderStyle.allValues {
             switch property {
-            case .MaximumTrackTintColor:
-                if let color = style.tintColor {
-                    self.maximumTrackTintColor = color
-                }
-            case .MinimumTrackTintColor:
-                if let color = style.minimumTrackTintColor {
-                    self.minimumTrackTintColor = color
-                }
             case .ThumbImage:
                 if let image = style.thumbImage {
                     self.setThumbImage(image, forState: .Normal)
@@ -748,6 +748,14 @@ extension UISlider {
             case .MaximumTrackImage:
                 if let image = style.maximumTrackImage {
                     self.setMaximumTrackImage(image, forState: .Normal)
+                }
+            case .FilledTrackColor:
+                if let color = style.filledTrackColor {
+                    self.minimumTrackTintColor = color
+                }
+            case .EmptyTrackColor:
+                if let color = style.emptyTrackColor {
+                    self.maximumTrackTintColor = color
                 }
             }
         }

@@ -15,7 +15,6 @@ enum UIElement: String {
     case stepper = "Steppers"
     case progressView = "ProgressViews"
     case view = "Views"
-    
     static let allValues:[UIElement] = [.view, .segmentedControl, .textField, .button, .label, .slider, .stepper, .progressView]
 }
 
@@ -225,21 +224,21 @@ class SegmentedControlStyle {
 
 class SliderStyle {
     var tintColor: UIColor?
-    var minimumTrackTintColor: UIColor?
-    var maximumTrackTintColor: UIColor?
     var thumbImage: UIImage?
     var minimumTrackImage: UIImage?
     var maximumTrackImage: UIImage?
+    var filledTrackColor: UIColor?
+    var emptyTrackColor: UIColor?
     
     enum Properties: String {
-        case MinimumTrackTintColor = "minimumTrackTintColor"
-        case MaximumTrackTintColor = "maximumTrackTintColor"
         case ThumbImage = "thumbImage"
         case MinimumTrackImage = "minimumTrackImage"
         case MaximumTrackImage = "maximumTrackImage"
+        case FilledTrackColor = "filledTrackColor"
+        case EmptyTrackColor = "emptyTrackColor"
     }
     
-    static let allValues:[Properties] = [.MinimumTrackTintColor, .MaximumTrackTintColor, .ThumbImage, .MinimumTrackImage, .MaximumTrackImage]
+    static let allValues:[Properties] = [.FilledTrackColor,.EmptyTrackColor, .ThumbImage, .MinimumTrackImage, .MaximumTrackImage]
 }
 
 
