@@ -15,7 +15,7 @@ enum UIElement: String {
     case stepper = "Steppers"
     case progressView = "ProgressViews"
     case view = "Views"
-        
+    
     static let allValues:[UIElement] = [.view, .segmentedControl, .textField, .button, .label, .slider, .stepper, .progressView]
 }
 
@@ -102,29 +102,40 @@ class AttributedTextStyle {
 //--------------------------------------
 
 class ButtonStyle {
-
+    
     var fontStyle: FontStyle?
     var borderWidth: Int?
     var borderColor: UIColor?
     var cornerRadius: Int?
-    var titleColorStates: [AllowedStates:UIColor]?
-
+    var normalColors: [ColorType: UIColor]
+    var highlightedColors: [ColorType: UIColor]
+    var selectedColors: [ColorType: UIColor]
+    var disabledColors: [ColorType: UIColor]
+    
     enum Properties: String {
         case FontStyle = "fontStyle"
         case BorderWidth = "borderWidth"
         case BorderColor = "borderColor"
         case CornerRadius = "cornerRadius"
-        case TitleColor = "titleColor"
-    }
-
-    enum AllowedStates: String {
         case Normal = "normalState"
         case Highlighted = "highlightedState"
         case Selected = "selectedState"
         case Disabled = "disabledState"
     }
-
-    static let allValues:[Properties] = [.FontStyle, .BorderWidth, .BorderColor, .CornerRadius, .TitleColor]
+    
+    enum ColorType: String {
+        case Background = "backgroundColor"
+        case Text = "textColor"
+    }
+    
+    static let allValues:[Properties] = [.FontStyle, .BorderWidth, .BorderColor, .CornerRadius, .Normal, .Highlighted, .Selected, .Disabled]
+    
+    init() {
+        self.normalColors = [ColorType: UIColor]()
+        self.highlightedColors = [ColorType: UIColor]()
+        self.selectedColors = [ColorType: UIColor]()
+        self.disabledColors = [ColorType: UIColor]()
+    }
 }
 
 //--------------------------------------
@@ -132,7 +143,7 @@ class ButtonStyle {
 //--------------------------------------
 
 class ViewStyle {
-
+    
     var borderWidth: Int?
     var borderColor: UIColor?
     var cornerRadius: Int?
@@ -172,9 +183,8 @@ class TextFieldStyle {
         case TextColor = "textColor"
         case BackgroundColor = "backgroundColor"
     }
-    
+ 
     static let allValues:[Properties] = [.BackgroundColor, .FontStyle, .BorderWidth, .BorderColor, .CornerRadius, .TextAlignment, .BorderStyle, .TextColor]
-
 }
 
 
@@ -186,7 +196,7 @@ class SegmentedControlStyle {
     var fontStyle: FontStyle?
     var tintColor:UIColor?
     var textColor: [AllowedStates:UIColor]?
-
+    
     enum Properties: String {
         case FontStyle = "fontStyle"
         case TintColor = "tintColor"
@@ -197,7 +207,7 @@ class SegmentedControlStyle {
         case Normal = "normalState"
         case Selected = "selectedState"
     }
-
+    
     static let allValues:[Properties] = [.FontStyle, .TintColor, .TextColor]
 }
 
@@ -222,7 +232,7 @@ class SliderStyle {
         case MaximumTrackImage = "maximumTrackImage"
     }
     
-    static let allValues:[Properties] = [.MinimumTrackTintColor, .MaximumTrackTintColor, .ThumbImage, .MinimumTrackImage, .MaximumTrackImage]    
+    static let allValues:[Properties] = [.MinimumTrackTintColor, .MaximumTrackTintColor, .ThumbImage, .MinimumTrackImage, .MaximumTrackImage]
 }
 
 
@@ -281,7 +291,7 @@ class ProgressViewStyle {
         case ProgressImage = "progressImage"
         case TrackImage = "trackImage"
     }
-
+    
     static let allValues:[Properties] = [.Style, .ProgressTintColor, .TrackTintColor, .ProgressImage, .TrackImage]
 }
 
