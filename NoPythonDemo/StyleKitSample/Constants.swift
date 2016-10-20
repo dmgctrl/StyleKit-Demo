@@ -38,14 +38,63 @@ enum ColorProperties: String {
 //--------------------------------------
 
 class LabelStyle {
-    var fontStyle: FontStyle?
+    
+    var textColor: UIColor?
+    var textAlignment: NSTextAlignment?
+    var attributes: AttributedTextStyle?
     
     enum Properties: String {
-        case FontStyle = "fontStyle"
-        static let allValues:[Properties] = [.FontStyle]
+        case TextColor = "textColor"
+        case TextAlignment = "textAlignment"
+        case Attributes = "attributes"
+        static let allValues:[Properties] = [.TextColor, .TextAlignment, .Attributes]
     }
+
+    static var textAlignmentKeyMap:[String:NSTextAlignment] = ["Left":.Left,
+                                                        "Center":.Center,
+                                                        "Right":.Right,
+                                                        "Justified":.Justified,
+                                                        "Natural":.Natural]
     
-    static let allValues:[Properties] = [.FontStyle]
+    static func attributesForLabel(styles:AttributedTextStyle) ->  Dictionary<String, AnyObject> {
+        let style = NSMutableParagraphStyle()
+        style.alignment = NSTextAlignment.Center
+        if let lineSpace = styles.lineSpacing {
+            style.lineSpacing = lineSpace
+        }
+        
+        var attributes:[String: AnyObject] = [:]
+
+        if let fontName = styles.fontStyle?.fontName, let fontSize = styles.fontStyle?.size  {
+            attributes[NSFontAttributeName] = UIFont(name: fontName, size: CGFloat(fontSize))
+        }
+
+        if let tracking = styles.tracking, let fontSize = styles.fontStyle?.size {
+            let characterSpacing = fontSize * tracking / 1000
+            attributes[NSKernAttributeName] = characterSpacing
+        }
+
+        attributes[NSParagraphStyleAttributeName] = style
+        
+        return attributes
+    }
+
+}
+
+class AttributedTextStyle {
+    
+    var fontStyle: FontStyle?
+    var tracking: Int?
+    var lineSpacing: CGFloat?
+    var ligature: Int?
+
+    enum Properties: String {
+        case FontStyle = "fontStyle"
+        case Tracking = "tracking"
+        case LineSpacing = "lineSpacing"
+        case Ligature = "ligature"
+        static let allValues:[Properties] = [.FontStyle, .Tracking, .LineSpacing, .Ligature]
+    }
 }
 
 //--------------------------------------

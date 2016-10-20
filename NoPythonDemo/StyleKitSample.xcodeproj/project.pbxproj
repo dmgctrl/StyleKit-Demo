@@ -8,6 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		2908BCD81DB7DAD10012C924 /* Stylist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2908BCD71DB7DAD10012C924 /* Stylist.swift */; };
+		2908BCDF1DB818020012C924 /* Brandon_bld.otf in Resources */ = {isa = PBXBuildFile; fileRef = 2908BCD91DB818020012C924 /* Brandon_bld.otf */; };
+		2908BCE01DB818020012C924 /* Brandon_blk.otf in Resources */ = {isa = PBXBuildFile; fileRef = 2908BCDA1DB818020012C924 /* Brandon_blk.otf */; };
+		2908BCE11DB818020012C924 /* Brandon_light_it.otf in Resources */ = {isa = PBXBuildFile; fileRef = 2908BCDB1DB818020012C924 /* Brandon_light_it.otf */; };
+		2908BCE21DB818020012C924 /* Brandon_light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 2908BCDC1DB818020012C924 /* Brandon_light.otf */; };
+		2908BCE31DB818020012C924 /* Brandon_med.otf in Resources */ = {isa = PBXBuildFile; fileRef = 2908BCDD1DB818020012C924 /* Brandon_med.otf */; };
+		2908BCE41DB818020012C924 /* Brandon_thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 2908BCDE1DB818020012C924 /* Brandon_thin.otf */; };
 		295D21791C9214AA001626BD /* Style.json in Resources */ = {isa = PBXBuildFile; fileRef = 295D21781C9214AA001626BD /* Style.json */; };
 		298DC60B1C92073E00BB0D29 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 298DC60A1C92073E00BB0D29 /* AppDelegate.swift */; };
 		298DC60D1C92073E00BB0D29 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 298DC60C1C92073E00BB0D29 /* ViewController.swift */; };
@@ -30,6 +36,12 @@
 
 /* Begin PBXFileReference section */
 		2908BCD71DB7DAD10012C924 /* Stylist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stylist.swift; sourceTree = "<group>"; };
+		2908BCD91DB818020012C924 /* Brandon_bld.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Brandon_bld.otf; path = StyleKitSample/Fonts/Brandon_bld.otf; sourceTree = "<group>"; };
+		2908BCDA1DB818020012C924 /* Brandon_blk.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Brandon_blk.otf; path = StyleKitSample/Fonts/Brandon_blk.otf; sourceTree = "<group>"; };
+		2908BCDB1DB818020012C924 /* Brandon_light_it.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Brandon_light_it.otf; path = StyleKitSample/Fonts/Brandon_light_it.otf; sourceTree = "<group>"; };
+		2908BCDC1DB818020012C924 /* Brandon_light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Brandon_light.otf; path = StyleKitSample/Fonts/Brandon_light.otf; sourceTree = "<group>"; };
+		2908BCDD1DB818020012C924 /* Brandon_med.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Brandon_med.otf; path = StyleKitSample/Fonts/Brandon_med.otf; sourceTree = "<group>"; };
+		2908BCDE1DB818020012C924 /* Brandon_thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Brandon_thin.otf; path = StyleKitSample/Fonts/Brandon_thin.otf; sourceTree = "<group>"; };
 		295D21781C9214AA001626BD /* Style.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; lineEnding = 0; path = Style.json; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.javascript; };
 		298DC6071C92073E00BB0D29 /* StyleKitSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StyleKitSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		298DC60A1C92073E00BB0D29 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -63,6 +75,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2908BCE51DB818160012C924 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				2908BCD91DB818020012C924 /* Brandon_bld.otf */,
+				2908BCDA1DB818020012C924 /* Brandon_blk.otf */,
+				2908BCDB1DB818020012C924 /* Brandon_light_it.otf */,
+				2908BCDC1DB818020012C924 /* Brandon_light.otf */,
+				2908BCDD1DB818020012C924 /* Brandon_med.otf */,
+				2908BCDE1DB818020012C924 /* Brandon_thin.otf */,
+			);
+			name = Fonts;
+			sourceTree = "<group>";
+		};
 		2932CEE21C93691E00F83F34 /* StyleKit */ = {
 			isa = PBXGroup;
 			children = (
@@ -86,6 +111,7 @@
 		298DC5FE1C92073E00BB0D29 = {
 			isa = PBXGroup;
 			children = (
+				2908BCE51DB818160012C924 /* Fonts */,
 				298DC6091C92073E00BB0D29 /* StyleKitSample */,
 				298DC6081C92073E00BB0D29 /* Products */,
 			);
@@ -174,10 +200,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				298DC6151C92073E00BB0D29 /* LaunchScreen.storyboard in Resources */,
+				2908BCE31DB818020012C924 /* Brandon_med.otf in Resources */,
 				298DC6121C92073E00BB0D29 /* Assets.xcassets in Resources */,
+				2908BCE11DB818020012C924 /* Brandon_light_it.otf in Resources */,
+				2908BCE41DB818020012C924 /* Brandon_thin.otf in Resources */,
+				2908BCE01DB818020012C924 /* Brandon_blk.otf in Resources */,
+				2908BCE21DB818020012C924 /* Brandon_light.otf in Resources */,
 				298E3BC81DB56D7B00B54DD0 /* Style2.json in Resources */,
 				298DC6101C92073E00BB0D29 /* Main.storyboard in Resources */,
 				295D21791C9214AA001626BD /* Style.json in Resources */,
+				2908BCDF1DB818020012C924 /* Brandon_bld.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

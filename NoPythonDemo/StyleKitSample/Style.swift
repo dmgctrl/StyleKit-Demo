@@ -195,26 +195,67 @@ class Style: NSObject {
         let labelStyle = LabelStyle()
         for (key,value) in spec {
             guard let property = LabelStyle.Properties(rawValue: key) else {
-                print("StyleKit: Warning: \(key) is not a recognized property. Ignoring")
+                print("StyleKit: Warning: \(key) is not a recognized property. Ignored.")
                 continue
             }
             switch property {
-            case LabelStyle.Properties.FontStyle:
-                if let fontSpec = value as? [String:AnyObject] {
-                    let font = try serializeFontSpec(fontSpec)
-                    labelStyle.fontStyle = font
-                    return labelStyle
+            
+            case LabelStyle.Properties.TextAlignment:
+                if let textAlignmentKey = value as? String, let alignment = LabelStyle.textAlignmentKeyMap[textAlignmentKey] {
+                    labelStyle.textAlignment = alignment
+                }
+            case LabelStyle.Properties.TextColor:
+                if let colorKey = value as? String, let color = resources.colors[colorKey] {
+                    labelStyle.textColor = color
+                }
+            case LabelStyle.Properties.Attributes:
+                if let attributes = value as? [String:AnyObject]
+                {
+                    let attr = try serializeFormatAttributesSpec(attributes)
+                    labelStyle.attributes = attr
                 }
             }
         }
         return labelStyle
     }
+    
+    private func serializeFormatAttributesSpec(spec: [String:AnyObject]) throws -> AttributedTextStyle {
 
+        let style = AttributedTextStyle()
+        for (key,value) in spec {
+            guard let property = AttributedTextStyle.Properties(rawValue: key) else {
+                print("StyleKit: Warning: \(key) is not a recognized property. Ignored.")
+                continue
+            }
+            switch property {
+            case .FontStyle:
+                if let fontSpec = value as? [String:AnyObject] {
+                    let font = try serializeFontSpec(fontSpec)
+                    style.fontStyle = font
+                }
+            case .Tracking:
+                if let tracking = value as? Int {
+                    style.tracking = tracking
+                }
+            case .LineSpacing:
+                if let lineSpacing = value as? CGFloat {
+                    style.lineSpacing = lineSpacing
+                }
+            case .Ligature:
+                if let ligature = value as? Int {
+                    style.ligature = ligature
+                }
+            }
+        
+        }
+        return style
+    }
+    
     private func serializeButtonSpec(spec: [String:AnyObject]) throws -> ButtonStyle {
         let style = ButtonStyle()
         for (key,value) in spec {
             guard let property = ButtonStyle.Properties(rawValue: key) else {
-                print("StyleKit: Warning: \(key) is not a recognized property. Ignoring")
+                print("StyleKit: Warning: \(key) is not a recognized property. Ignored.")
                 continue
             }
             switch property {
@@ -258,7 +299,7 @@ class Style: NSObject {
         let style = ViewStyle()
         for (key,value) in spec {
             guard let property = ViewStyle.Properties(rawValue: key) else {
-                print("StyleKit: Warning: \(key) is not a recognized property. Ignoring")
+                print("StyleKit: Warning: \(key) is not a recognized property. Ignored.")
                 continue
             }
             switch property {
@@ -289,7 +330,7 @@ class Style: NSObject {
         let style = SegmentedControlStyle()
         for (key,value) in spec {
             guard let property = SegmentedControlStyle.Properties(rawValue: key) else {
-                print("StyleKit: Warning: \(key) is not a recognized property. Ignoring")
+                print("StyleKit: Warning: \(key) is not a recognized property. Ignored.")
                 continue
             }
             switch property {
@@ -325,7 +366,7 @@ class Style: NSObject {
         let style = SliderStyle()
         for (key,value) in spec {
             guard let property = SliderStyle.Properties(rawValue: key) else {
-                print("StyleKit: Warning: \(key) is not a recognized property. Ignoring")
+                print("StyleKit: Warning: \(key) is not a recognized property. Ignored.")
                 continue
             }
             switch property {
@@ -363,7 +404,7 @@ class Style: NSObject {
         let style = StepperStyle()
         for (key,value) in spec {
             guard let property = StepperStyle.Properties(rawValue: key) else {
-                print("StyleKit: Warning: \(key) is not a recognized property. Ignoring")
+                print("StyleKit: Warning: \(key) is not a recognized property. Ignored.")
                 continue
             }
             switch property {
@@ -416,7 +457,7 @@ class Style: NSObject {
         let style = ProgressViewStyle()
         for (key,value) in spec {
             guard let property = ProgressViewStyle.Properties(rawValue: key) else {
-                print("StyleKit: Warning: \(key) is not a recognized property. Ignoring")
+                print("StyleKit: Warning: \(key) is not a recognized property. Ignored.")
                 continue
             }
             switch property {
@@ -737,18 +778,23 @@ extension UIProgressView {
 extension UILabel {
     
     func applyStyle(style:LabelStyle, resources:CommonResources) {
-        for property in LabelStyle.allValues {
+        for property in LabelStyle.Properties.allValues {
             switch property {
-            case .FontStyle:
-                if let fontStyle = style.fontStyle {
-                    self.font = UIFont(name: fontStyle.fontName, size: CGFloat(fontStyle.size))
+            case .TextColor:
+                self.textColor = style.textColor
+            case .TextAlignment:
+                self.textAlignment = style.textAlignment ?? self.textAlignment
+            case .Attributes:
+                if let attributes = style.attributes, text = self.text {
+                    let asdf = LabelStyle.attributesForLabel(attributes)
+                    self.attributedText = NSAttributedString(string: text, attributes:asdf)
                 }
             }
         }
     }
-    
-
 }
+
+
 
 extension UIButton {
     
