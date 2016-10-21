@@ -520,7 +520,7 @@
             <objects>
                 <navigationController title="StyleKit Catalog" automaticallyAdjustsScrollViewInsets="NO" id="y3g-6O-uUf" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="Nno-YI-l6u">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="Nno-YI-l6u">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
