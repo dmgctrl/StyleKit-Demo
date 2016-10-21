@@ -13,6 +13,14 @@
 		2908BCE21DB818020012C924 /* Brandon_light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 2908BCDC1DB818020012C924 /* Brandon_light.otf */; };
 		2908BCE31DB818020012C924 /* Brandon_med.otf in Resources */ = {isa = PBXBuildFile; fileRef = 2908BCDD1DB818020012C924 /* Brandon_med.otf */; };
 		2908BCE41DB818020012C924 /* Brandon_thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 2908BCDE1DB818020012C924 /* Brandon_thin.otf */; };
+		2908BCE71DBA61360012C924 /* LabelStylist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2908BCE61DBA61360012C924 /* LabelStylist.swift */; };
+		2908BCE91DBA61BF0012C924 /* ButtonStylist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2908BCE81DBA61BF0012C924 /* ButtonStylist.swift */; };
+		2908BCEC1DBA621D0012C924 /* ViewStylist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2908BCEB1DBA621D0012C924 /* ViewStylist.swift */; };
+		2908BCEE1DBA62680012C924 /* TextFieldStylist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2908BCED1DBA62680012C924 /* TextFieldStylist.swift */; };
+		2908BCF01DBA62AA0012C924 /* SegmentedControlStylist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2908BCEF1DBA62AA0012C924 /* SegmentedControlStylist.swift */; };
+		2908BCF21DBA62E20012C924 /* SliderStylist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2908BCF11DBA62E20012C924 /* SliderStylist.swift */; };
+		2908BCF41DBA631E0012C924 /* StepperStylist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2908BCF31DBA631E0012C924 /* StepperStylist.swift */; };
+		2908BCF61DBA636D0012C924 /* ProgressViewStylist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2908BCF51DBA636D0012C924 /* ProgressViewStylist.swift */; };
 		295D21791C9214AA001626BD /* Style.json in Resources */ = {isa = PBXBuildFile; fileRef = 295D21781C9214AA001626BD /* Style.json */; };
 		298DC60B1C92073E00BB0D29 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 298DC60A1C92073E00BB0D29 /* AppDelegate.swift */; };
 		298DC60D1C92073E00BB0D29 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 298DC60C1C92073E00BB0D29 /* ViewController.swift */; };
@@ -24,7 +32,6 @@
 		C4451B231CC166C800C9E410 /* ProgressViewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4451B221CC166C800C9E410 /* ProgressViewsViewController.swift */; };
 		C446D61D1CB540CA00EBC929 /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = C446D61B1CB540CA00EBC929 /* Style.swift */; };
 		C446D61E1CB540CA00EBC929 /* UIView+StyleKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = C446D61C1CB540CA00EBC929 /* UIView+StyleKit.swift */; };
-		C446D6201CB5430C00EBC929 /* Elements.swift in Sources */ = {isa = PBXBuildFile; fileRef = C446D61F1CB5430C00EBC929 /* Elements.swift */; };
 		C46B9D3F1CBED54200B50F17 /* SlidersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C46B9D3E1CBED54200B50F17 /* SlidersViewController.swift */; };
 		C4946BD11CBFEF8E00361F0B /* SteppersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4946BD01CBFEF8E00361F0B /* SteppersViewController.swift */; };
 		C4DC5FF61CBD35300006132D /* LabelsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4DC5FF51CBD35300006132D /* LabelsViewController.swift */; };
@@ -40,6 +47,14 @@
 		2908BCDC1DB818020012C924 /* Brandon_light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Brandon_light.otf; path = StyleKitSample/Fonts/Brandon_light.otf; sourceTree = "<group>"; };
 		2908BCDD1DB818020012C924 /* Brandon_med.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Brandon_med.otf; path = StyleKitSample/Fonts/Brandon_med.otf; sourceTree = "<group>"; };
 		2908BCDE1DB818020012C924 /* Brandon_thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Brandon_thin.otf; path = StyleKitSample/Fonts/Brandon_thin.otf; sourceTree = "<group>"; };
+		2908BCE61DBA61360012C924 /* LabelStylist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LabelStylist.swift; sourceTree = "<group>"; };
+		2908BCE81DBA61BF0012C924 /* ButtonStylist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonStylist.swift; sourceTree = "<group>"; };
+		2908BCEB1DBA621D0012C924 /* ViewStylist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewStylist.swift; sourceTree = "<group>"; };
+		2908BCED1DBA62680012C924 /* TextFieldStylist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldStylist.swift; sourceTree = "<group>"; };
+		2908BCEF1DBA62AA0012C924 /* SegmentedControlStylist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentedControlStylist.swift; sourceTree = "<group>"; };
+		2908BCF11DBA62E20012C924 /* SliderStylist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SliderStylist.swift; sourceTree = "<group>"; };
+		2908BCF31DBA631E0012C924 /* StepperStylist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepperStylist.swift; sourceTree = "<group>"; };
+		2908BCF51DBA636D0012C924 /* ProgressViewStylist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressViewStylist.swift; sourceTree = "<group>"; };
 		295D21781C9214AA001626BD /* Style.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; lineEnding = 0; path = Style.json; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.javascript; };
 		298DC6071C92073E00BB0D29 /* StyleKitSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StyleKitSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		298DC60A1C92073E00BB0D29 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -53,7 +68,6 @@
 		C4451B221CC166C800C9E410 /* ProgressViewsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressViewsViewController.swift; sourceTree = "<group>"; };
 		C446D61B1CB540CA00EBC929 /* Style.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Style.swift; sourceTree = "<group>"; };
 		C446D61C1CB540CA00EBC929 /* UIView+StyleKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+StyleKit.swift"; sourceTree = "<group>"; };
-		C446D61F1CB5430C00EBC929 /* Elements.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Elements.swift; sourceTree = "<group>"; };
 		C46B9D3E1CBED54200B50F17 /* SlidersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlidersViewController.swift; sourceTree = "<group>"; };
 		C4946BD01CBFEF8E00361F0B /* SteppersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SteppersViewController.swift; sourceTree = "<group>"; };
 		C4DC5FF51CBD35300006132D /* LabelsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LabelsViewController.swift; sourceTree = "<group>"; };
@@ -86,12 +100,27 @@
 			name = Fonts;
 			sourceTree = "<group>";
 		};
+		2908BCEA1DBA61CB0012C924 /* Stylist */ = {
+			isa = PBXGroup;
+			children = (
+				2908BCED1DBA62680012C924 /* TextFieldStylist.swift */,
+				2908BCE61DBA61360012C924 /* LabelStylist.swift */,
+				2908BCE81DBA61BF0012C924 /* ButtonStylist.swift */,
+				2908BCEB1DBA621D0012C924 /* ViewStylist.swift */,
+				2908BCEF1DBA62AA0012C924 /* SegmentedControlStylist.swift */,
+				2908BCF11DBA62E20012C924 /* SliderStylist.swift */,
+				2908BCF31DBA631E0012C924 /* StepperStylist.swift */,
+				2908BCF51DBA636D0012C924 /* ProgressViewStylist.swift */,
+			);
+			name = Stylist;
+			sourceTree = "<group>";
+		};
 		2932CEE21C93691E00F83F34 /* StyleKit */ = {
 			isa = PBXGroup;
 			children = (
 				C446D61C1CB540CA00EBC929 /* UIView+StyleKit.swift */,
-				C446D61F1CB5430C00EBC929 /* Elements.swift */,
 				C446D61B1CB540CA00EBC929 /* Style.swift */,
+				2908BCEA1DBA61CB0012C924 /* Stylist */,
 				29EBA4901DB69EA500CAFFEA /* Utils.swift */,
 				C4DC5FF51CBD35300006132D /* LabelsViewController.swift */,
 				C4DC5FF71CBD360E0006132D /* ButtonsViewController.swift */,
@@ -217,17 +246,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C446D6201CB5430C00EBC929 /* Elements.swift in Sources */,
 				298DC60D1C92073E00BB0D29 /* ViewController.swift in Sources */,
 				C4451B231CC166C800C9E410 /* ProgressViewsViewController.swift in Sources */,
+				2908BCEC1DBA621D0012C924 /* ViewStylist.swift in Sources */,
+				2908BCF61DBA636D0012C924 /* ProgressViewStylist.swift in Sources */,
 				C4946BD11CBFEF8E00361F0B /* SteppersViewController.swift in Sources */,
+				2908BCF01DBA62AA0012C924 /* SegmentedControlStylist.swift in Sources */,
 				C446D61E1CB540CA00EBC929 /* UIView+StyleKit.swift in Sources */,
+				2908BCE71DBA61360012C924 /* LabelStylist.swift in Sources */,
+				2908BCF21DBA62E20012C924 /* SliderStylist.swift in Sources */,
+				2908BCEE1DBA62680012C924 /* TextFieldStylist.swift in Sources */,
 				29EBA4911DB69EA500CAFFEA /* Utils.swift in Sources */,
 				C4DC5FF61CBD35300006132D /* LabelsViewController.swift in Sources */,
 				C4DC5FFC1CBD36D50006132D /* SegmentedControlsViewController.swift in Sources */,
 				C4DC5FFA1CBD365C0006132D /* TextFieldsViewController.swift in Sources */,
+				2908BCF41DBA631E0012C924 /* StepperStylist.swift in Sources */,
 				C4DC5FF81CBD360E0006132D /* ButtonsViewController.swift in Sources */,
 				C46B9D3F1CBED54200B50F17 /* SlidersViewController.swift in Sources */,
+				2908BCE91DBA61BF0012C924 /* ButtonStylist.swift in Sources */,
 				C446D61D1CB540CA00EBC929 /* Style.swift in Sources */,
 				298DC60B1C92073E00BB0D29 /* AppDelegate.swift in Sources */,
 			);
