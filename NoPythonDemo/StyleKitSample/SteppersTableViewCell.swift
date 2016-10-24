@@ -9,9 +9,8 @@
 import UIKit
 
 class SteppersTableViewCell: UITableViewCell {
-
     
-    
+    @IBOutlet weak var label: UILabel!
     @IBOutlet weak var stepper: UIStepper!
     
     override func awakeFromNib() {

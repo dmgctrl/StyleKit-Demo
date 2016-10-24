@@ -11,6 +11,7 @@ import UIKit
 class SegmentedControlsTableViewCell: UITableViewCell {
 
     @IBOutlet weak var segmentedControl: UISegmentedControl!
+    @IBOutlet weak var label: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

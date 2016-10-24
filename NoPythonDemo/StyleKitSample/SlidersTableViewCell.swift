@@ -10,7 +10,7 @@ import UIKit
 
 class SlidersTableViewCell: UITableViewCell {
 
-    
+    @IBOutlet weak var label: UILabel!
     @IBOutlet weak var slider: UISlider!
     
     override func awakeFromNib() {

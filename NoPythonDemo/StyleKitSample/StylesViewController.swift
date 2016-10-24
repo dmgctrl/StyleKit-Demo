@@ -64,6 +64,7 @@ extension StylesViewController: UITableViewDataSource {
                 (cell as! ButtonTableViewCell).button.setTitle(styleTag, forState: .Normal)
             case .segmentedControl:
                 (cell as! SegmentedControlsTableViewCell).segmentedControl.styleTag = styleTag
+                (cell as! SegmentedControlsTableViewCell).label.text = styleTag
             case .textField:
                 (cell as! TextFieldsTableViewCell).textField.styleTag = styleTag
                 (cell as! TextFieldsTableViewCell).textField.text = styleTag
@@ -72,10 +73,13 @@ extension StylesViewController: UITableViewDataSource {
                 (cell as! LabelsTableViewCell).label.text = styleTag
             case .slider:
                 (cell as! SlidersTableViewCell).slider.styleTag = styleTag
+                (cell as! SlidersTableViewCell).label.text = styleTag
             case .stepper:
                 (cell as! SteppersTableViewCell).stepper.styleTag = styleTag
+                (cell as! SteppersTableViewCell).label.text = styleTag
             case .progressView:
                 (cell as! ProgressViewsTableViewCell).progressView.styleTag = styleTag
+                (cell as! ProgressViewsTableViewCell).label.text = styleTag
             case .view:
                 (cell as! ViewsTableViewCell).view.styleTag = styleTag
                 (cell as! ViewsTableViewCell).label.text = styleTag

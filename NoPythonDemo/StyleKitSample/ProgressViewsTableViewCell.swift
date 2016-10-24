@@ -12,6 +12,7 @@ class ProgressViewsTableViewCell: UITableViewCell {
 
     
     @IBOutlet weak var progressView: UIProgressView!
+    @IBOutlet weak var label: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
