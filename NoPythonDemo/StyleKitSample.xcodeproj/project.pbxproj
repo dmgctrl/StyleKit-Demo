@@ -21,6 +21,15 @@
 		2908BCF21DBA62E20012C924 /* SliderStylist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2908BCF11DBA62E20012C924 /* SliderStylist.swift */; };
 		2908BCF41DBA631E0012C924 /* StepperStylist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2908BCF31DBA631E0012C924 /* StepperStylist.swift */; };
 		2908BCF61DBA636D0012C924 /* ProgressViewStylist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2908BCF51DBA636D0012C924 /* ProgressViewStylist.swift */; };
+		2908BCF91DBA89240012C924 /* StylesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2908BCF81DBA89240012C924 /* StylesViewController.swift */; };
+		2908BD1F1DBC0EC10012C924 /* ButtonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2908BD1E1DBC0EC10012C924 /* ButtonTableViewCell.swift */; };
+		2908BD211DBC10A20012C924 /* SegmentedControlsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2908BD201DBC10A20012C924 /* SegmentedControlsTableViewCell.swift */; };
+		2908BD231DBC10BE0012C924 /* TextFieldsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2908BD221DBC10BE0012C924 /* TextFieldsTableViewCell.swift */; };
+		2908BD251DBC10D60012C924 /* LabelsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2908BD241DBC10D60012C924 /* LabelsTableViewCell.swift */; };
+		2908BD271DBC10EB0012C924 /* SlidersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2908BD261DBC10EB0012C924 /* SlidersTableViewCell.swift */; };
+		2908BD291DBC10FF0012C924 /* SteppersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2908BD281DBC10FF0012C924 /* SteppersTableViewCell.swift */; };
+		2908BD2B1DBC11120012C924 /* ProgressViewsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2908BD2A1DBC11120012C924 /* ProgressViewsTableViewCell.swift */; };
+		2908BD2D1DBC11220012C924 /* ViewsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2908BD2C1DBC11220012C924 /* ViewsTableViewCell.swift */; };
 		295D21791C9214AA001626BD /* Style.json in Resources */ = {isa = PBXBuildFile; fileRef = 295D21781C9214AA001626BD /* Style.json */; };
 		298DC60B1C92073E00BB0D29 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 298DC60A1C92073E00BB0D29 /* AppDelegate.swift */; };
 		298DC60D1C92073E00BB0D29 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 298DC60C1C92073E00BB0D29 /* ViewController.swift */; };
@@ -55,6 +64,15 @@
 		2908BCF11DBA62E20012C924 /* SliderStylist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SliderStylist.swift; sourceTree = "<group>"; };
 		2908BCF31DBA631E0012C924 /* StepperStylist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepperStylist.swift; sourceTree = "<group>"; };
 		2908BCF51DBA636D0012C924 /* ProgressViewStylist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressViewStylist.swift; sourceTree = "<group>"; };
+		2908BCF81DBA89240012C924 /* StylesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StylesViewController.swift; sourceTree = "<group>"; };
+		2908BD1E1DBC0EC10012C924 /* ButtonTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonTableViewCell.swift; sourceTree = "<group>"; };
+		2908BD201DBC10A20012C924 /* SegmentedControlsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentedControlsTableViewCell.swift; sourceTree = "<group>"; };
+		2908BD221DBC10BE0012C924 /* TextFieldsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldsTableViewCell.swift; sourceTree = "<group>"; };
+		2908BD241DBC10D60012C924 /* LabelsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LabelsTableViewCell.swift; sourceTree = "<group>"; };
+		2908BD261DBC10EB0012C924 /* SlidersTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlidersTableViewCell.swift; sourceTree = "<group>"; };
+		2908BD281DBC10FF0012C924 /* SteppersTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SteppersTableViewCell.swift; sourceTree = "<group>"; };
+		2908BD2A1DBC11120012C924 /* ProgressViewsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressViewsTableViewCell.swift; sourceTree = "<group>"; };
+		2908BD2C1DBC11220012C924 /* ViewsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewsTableViewCell.swift; sourceTree = "<group>"; };
 		295D21781C9214AA001626BD /* Style.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; lineEnding = 0; path = Style.json; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.javascript; };
 		298DC6071C92073E00BB0D29 /* StyleKitSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StyleKitSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		298DC60A1C92073E00BB0D29 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -115,13 +133,10 @@
 			name = Stylist;
 			sourceTree = "<group>";
 		};
-		2932CEE21C93691E00F83F34 /* StyleKit */ = {
+		2908BCF71DBA887B0012C924 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				C446D61C1CB540CA00EBC929 /* UIView+StyleKit.swift */,
-				C446D61B1CB540CA00EBC929 /* Style.swift */,
-				2908BCEA1DBA61CB0012C924 /* Stylist */,
-				29EBA4901DB69EA500CAFFEA /* Utils.swift */,
+				2908BCF81DBA89240012C924 /* StylesViewController.swift */,
 				C4DC5FF51CBD35300006132D /* LabelsViewController.swift */,
 				C4DC5FF71CBD360E0006132D /* ButtonsViewController.swift */,
 				C4DC5FF91CBD365C0006132D /* TextFieldsViewController.swift */,
@@ -130,6 +145,35 @@
 				C4946BD01CBFEF8E00361F0B /* SteppersViewController.swift */,
 				C4451B221CC166C800C9E410 /* ProgressViewsViewController.swift */,
 				298DC60C1C92073E00BB0D29 /* ViewController.swift */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		2908BD2E1DBC11310012C924 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				2908BD1E1DBC0EC10012C924 /* ButtonTableViewCell.swift */,
+				2908BD201DBC10A20012C924 /* SegmentedControlsTableViewCell.swift */,
+				2908BD221DBC10BE0012C924 /* TextFieldsTableViewCell.swift */,
+				2908BD241DBC10D60012C924 /* LabelsTableViewCell.swift */,
+				2908BD261DBC10EB0012C924 /* SlidersTableViewCell.swift */,
+				2908BD281DBC10FF0012C924 /* SteppersTableViewCell.swift */,
+				2908BD2A1DBC11120012C924 /* ProgressViewsTableViewCell.swift */,
+				2908BD2C1DBC11220012C924 /* ViewsTableViewCell.swift */,
+			);
+			name = Cells;
+			sourceTree = "<group>";
+		};
+		2932CEE21C93691E00F83F34 /* StyleKit */ = {
+			isa = PBXGroup;
+			children = (
+				298DC60A1C92073E00BB0D29 /* AppDelegate.swift */,
+				C446D61B1CB540CA00EBC929 /* Style.swift */,
+				29EBA4901DB69EA500CAFFEA /* Utils.swift */,
+				C446D61C1CB540CA00EBC929 /* UIView+StyleKit.swift */,
+				2908BCEA1DBA61CB0012C924 /* Stylist */,
+				2908BCF71DBA887B0012C924 /* ViewControllers */,
+				2908BD2E1DBC11310012C924 /* Cells */,
 			);
 			name = StyleKit;
 			sourceTree = "<group>";
@@ -157,7 +201,6 @@
 				295D21781C9214AA001626BD /* Style.json */,
 				298E3BC71DB56D7B00B54DD0 /* Style2.json */,
 				2932CEE21C93691E00F83F34 /* StyleKit */,
-				298DC60A1C92073E00BB0D29 /* AppDelegate.swift */,
 				298DC60E1C92073E00BB0D29 /* Main.storyboard */,
 				298DC6111C92073E00BB0D29 /* Assets.xcassets */,
 				298DC6131C92073E00BB0D29 /* LaunchScreen.storyboard */,
@@ -247,15 +290,23 @@
 			buildActionMask = 2147483647;
 			files = (
 				298DC60D1C92073E00BB0D29 /* ViewController.swift in Sources */,
+				2908BD2D1DBC11220012C924 /* ViewsTableViewCell.swift in Sources */,
+				2908BD1F1DBC0EC10012C924 /* ButtonTableViewCell.swift in Sources */,
 				C4451B231CC166C800C9E410 /* ProgressViewsViewController.swift in Sources */,
 				2908BCEC1DBA621D0012C924 /* ViewStylist.swift in Sources */,
+				2908BD271DBC10EB0012C924 /* SlidersTableViewCell.swift in Sources */,
+				2908BD291DBC10FF0012C924 /* SteppersTableViewCell.swift in Sources */,
 				2908BCF61DBA636D0012C924 /* ProgressViewStylist.swift in Sources */,
 				C4946BD11CBFEF8E00361F0B /* SteppersViewController.swift in Sources */,
+				2908BCF91DBA89240012C924 /* StylesViewController.swift in Sources */,
 				2908BCF01DBA62AA0012C924 /* SegmentedControlStylist.swift in Sources */,
+				2908BD251DBC10D60012C924 /* LabelsTableViewCell.swift in Sources */,
 				C446D61E1CB540CA00EBC929 /* UIView+StyleKit.swift in Sources */,
 				2908BCE71DBA61360012C924 /* LabelStylist.swift in Sources */,
 				2908BCF21DBA62E20012C924 /* SliderStylist.swift in Sources */,
+				2908BD2B1DBC11120012C924 /* ProgressViewsTableViewCell.swift in Sources */,
 				2908BCEE1DBA62680012C924 /* TextFieldStylist.swift in Sources */,
+				2908BD211DBC10A20012C924 /* SegmentedControlsTableViewCell.swift in Sources */,
 				29EBA4911DB69EA500CAFFEA /* Utils.swift in Sources */,
 				C4DC5FF61CBD35300006132D /* LabelsViewController.swift in Sources */,
 				C4DC5FFC1CBD36D50006132D /* SegmentedControlsViewController.swift in Sources */,
@@ -266,6 +317,7 @@
 				2908BCE91DBA61BF0012C924 /* ButtonStylist.swift in Sources */,
 				C446D61D1CB540CA00EBC929 /* Style.swift in Sources */,
 				298DC60B1C92073E00BB0D29 /* AppDelegate.swift in Sources */,
+				2908BD231DBC10BE0012C924 /* TextFieldsTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
