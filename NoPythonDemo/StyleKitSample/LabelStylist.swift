@@ -50,7 +50,7 @@ class LabelStyle: Stylist {
         let labelStyle = LabelStyle()
         for (key,value) in spec {
             guard let property = LabelStyle.Properties(rawValue: key) else {
-                print("StyleKit: Warning: \(key) is not a recognized property. Ignored.")
+                print("StyleKit: Warning: StyleKit does not support \(key) on \(Element.self). Ignored.")
                 continue
             }
             switch property {
@@ -79,7 +79,7 @@ class LabelStyle: Stylist {
         let style = AttributedTextStyle()
         for (key,value) in spec {
             guard let property = AttributedTextStyle.Properties(rawValue: key) else {
-                print("StyleKit: Warning: \(key) is not a recognized property. Ignored.")
+                print("StyleKit: Warning: StyleKit does not support \(key) on \(Element.self). Ignored.")
                 continue
             }
             switch property {

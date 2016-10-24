@@ -32,7 +32,7 @@ class TextFieldStyle : Stylist {
         let result = TextFieldStyle()
         for (key,value) in spec {
             guard let property = TextFieldStyle.Properties(rawValue: key) else {
-                print("StyleKit: Warning: \(key) is not a recognized property. Ignoring.")
+                print("StyleKit: Warning: StyleKit does not support \(key) on \(Element.self). Ignored.")
                 continue
             }
             

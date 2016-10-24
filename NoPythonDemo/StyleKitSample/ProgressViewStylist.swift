@@ -26,7 +26,7 @@ class ProgressViewStyle : Stylist {
         let style = ProgressViewStyle()
         for (key,value) in spec {
             guard let property = ProgressViewStyle.Properties(rawValue: key) else {
-                print("StyleKit: Warning: \(key) is not a recognized property. Ignored.")
+                print("StyleKit: Warning: StyleKit does not support \(key) on \(Element.self). Ignored.")
                 continue
             }
             switch property {

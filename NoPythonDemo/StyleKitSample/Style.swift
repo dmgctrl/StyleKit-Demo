@@ -102,8 +102,14 @@ class Style: NSObject {
             let data = try NSData(contentsOfURL: stylePath, options: NSDataReadingOptions.DataReadingMappedIfSafe)
             let json = try NSJSONSerialization.JSONObjectWithData(data, options: .AllowFragments)
             
-            if let items = json[CommonObjects.Fonts.rawValue] as? [String: String] {
-                resources.fontLabels = items
+            if let fontConfigs = json[CommonObjects.Fonts.rawValue] as? [String: String] {
+                for fontName in fontConfigs.values {
+                    guard UIFont.familyNames().contains(fontName) else {
+                        print("StyleKit: Warning: Font '\(fontName)' referenced in Style.json was not found.")
+                        continue
+                    }
+                }
+                resources.fontLabels = fontConfigs
             }
             
             if let colorDict = json[CommonObjects.Colors.rawValue] as? [String: [String: AnyObject]] {
