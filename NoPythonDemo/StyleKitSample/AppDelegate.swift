@@ -16,6 +16,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        do {
+            let documentDirectory = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).last
+            if let destDirectory = documentDirectory?.URLByAppendingPathComponent("NewFolder/"), srcDirectory = NSBundle.mainBundle().URLForResource("Style", withExtension: "json") {
+                try NSFileManager.defaultManager().createDirectoryAtURL(destDirectory, withIntermediateDirectories: false, attributes: nil)
+                try NSFileManager.defaultManager().copyItemAtURL(srcDirectory, toURL: destDirectory.URLByAppendingPathComponent("Style.json")!)
+            }
+        } catch let error {
+            print(error)
+        }
+        
         return true
     }
 

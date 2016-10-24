@@ -84,7 +84,8 @@ class Style: NSObject {
     }
     
     private func getStylePath() throws -> NSURL {
-        guard let string = NSBundle.mainBundle().infoDictionary?["StyleKit-DesignatedFolder"] as? String, designatedFolder = NSURL(string: string) else {
+        guard let string = NSBundle.mainBundle().infoDictionary?["StyleKit-DesignatedFolder"] as? String,
+            documentDirectory = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).last else {
             if let path = NSBundle.mainBundle().URLForResource("Style", withExtension: "json") {
                 return path
             } else {
@@ -92,7 +93,7 @@ class Style: NSObject {
             }
         }
 
-        if let pathURL = designatedFolder.URLByAppendingPathComponent("Style.json"), path = pathURL.path {
+        if let pathURL = documentDirectory.URLByAppendingPathComponent(string + "/Style.json"), path = pathURL.path {
             if NSFileManager.defaultManager().fileExistsAtPath(path) {
                 return pathURL
             } else {
