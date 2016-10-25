@@ -61,7 +61,7 @@ enum ColorProperties: String {
 class Style: NSObject {
     
     enum StyleKitError: ErrorType {
-        case StyleFileNotFound
+        case StyleFileNotFound(String)
         case InvalidFontStyle
         case InvalidTextFieldProperty
         case InvalidLabelStyle
@@ -69,7 +69,8 @@ class Style: NSObject {
     
     static let sharedInstance = Style()
     
-    var fileName = "Style.json"
+    let fileName = "Style.json"
+    let bundleKeyForLocation = "StyleKit-StylesheetLocation"
     
     var resources = CommonResources()
     
@@ -79,7 +80,7 @@ class Style: NSObject {
     
     private override init() {
         super.init()
-        serialize(fileName)
+        serialize()
     }
 
     private func checkIfImageExist(name:String) -> Bool {
@@ -87,34 +88,35 @@ class Style: NSObject {
     }
     
     private func getStylePath() throws -> NSURL {
-        if let string = NSBundle.mainBundle().infoDictionary?["StyleKit-StylesheetLocation"] as? String,
-            documentDirectory = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).last {
+        if let string = NSBundle.mainBundle().infoDictionary?[bundleKeyForLocation] as? String,
+            documentDirectory = Utils.documentDirectory {
             let pathURL: NSURL?
             if string.containsString(".json") {
                 pathURL = documentDirectory.URLByAppendingPathComponent(string)
             } else {
-                pathURL = documentDirectory.URLByAppendingPathComponent(string + "/Style.json")
+                pathURL = documentDirectory.URLByAppendingPathComponent(string + "/" + fileName)
             }
             
             if let thePathURL = pathURL, path = thePathURL.path {
                 if NSFileManager.defaultManager().fileExistsAtPath(path) {
                     return thePathURL
                 } else {
-                    throw StyleKitError.StyleFileNotFound
+                    throw StyleKitError.StyleFileNotFound("File does not exist at \(thePathURL)")
                 }
             } else {
-                throw StyleKitError.StyleFileNotFound
+                throw StyleKitError.StyleFileNotFound("Invalid path URL: \(pathURL)")
             }
         } else {
-            if let path = NSBundle.mainBundle().URLForResource("Style", withExtension: "json") {
+            if let path = NSBundle.mainBundle().URLForResource(fileName, withExtension: nil) {
                 return path
             } else {
-                throw StyleKitError.StyleFileNotFound
+                throw StyleKitError.StyleFileNotFound("Expected to find Style.json in the bundle")
             }
         }
     }
     
-    private func serialize(styleFile: String) {
+    private func serialize() {
+        
         do {
             let stylePath = try self.getStylePath()
             let data = try NSData(contentsOfURL: stylePath, options: NSDataReadingOptions.DataReadingMappedIfSafe)
@@ -176,7 +178,16 @@ class Style: NSObject {
                 styleMap[element] = styles
             }
         } catch {
-            assert(false,"error serializing JSON: \(error)")
+            if let error = error as? StyleKitError {
+                switch error {
+                case .StyleFileNotFound(let str):
+                    print("StyleKit:Error: " + str)
+                default:
+                    break
+                }
+            }
+
+            assert(false, "error serializing JSON: \(error)")
         }
     }
     

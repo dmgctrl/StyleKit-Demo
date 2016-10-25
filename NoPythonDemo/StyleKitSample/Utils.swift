@@ -2,6 +2,11 @@
 import Foundation
 import UIKit
 
+
+struct Utils {
+    static let documentDirectory = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).last
+}
+
 extension UIColor {
     convenience init(red: Int, green: Int, blue: Int, alph: Float) {
         assert(red >= 0 && red <= 255, "Invalid red component")
