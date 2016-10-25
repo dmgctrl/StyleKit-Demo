@@ -19,8 +19,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if let destDirectory = Utils.documentDirectory?.URLByAppendingPathComponent("NewFolder/"),
             srcDirectory = NSBundle.mainBundle().URLForResource("Style", withExtension: "json") {
             self.copyStyleFile(from: srcDirectory, to: destDirectory)
-            
-            Style.sharedInstance.refresh()
         }
         
         return true

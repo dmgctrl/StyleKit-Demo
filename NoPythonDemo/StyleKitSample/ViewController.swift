@@ -8,22 +8,26 @@
 
 import UIKit
 
-class ViewController: UIViewController, StyleKitSubscriber {
+class ViewController: UIViewController {
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        Style.sharedInstance.addSubscriber(self)
+        
+        
+
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
 
     }
+
     
-    func update() {
-        for view in self.view.subviews {
-            view.style()
-        }
-    }
+    
+    
+    
+    
+
 }
 

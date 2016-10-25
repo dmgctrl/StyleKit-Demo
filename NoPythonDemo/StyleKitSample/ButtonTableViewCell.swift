@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ButtonTableViewCell: UITableViewCell, StyleKitSubscriber {
+class ButtonTableViewCell: UITableViewCell {
     
     @IBOutlet weak var button: UIButton!
     
@@ -23,7 +23,4 @@ class ButtonTableViewCell: UITableViewCell, StyleKitSubscriber {
         // Configure the view for the selected state
     }
 
-    func update() {
-        self.button.style()
-    }
 }
