@@ -17,7 +17,7 @@ class Style: NSObject {
     
     static let sharedInstance = Style()
     
-    var fileName = "Style2.json"
+    var fileName = "Style.json"
     
     var resources = CommonResources()
     
