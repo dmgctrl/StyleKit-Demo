@@ -52,6 +52,7 @@
     "Labels": {
         "H1": {
             "textColor": "blueColor",
+            "textAlignment": "Center",
             "attributes": {
                 "fontStyle": {
                     "font": "primaryFontLight",
@@ -61,6 +62,7 @@
         },
         "H2": {
             "textColor": "purpleColor",
+            "textAlignment": "Center",
             "attributes": {
                 "fontStyle": {
                     "font": "primaryFontMedium",
