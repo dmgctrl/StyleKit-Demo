@@ -14,7 +14,7 @@ class ViewController: UIViewController, StyleKitSubscriber {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         Style.sharedInstance.addSubscriber(self)
     }
 

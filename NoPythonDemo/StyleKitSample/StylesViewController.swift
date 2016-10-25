@@ -4,6 +4,7 @@ import UIKit
 class StylesViewController: UIViewController, StyleKitSubscriber {
 
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var button: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,6 +27,10 @@ class StylesViewController: UIViewController, StyleKitSubscriber {
     
     func update() {
         self.tableView.reloadData()
+    }
+    
+    @IBAction func buttonTapped(sender: AnyObject) {
+        (UIApplication.sharedApplication().delegate as? AppDelegate)?.downloadStyleFile()
     }
 }
 
