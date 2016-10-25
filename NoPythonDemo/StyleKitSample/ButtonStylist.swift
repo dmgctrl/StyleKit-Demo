@@ -55,19 +55,19 @@ class ButtonStyle : Stylist {
                 }
             case .Normal:
                 if let normalColorEntries = value as? [String: String] {
-                    style.normalColors = try Style.serializeColorsSpec(normalColorEntries, resources:resources)
+                    style.normalColors = Style.serializeColorsSpec(normalColorEntries, resources:resources)
                 }
             case .Selected:
                 if let selectedColorEntries = value as? [String: String] {
-                    style.selectedColors = try Style.serializeColorsSpec(selectedColorEntries, resources:resources)
+                    style.selectedColors = Style.serializeColorsSpec(selectedColorEntries, resources:resources)
                 }
             case .Highlighted:
                 if let highlightedColorEntries = value as? [String: String] {
-                    style.highlightedColors = try Style.serializeColorsSpec(highlightedColorEntries, resources:resources)
+                    style.highlightedColors = Style.serializeColorsSpec(highlightedColorEntries, resources:resources)
                 }
             case .Disabled:
                 if let disabledColorEntries = value as? [String: String] {
-                    style.disabledColors = try Style.serializeColorsSpec(disabledColorEntries, resources:resources)
+                    style.disabledColors = Style.serializeColorsSpec(disabledColorEntries, resources:resources)
                 }
             }
         }

@@ -203,7 +203,7 @@ class Style: NSObject {
     // MARK: - Serialize JSON into Objects (Common)
     //---------------------------------------------
     
-    static func serializeColorsSpec(spec: [String:String], resources:CommonResources) throws -> ColorStyle? {
+    static func serializeColorsSpec(spec: [String:String], resources:CommonResources) -> ColorStyle? {
         
         let styleSpec = ColorStyle()
         for style in ColorStyle.Properties.allValues {
