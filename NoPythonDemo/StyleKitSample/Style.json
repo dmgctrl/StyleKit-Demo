@@ -88,6 +88,7 @@
                 "font": "primaryFontMedium",
                 "size": 19
             },
+            "backgroundColor" : "whiteColor",
             "borderWidth": 1,
             "borderColor": "blueColor",
             "cornerRadius": 5,
