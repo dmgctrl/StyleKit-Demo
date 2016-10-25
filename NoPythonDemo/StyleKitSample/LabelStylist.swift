@@ -23,12 +23,8 @@ class LabelStyle: Stylist {
                                                                "Justified":.Justified,
                                                                "Natural":.Natural]
     
-    static func attributesForLabel(styles:AttributedTextStyle) ->  Dictionary<String, AnyObject> {
-        let style = NSMutableParagraphStyle()
-        style.alignment = NSTextAlignment.Center
-        if let lineSpace = styles.lineSpacing {
-            style.lineSpacing = lineSpace
-        }
+    static func attributesForLabel(styles:AttributedTextStyle, textAlignment:NSTextAlignment) ->  Dictionary<String, AnyObject> {
+
         
         var attributes:[String: AnyObject] = [:]
         
@@ -40,7 +36,18 @@ class LabelStyle: Stylist {
             let characterSpacing = fontSize * tracking / 1000
             attributes[NSKernAttributeName] = characterSpacing
         }
+
+        let style = NSMutableParagraphStyle()
         
+        if let lineSpace = styles.lineSpacing {
+            style.lineSpacing = lineSpace
+        }
+
+        style.alignment = textAlignment
+
+        if let lineSpace = styles.lineSpacing {
+            style.lineSpacing = lineSpace
+        }
         attributes[NSParagraphStyleAttributeName] = style
         
         return attributes
@@ -126,13 +133,13 @@ extension UILabel {
         for property in LabelStyle.Properties.allValues {
             switch property {
             case .TextColor:
-                self.textColor = style.textColor
+                textColor = style.textColor
             case .TextAlignment:
-                self.textAlignment = style.textAlignment ?? self.textAlignment
+                textAlignment = style.textAlignment ?? self.textAlignment
             case .Attributes:
                 if let attributes = style.attributes, text = self.text {
-                    let asdf = LabelStyle.attributesForLabel(attributes)
-                    self.attributedText = NSAttributedString(string: text, attributes:asdf)
+                    let attr = LabelStyle.attributesForLabel(attributes, textAlignment: textAlignment)
+                    self.attributedText = NSAttributedString(string: text, attributes:attr)
                 }
             }
         }
