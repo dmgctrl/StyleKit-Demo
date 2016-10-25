@@ -60,6 +60,13 @@ enum ColorProperties: String {
 
 class Style: NSObject {
     
+    enum StyleKitError: ErrorType {
+        case StyleFileNotFound
+        case InvalidFontStyle
+        case InvalidTextFieldProperty
+        case InvalidLabelStyle
+    }
+    
     static let sharedInstance = Style()
     
     var fileName = "Style.json"
@@ -69,10 +76,6 @@ class Style: NSObject {
     typealias StyleMap = [String: AnyObject]
     
     var styleMap = [UIElement:StyleMap]()
-    
-    enum StyleKitError: ErrorType {
-        case StyleFileNotFound
-    }
     
     private override init() {
         super.init()
@@ -84,23 +87,30 @@ class Style: NSObject {
     }
     
     private func getStylePath() throws -> NSURL {
-        guard let string = NSBundle.mainBundle().infoDictionary?["StyleKit-DesignatedFolder"] as? String,
-            documentDirectory = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).last else {
+        if let string = NSBundle.mainBundle().infoDictionary?["StyleKit-StylesheetLocation"] as? String,
+            documentDirectory = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).last {
+            let pathURL: NSURL?
+            if string.containsString(".json") {
+                pathURL = documentDirectory.URLByAppendingPathComponent(string)
+            } else {
+                pathURL = documentDirectory.URLByAppendingPathComponent(string + "/Style.json")
+            }
+            
+            if let thePathURL = pathURL, path = thePathURL.path {
+                if NSFileManager.defaultManager().fileExistsAtPath(path) {
+                    return thePathURL
+                } else {
+                    throw StyleKitError.StyleFileNotFound
+                }
+            } else {
+                throw StyleKitError.StyleFileNotFound
+            }
+        } else {
             if let path = NSBundle.mainBundle().URLForResource("Style", withExtension: "json") {
                 return path
             } else {
                 throw StyleKitError.StyleFileNotFound
             }
-        }
-
-        if let pathURL = documentDirectory.URLByAppendingPathComponent(string + "/Style.json"), path = pathURL.path {
-            if NSFileManager.defaultManager().fileExistsAtPath(path) {
-                return pathURL
-            } else {
-                throw StyleKitError.StyleFileNotFound
-            }
-        } else {
-            throw StyleKitError.StyleFileNotFound
         }
     }
     
@@ -170,12 +180,6 @@ class Style: NSObject {
         }
     }
     
-    enum ParseError: ErrorType {
-        case invalidFontStyle
-        case invalidTextFieldProperty
-        case invalidLabelStyle
-    }
-    
     //---------------------------------------------
     // MARK: - Serialize JSON into Objects (Common)
     //---------------------------------------------
@@ -204,7 +208,7 @@ class Style: NSObject {
             let size = spec[FontProperty.size.rawValue] as? Int {
             return FontStyle(fontName: fontName, size: size)
         } else {
-            throw ParseError.invalidFontStyle
+            throw StyleKitError.InvalidFontStyle
         }
     }
 }
