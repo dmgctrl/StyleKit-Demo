@@ -103,9 +103,12 @@ class Style: NSObject {
             let json = try NSJSONSerialization.JSONObjectWithData(data, options: .AllowFragments)
             
             if let fontConfigs = json[CommonObjects.Fonts.rawValue] as? [String: String] {
+                let allFontNames = UIFont.familyNames().reduce([]) {
+                    $0 + UIFont.fontNamesForFamilyName($1)
+                }
                 for fontName in fontConfigs.values {
-                    guard UIFont.familyNames().contains(fontName) else {
-                        print("StyleKit: Warning: Font '\(fontName)' referenced in Style.json was not found.")
+                    guard allFontNames.contains(fontName) else {
+                        print("StyleKit: Warning: '\(fontName)' Font referenced in Style.json is not a valid font.")
                         continue
                     }
                 }
@@ -197,13 +200,18 @@ class Style: NSObject {
     }
         
     static func serializeFontSpec(spec: [String:AnyObject], resources:CommonResources) throws -> FontStyle {
-        if let nameKey = spec[FontProperty.name.rawValue] as? String,
-            let fontName = resources.fontLabels[nameKey],
-            let size = spec[FontProperty.size.rawValue] as? Int {
-            return FontStyle(fontName: fontName, size: size)
-        } else {
-            throw ParseError.invalidFontStyle
+        if let nameKey = spec[FontProperty.name.rawValue] as? String {
+            if let fontName = resources.fontLabels[nameKey] {
+                if let size = spec[FontProperty.size.rawValue] as? Int {
+                    return FontStyle(fontName: fontName, size: size)
+                } else {
+                    print("StyleKit:Warning: fontStyle for '\(nameKey)' must include a font 'size' parameter")
+                }
+            } else {
+                print("StyleKit:Warning: '\(nameKey)' alias must be defined under 'Fonts' ")
+            }
         }
+        throw ParseError.invalidFontStyle
     }
 }
 

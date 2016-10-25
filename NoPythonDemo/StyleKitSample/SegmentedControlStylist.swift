@@ -36,7 +36,7 @@ class SegmentedControlStyle : Stylist {
             switch property {
             case .FontStyle:
                 if let fontSpec = value as? [String:AnyObject] {
-                    let font = try Style.serializeFontSpec(fontSpec, resources: resources)
+                    let font = try? Style.serializeFontSpec(fontSpec, resources: resources)
                     style.fontStyle = font
                 }
                 

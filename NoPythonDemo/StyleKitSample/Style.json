@@ -1,8 +1,7 @@
 {
     "Fonts": {
         "primaryFontLight": "MarkerFelt-Thin",
-        "primaryFontMedium": "MarkerFelt-Wide",
-        "primaryFontHeavy": "MarkerFelt-Heavy"
+        "primaryFontMedium": "MarkerFelt-Wide"
     },
     "Images": {
         "defaultThumbImage": "BlueDot",
