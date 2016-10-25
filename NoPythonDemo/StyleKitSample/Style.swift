@@ -60,6 +60,13 @@ enum ColorProperties: String {
 
 class Style: NSObject {
     
+    enum StyleKitError: ErrorType {
+        case StyleFileNotFound
+        case InvalidFontStyle
+        case InvalidTextFieldProperty
+        case InvalidLabelStyle
+    }
+    
     static let sharedInstance = Style()
     
     var fileName = "Style.json"
@@ -69,10 +76,6 @@ class Style: NSObject {
     typealias StyleMap = [String: AnyObject]
     
     var styleMap = [UIElement:StyleMap]()
-    
-    enum StyleKitError: ErrorType {
-        case StyleFileNotFound
-    }
     
     private override init() {
         super.init()
@@ -170,12 +173,6 @@ class Style: NSObject {
         }
     }
     
-    enum ParseError: ErrorType {
-        case invalidFontStyle
-        case invalidTextFieldProperty
-        case invalidLabelStyle
-    }
-    
     //---------------------------------------------
     // MARK: - Serialize JSON into Objects (Common)
     //---------------------------------------------
@@ -204,7 +201,7 @@ class Style: NSObject {
             let size = spec[FontProperty.size.rawValue] as? Int {
             return FontStyle(fontName: fontName, size: size)
         } else {
-            throw ParseError.invalidFontStyle
+            throw StyleKitError.InvalidFontStyle
         }
     }
 }
