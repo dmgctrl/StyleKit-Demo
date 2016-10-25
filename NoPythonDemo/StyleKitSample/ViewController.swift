@@ -10,6 +10,8 @@ import UIKit
 
 class ViewController: UIViewController, StyleKitSubscriber {
     
+    @IBOutlet weak var button1: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -22,9 +24,11 @@ class ViewController: UIViewController, StyleKitSubscriber {
     }
     
     func update() {
-        for view in self.view.subviews {
-            view.style()
-        }
+        self.button1.style()
+    }
+    
+    @IBAction func buttonTapped(sender: AnyObject) {
+        (UIApplication.sharedApplication().delegate as? AppDelegate)?.downloadStyleFile()
     }
 }
 
