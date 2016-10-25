@@ -40,7 +40,7 @@ class TextFieldStyle : Stylist {
                 
             case TextFieldStyle.Properties.FontStyle:
                 if let fontSpec = value as? [String:AnyObject] {
-                    result.fontStyle = try? Style.serializeFontSpec(fontSpec, resources: resources)
+                    result.fontStyle = Style.serializeFontSpec(fontSpec, resources: resources)
                 }
             case TextFieldStyle.Properties.BorderWidth:
                 if let borderWidth = value as? Int {

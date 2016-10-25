@@ -84,9 +84,9 @@ class LabelStyle: Stylist {
             }
             switch property {
             case .FontStyle:
-                if let fontSpec = value as? [String:AnyObject] {
-                    let font = try? Style.serializeFontSpec(fontSpec, resources: resources)
-                    style.fontStyle = font
+                if let fontSpec = value as? [String:AnyObject]
+                {
+                    style.fontStyle = Style.serializeFontSpec(fontSpec, resources: resources)
                 }
             case .Tracking:
                 if let tracking = value as? Int {

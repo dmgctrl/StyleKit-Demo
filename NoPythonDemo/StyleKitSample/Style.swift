@@ -62,7 +62,6 @@ class Style: NSObject {
     
     enum StyleKitError: ErrorType {
         case StyleFileNotFound(String)
-        case InvalidFontStyle
         case InvalidTextFieldProperty
         case InvalidLabelStyle
     }
@@ -204,7 +203,7 @@ class Style: NSObject {
     // MARK: - Serialize JSON into Objects (Common)
     //---------------------------------------------
     
-    static func serializeColorsSpec(spec: [String:String], resources:CommonResources) throws -> ColorStyle {
+    static func serializeColorsSpec(spec: [String:String], resources:CommonResources) throws -> ColorStyle? {
         
         let styleSpec = ColorStyle()
         for style in ColorStyle.Properties.allValues {
@@ -219,10 +218,10 @@ class Style: NSObject {
                 }
             }
         }
-        return styleSpec
+        return nil
     }
         
-    static func serializeFontSpec(spec: [String:AnyObject], resources:CommonResources) throws -> FontStyle {
+    static func serializeFontSpec(spec: [String:AnyObject], resources:CommonResources) -> FontStyle? {
 
         if let nameKey = spec[FontProperty.name.rawValue] as? String {
             if let fontName = resources.fontLabels[nameKey] {
@@ -235,7 +234,7 @@ class Style: NSObject {
                 print("StyleKit:Warning: '\(nameKey)' alias must be defined under 'Fonts' ")
             }
         }
-        throw StyleKitError.InvalidFontStyle
+        return nil
     }
 }
 
