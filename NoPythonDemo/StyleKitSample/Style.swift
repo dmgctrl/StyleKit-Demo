@@ -87,11 +87,18 @@ class Style: NSObject {
     }
     
     private func getStylePath() throws -> NSURL {
-        if let string = NSBundle.mainBundle().infoDictionary?["StyleKit-DesignatedFolder"] as? String,
+        if let string = NSBundle.mainBundle().infoDictionary?["StyleKit-StylesheetLocation"] as? String,
             documentDirectory = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).last {
-            if let pathURL = documentDirectory.URLByAppendingPathComponent(string + "/Style.json"), path = pathURL.path {
+            let pathURL: NSURL?
+            if string.containsString(".json") {
+                pathURL = documentDirectory.URLByAppendingPathComponent(string)
+            } else {
+                pathURL = documentDirectory.URLByAppendingPathComponent(string + "/Style.json")
+            }
+            
+            if let thePathURL = pathURL, path = thePathURL.path {
                 if NSFileManager.defaultManager().fileExistsAtPath(path) {
-                    return pathURL
+                    return thePathURL
                 } else {
                     throw StyleKitError.StyleFileNotFound
                 }
