@@ -77,9 +77,11 @@ class Style: NSObject {
     
     var styleMap = [UIElement:StyleMap]()
     
+    private let subscribers: NSHashTable
+    
     private override init() {
+        self.subscribers = NSHashTable(options: .WeakMemory)
         super.init()
-        serialize()
     }
 
     private func checkIfImageExist(name:String) -> Bool {
@@ -236,22 +238,26 @@ class Style: NSObject {
         }
         return nil
     }
+    
+    // MARK: - Observer Pattern
+    
+    func addSubscriber(subscriber: StyleKitSubscriber) {
+        if !subscribers.containsObject(subscriber) {
+            subscribers.addObject(subscriber)
+        }
+    }
+    
+    func removeSubscriber(subscriber: StyleKitSubscriber) {
+        if subscribers.containsObject(subscriber) {
+            subscribers.removeObject(subscriber)
+        }
+    }
+    
+    func refresh() {
+        self.serialize()
+        let enumerator = subscribers.objectEnumerator()
+        while let subscriber = enumerator.nextObject() as? StyleKitSubscriber {
+            subscriber.update()
+        }
+    }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
