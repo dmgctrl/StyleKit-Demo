@@ -60,9 +60,17 @@ enum ColorProperties: String {
 
 class Style: NSObject {
     
+    enum StyleKitError: ErrorType {
+        case StyleFileNotFound(String)
+        case InvalidFontStyle
+        case InvalidTextFieldProperty
+        case InvalidLabelStyle
+    }
+    
     static let sharedInstance = Style()
     
-    var fileName = "Style.json"
+    let fileName = "Style.json"
+    let bundleKeyForLocation = "StyleKit-StylesheetLocation"
     
     var resources = CommonResources()
     
@@ -72,33 +80,45 @@ class Style: NSObject {
     
     private override init() {
         super.init()
-        serialize(fileName)
+        serialize()
     }
-    
-    private func configurationStyleURL(styleFile:String) -> NSURL? {
-        let documentsDirPath = urlForFileInDocumentsDirectory(styleFile)
-        if NSFileManager.defaultManager().fileExistsAtPath(documentsDirPath.path!)   {
-            return documentsDirPath
-        }
-        let bundlePath = NSBundle.mainBundle().pathForResource(styleFile, ofType: nil)
-        return NSURL(fileURLWithPath: bundlePath!)
-    }
-    
-    private func urlForFileInDocumentsDirectory(fileName: String) -> NSURL {
-        let docsDir = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)[0]
-        return docsDir.URLByAppendingPathComponent(fileName)!
-    }
-    
+
     private func checkIfImageExist(name:String) -> Bool {
         return UIImage(named: name) == nil ? false : true
     }
     
-    private func serialize(styleFile:String) {
-        
-        let stylePath = configurationStyleURL(styleFile)!
+    private func getStylePath() throws -> NSURL {
+        if let string = NSBundle.mainBundle().infoDictionary?[bundleKeyForLocation] as? String,
+            documentDirectory = Utils.documentDirectory {
+            let pathURL: NSURL?
+            if string.containsString(".json") {
+                pathURL = documentDirectory.URLByAppendingPathComponent(string)
+            } else {
+                pathURL = documentDirectory.URLByAppendingPathComponent(string + "/" + fileName)
+            }
+            
+            if let thePathURL = pathURL, path = thePathURL.path {
+                if NSFileManager.defaultManager().fileExistsAtPath(path) {
+                    return thePathURL
+                } else {
+                    throw StyleKitError.StyleFileNotFound("File does not exist at \(thePathURL)")
+                }
+            } else {
+                throw StyleKitError.StyleFileNotFound("Invalid path URL: \(pathURL)")
+            }
+        } else {
+            if let path = NSBundle.mainBundle().URLForResource(fileName, withExtension: nil) {
+                return path
+            } else {
+                throw StyleKitError.StyleFileNotFound("Expected to find Style.json in the bundle")
+            }
+        }
+    }
+    
+    private func serialize() {
         
         do {
-            
+            let stylePath = try self.getStylePath()
             let data = try NSData(contentsOfURL: stylePath, options: NSDataReadingOptions.DataReadingMappedIfSafe)
             let json = try NSJSONSerialization.JSONObjectWithData(data, options: .AllowFragments)
             
@@ -167,14 +187,17 @@ class Style: NSObject {
                 styleMap[element] = styles
             }
         } catch {
-            assert(false,"error serializing JSON: \(error)")
+            if let error = error as? StyleKitError {
+                switch error {
+                case .StyleFileNotFound(let str):
+                    print("StyleKit:Error: " + str)
+                default:
+                    break
+                }
+            }
+
+            assert(false, "error serializing JSON: \(error)")
         }
-    }
-    
-    enum ParseError: ErrorType {
-        case invalidFontStyle
-        case invalidTextFieldProperty
-        case invalidLabelStyle
     }
     
     //---------------------------------------------
@@ -200,6 +223,7 @@ class Style: NSObject {
     }
         
     static func serializeFontSpec(spec: [String:AnyObject], resources:CommonResources) throws -> FontStyle {
+
         if let nameKey = spec[FontProperty.name.rawValue] as? String {
             if let fontName = resources.fontLabels[nameKey] {
                 if let size = spec[FontProperty.size.rawValue] as? Int {
@@ -211,7 +235,7 @@ class Style: NSObject {
                 print("StyleKit:Warning: '\(nameKey)' alias must be defined under 'Fonts' ")
             }
         }
-        throw ParseError.invalidFontStyle
+        throw StyleKitError.InvalidFontStyle
     }
 }
 

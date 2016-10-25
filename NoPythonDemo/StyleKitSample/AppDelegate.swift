@@ -13,9 +13,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+
+        if let destDirectory = Utils.documentDirectory?.URLByAppendingPathComponent("NewFolder/"),
+            srcDirectory = NSBundle.mainBundle().URLForResource("Style", withExtension: "json") {
+            self.copyStyleFile(from: srcDirectory, to: destDirectory)
+        }
+        
         return true
     }
 
@@ -41,6 +46,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
-
+    func copyStyleFile(from srcURL: NSURL, to destURL: NSURL) {
+        let fileManager = NSFileManager.defaultManager()
+        
+        if !fileManager.fileExistsAtPath(destURL.path!) {
+            do {
+                try fileManager.createDirectoryAtURL(destURL, withIntermediateDirectories: false, attributes: nil)
+                try fileManager.copyItemAtURL(srcURL, toURL: destURL.URLByAppendingPathComponent("Style.json")!)
+            } catch let error {
+                print(error)
+            }
+        }
+    }
 }
 
