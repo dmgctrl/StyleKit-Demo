@@ -62,6 +62,7 @@ extension StylesViewController: UITableViewDataSource {
             case .button:
                 (cell as! ButtonTableViewCell).button.styleTag = styleTag
                 (cell as! ButtonTableViewCell).button.setTitle(styleTag, forState: .Normal)
+                Style.sharedInstance.addSubscriber((cell as! ButtonTableViewCell))
             case .segmentedControl:
                 (cell as! SegmentedControlsTableViewCell).segmentedControl.styleTag = styleTag
                 (cell as! SegmentedControlsTableViewCell).label.text = styleTag
@@ -96,7 +97,4 @@ extension StylesViewController: UITableViewDataSource {
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return sectionHeaders[section].rawValue
     }
-    
-    
-    
 }

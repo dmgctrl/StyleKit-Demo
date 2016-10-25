@@ -18,7 +18,6 @@ extension UIView {
                     newValue as NSString?,
                     .OBJC_ASSOCIATION_RETAIN_NONATOMIC
                 )
-                self.style()
             }
         }
     }
