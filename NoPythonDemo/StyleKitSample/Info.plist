@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>StyleKit-DesignatedFolder</key>
+	<string>NewFolder</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleExecutable</key>
@@ -36,14 +38,14 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-    <key>UIAppFonts</key>
-    <array>
-        <string>Brandon_thin.otf</string>
-        <string>Brandon_med.otf</string>
-        <string>Brandon_light.otf</string>
-        <string>Brandon_light_it.otf</string>
-        <string>Brandon_blk.otf</string>
-        <string>Brandon_bld.otf</string>
-    </array>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Brandon_thin.otf</string>
+		<string>Brandon_med.otf</string>
+		<string>Brandon_light.otf</string>
+		<string>Brandon_light_it.otf</string>
+		<string>Brandon_blk.otf</string>
+		<string>Brandon_bld.otf</string>
+	</array>
 </dict>
 </plist>

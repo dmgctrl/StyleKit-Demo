@@ -70,35 +70,43 @@ class Style: NSObject {
     
     var styleMap = [UIElement:StyleMap]()
     
+    enum StyleKitError: ErrorType {
+        case StyleFileNotFound
+    }
+    
     private override init() {
         super.init()
         serialize(fileName)
     }
-    
-    private func configurationStyleURL(styleFile:String) -> NSURL? {
-        let documentsDirPath = urlForFileInDocumentsDirectory(styleFile)
-        if NSFileManager.defaultManager().fileExistsAtPath(documentsDirPath.path!)   {
-            return documentsDirPath
-        }
-        let bundlePath = NSBundle.mainBundle().pathForResource(styleFile, ofType: nil)
-        return NSURL(fileURLWithPath: bundlePath!)
-    }
-    
-    private func urlForFileInDocumentsDirectory(fileName: String) -> NSURL {
-        let docsDir = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)[0]
-        return docsDir.URLByAppendingPathComponent(fileName)!
-    }
-    
+
     private func checkIfImageExist(name:String) -> Bool {
         return UIImage(named: name) == nil ? false : true
     }
     
-    private func serialize(styleFile:String) {
-        
-        let stylePath = configurationStyleURL(styleFile)!
-        
+    private func getStylePath() throws -> NSURL {
+        guard let string = NSBundle.mainBundle().infoDictionary?["StyleKit-DesignatedFolder"] as? String,
+            documentDirectory = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).last else {
+            if let path = NSBundle.mainBundle().URLForResource("Style", withExtension: "json") {
+                return path
+            } else {
+                throw StyleKitError.StyleFileNotFound
+            }
+        }
+
+        if let pathURL = documentDirectory.URLByAppendingPathComponent(string + "/Style.json"), path = pathURL.path {
+            if NSFileManager.defaultManager().fileExistsAtPath(path) {
+                return pathURL
+            } else {
+                throw StyleKitError.StyleFileNotFound
+            }
+        } else {
+            throw StyleKitError.StyleFileNotFound
+        }
+    }
+    
+    private func serialize(styleFile: String) {
         do {
-            
+            let stylePath = try self.getStylePath()
             let data = try NSData(contentsOfURL: stylePath, options: NSDataReadingOptions.DataReadingMappedIfSafe)
             let json = try NSJSONSerialization.JSONObjectWithData(data, options: .AllowFragments)
             
