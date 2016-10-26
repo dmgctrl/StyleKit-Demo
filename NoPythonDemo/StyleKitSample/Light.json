@@ -1,0 +1,55 @@
+{
+    "Fonts": {
+        "primaryFontLight": "MarkerFelt-Thin",
+        "primaryFontMedium": "MarkerFelt-Wide"
+    },
+    "Images": {
+        "defaultThumbImage": "BlueDot",
+        "defaultFilledTrackImage": "BlueBar",
+        "defaultEmptyTrackImage": "GreenBar",
+        "defaultIncrementImage": "Star",
+        "defaultDecrementImage": "Diamond",
+        "defaultBackgroundImage": "Pattern"
+    },
+    "Colors": {
+        "whiteColor": {
+            "red": 255,
+            "green": 255,
+            "blue": 255,
+            "alpha": 1
+        },
+        "blackColor": {
+            "red": 0,
+            "green": 0,
+            "blue": 0,
+            "alpha": 1
+        },
+        "blueColor": {
+            "red": 0,
+            "green": 0,
+            "blue": 255,
+            "alpha": 1
+        },
+        "purpleColor": {
+            "red": 128,
+            "green": 0,
+            "blue": 128,
+            "alpha": 1
+        },
+        "lightGrayColor": {
+            "hex": "#EFEFF4",
+            "alpha": 1
+        }
+    },
+    "TextViews": {
+        "TV1": {
+            "textColor": "blueColor",
+            "attributes": {
+                "fontStyle": {
+                    "font": "primaryFontLight",
+                    "size": 20
+                },
+            }
+        }
+    }
+}

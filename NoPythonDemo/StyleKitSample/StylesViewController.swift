@@ -95,6 +95,9 @@ extension StylesViewController: UITableViewDataSource {
             case .view:
                 (cell as! ViewsTableViewCell).view.styleTag = styleTag
                 (cell as! ViewsTableViewCell).label.text = styleTag
+            case .textView:
+                (cell as! TextViewsTableViewCell).textView.styleTag = styleTag
+                (cell as! TextViewsTableViewCell).textView.text = styleTag
             }
         }
                 

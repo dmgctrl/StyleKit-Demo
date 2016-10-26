@@ -22,6 +22,21 @@ class CommonResources {
     var imageNames = [String: String]()
 }
 
+class AttributedTextStyle {
+    var fontStyle: FontStyle?
+    var tracking: Int?
+    var lineSpacing: CGFloat?
+    var ligature: Int?
+    
+    enum Properties: String {
+        case FontStyle = "fontStyle"
+        case Tracking = "tracking"
+        case LineSpacing = "lineSpacing"
+        case Ligature = "ligature"
+        static let allValues:[Properties] = [.FontStyle, .Tracking, .LineSpacing, .Ligature]
+    }
+}
+
 protocol Stylist {
     associatedtype Element
 }
@@ -40,7 +55,8 @@ enum UIElement: String {
     case stepper = "Steppers"
     case progressView = "ProgressViews"
     case view = "Views"
-    static let allValues:[UIElement] = [.view, .segmentedControl, .textField, .button, .label, .slider, .stepper, .progressView]
+    case textView = "TextViews"
+    static let allValues:[UIElement] = [.view, .segmentedControl, .textField, .button, .label, .slider, .stepper, .progressView, .textView]
 }
 
 enum CommonObjects: String {
@@ -183,6 +199,8 @@ class Style: NSObject {
                         styles[labelKey] = try ViewStyle.serialize(specification, resources: resources) as AnyObject
                     case .textField:
                         styles[labelKey] = try TextFieldStyle.serialize(specification, resources: resources) as AnyObject
+                    case .textView:
+                        styles[labelKey] = try TextViewStyle.serialize(specification, resources: resources) as AnyObject
                     }
                 }
                 styleMap[element] = styles

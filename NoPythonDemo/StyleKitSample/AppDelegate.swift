@@ -31,25 +31,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         do {
-            try fileManager.createDirectoryAtURL(destURL, withIntermediateDirectories: false, attributes: nil)
-            try fileManager.copyItemAtURL(srcURL, toURL: destURL.URLByAppendingPathComponent("Style.json")!)
+            if let path = destURL.path where !path.containsString(".json") {
+                try fileManager.createDirectoryAtURL(destURL, withIntermediateDirectories: false, attributes: nil)
+                try fileManager.copyItemAtURL(srcURL, toURL: destURL.URLByAppendingPathComponent("Style.json")!)
+            } else {
+                try fileManager.copyItemAtURL(srcURL, toURL: destURL)
+            }
         } catch let error {
             print(error)
         }
     }
     
     func downloadStyleFile() {
-        if let url = NSURL(string:"https://dl.dropboxusercontent.com/u/26582460/Style.json") {
-            NSURLSession.sharedSession().downloadTaskWithURL(url, completionHandler: { tempFileDirectory, response, error in
-                if error == nil {
-                    if let srcDirectory = tempFileDirectory, destDirectory = Utils.documentDirectory?.URLByAppendingPathComponent("NewFolder/") {
-                        self.copyStyleFile(from: srcDirectory, to: destDirectory)
-                        dispatch_async(dispatch_get_main_queue(), { 
-                            Style.sharedInstance.refresh()
-                        })
+        if let string = NSBundle.mainBundle().infoDictionary?[Style.sharedInstance.bundleKeyForLocation] as? String {
+            if let url = NSURL(string:"https://dl.dropboxusercontent.com/u/26582460/Style.json") {
+                NSURLSession.sharedSession().downloadTaskWithURL(url, completionHandler: { tempFileDirectory, response, error in
+                    if error == nil {
+                        if let srcDirectory = tempFileDirectory, destDirectory = Utils.documentDirectory?.URLByAppendingPathComponent(string) {
+                            self.copyStyleFile(from: srcDirectory, to: destDirectory)
+                            dispatch_async(dispatch_get_main_queue(), {
+                                Style.sharedInstance.refresh()
+                            })
+                        }
                     }
-                }
-            }).resume()
+                }).resume()
+            }
         }
     }
 }

@@ -140,6 +140,14 @@ extension UIView {
             } else {
                 print("StyleKit: Warning: styleTag \(styleTag) on \(self.dynamicType) was not found in Style.json")
             }
+        case is UITextView:
+            if let elementStyles = Style.sharedInstance.styleMap[.textView],
+                let styles = elementStyles[styleTag],
+                let styleObject = styles as? TextViewStyle {
+                (self as! UITextView).applyStyle(styleObject, resources: Style.sharedInstance.resources)
+            } else {
+                print("StyleKit: Warning: styleTag \(styleTag) on \(self.dynamicType) was not found in Style.json")
+            }
         default:
             if let elementStyles = Style.sharedInstance.styleMap[.view],
                 let styles = elementStyles[styleTag],

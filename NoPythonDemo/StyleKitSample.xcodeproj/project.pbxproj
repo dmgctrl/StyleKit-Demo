@@ -39,6 +39,11 @@
 		298E3BC81DB56D7B00B54DD0 /* Style2.json in Resources */ = {isa = PBXBuildFile; fileRef = 298E3BC71DB56D7B00B54DD0 /* Style2.json */; };
 		29EBA4911DB69EA500CAFFEA /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29EBA4901DB69EA500CAFFEA /* Utils.swift */; };
 		C406E7BA1DBFD58F004865CA /* StyleKitSubscriber.swift in Sources */ = {isa = PBXBuildFile; fileRef = C406E7B91DBFD58F004865CA /* StyleKitSubscriber.swift */; };
+		C406E7BC1DBFFF59004865CA /* DarkModeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C406E7BB1DBFFF59004865CA /* DarkModeViewController.swift */; };
+		C406E7BE1DC0F51D004865CA /* Light.json in Resources */ = {isa = PBXBuildFile; fileRef = C406E7BD1DC0F51D004865CA /* Light.json */; };
+		C406E7C01DC0F53A004865CA /* Dark.json in Resources */ = {isa = PBXBuildFile; fileRef = C406E7BF1DC0F53A004865CA /* Dark.json */; };
+		C406E7C21DC0F63C004865CA /* TextViewStylist.swift in Sources */ = {isa = PBXBuildFile; fileRef = C406E7C11DC0F63C004865CA /* TextViewStylist.swift */; };
+		C406E7C41DC0F81D004865CA /* TextViewsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C406E7C31DC0F81D004865CA /* TextViewsTableViewCell.swift */; };
 		C446D61D1CB540CA00EBC929 /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = C446D61B1CB540CA00EBC929 /* Style.swift */; };
 		C446D61E1CB540CA00EBC929 /* UIView+StyleKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = C446D61C1CB540CA00EBC929 /* UIView+StyleKit.swift */; };
 /* End PBXBuildFile section */
@@ -78,6 +83,11 @@
 		298E3BC71DB56D7B00B54DD0 /* Style2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Style2.json; sourceTree = "<group>"; };
 		29EBA4901DB69EA500CAFFEA /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		C406E7B91DBFD58F004865CA /* StyleKitSubscriber.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StyleKitSubscriber.swift; sourceTree = "<group>"; };
+		C406E7BB1DBFFF59004865CA /* DarkModeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DarkModeViewController.swift; sourceTree = "<group>"; };
+		C406E7BD1DC0F51D004865CA /* Light.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Light.json; sourceTree = "<group>"; };
+		C406E7BF1DC0F53A004865CA /* Dark.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Dark.json; sourceTree = "<group>"; };
+		C406E7C11DC0F63C004865CA /* TextViewStylist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextViewStylist.swift; sourceTree = "<group>"; };
+		C406E7C31DC0F81D004865CA /* TextViewsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextViewsTableViewCell.swift; sourceTree = "<group>"; };
 		C446D61B1CB540CA00EBC929 /* Style.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Style.swift; sourceTree = "<group>"; };
 		C446D61C1CB540CA00EBC929 /* UIView+StyleKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+StyleKit.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -117,6 +127,7 @@
 				2908BCF11DBA62E20012C924 /* SliderStylist.swift */,
 				2908BCF31DBA631E0012C924 /* StepperStylist.swift */,
 				2908BCF51DBA636D0012C924 /* ProgressViewStylist.swift */,
+				C406E7C11DC0F63C004865CA /* TextViewStylist.swift */,
 			);
 			name = Stylist;
 			sourceTree = "<group>";
@@ -126,6 +137,7 @@
 			children = (
 				2908BCF81DBA89240012C924 /* StylesViewController.swift */,
 				298DC60C1C92073E00BB0D29 /* ViewController.swift */,
+				C406E7BB1DBFFF59004865CA /* DarkModeViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -141,6 +153,7 @@
 				2908BD281DBC10FF0012C924 /* SteppersTableViewCell.swift */,
 				2908BD2A1DBC11120012C924 /* ProgressViewsTableViewCell.swift */,
 				2908BD2C1DBC11220012C924 /* ViewsTableViewCell.swift */,
+				C406E7C31DC0F81D004865CA /* TextViewsTableViewCell.swift */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -180,6 +193,8 @@
 		298DC6091C92073E00BB0D29 /* StyleKitSample */ = {
 			isa = PBXGroup;
 			children = (
+				C406E7BD1DC0F51D004865CA /* Light.json */,
+				C406E7BF1DC0F53A004865CA /* Dark.json */,
 				295D21781C9214AA001626BD /* Style.json */,
 				298E3BC71DB56D7B00B54DD0 /* Style2.json */,
 				2932CEE21C93691E00F83F34 /* StyleKit */,
@@ -252,9 +267,11 @@
 			files = (
 				298DC6151C92073E00BB0D29 /* LaunchScreen.storyboard in Resources */,
 				2908BCE31DB818020012C924 /* Brandon_med.otf in Resources */,
+				C406E7BE1DC0F51D004865CA /* Light.json in Resources */,
 				298DC6121C92073E00BB0D29 /* Assets.xcassets in Resources */,
 				2908BCE11DB818020012C924 /* Brandon_light_it.otf in Resources */,
 				2908BCE41DB818020012C924 /* Brandon_thin.otf in Resources */,
+				C406E7C01DC0F53A004865CA /* Dark.json in Resources */,
 				2908BCE01DB818020012C924 /* Brandon_blk.otf in Resources */,
 				2908BCE21DB818020012C924 /* Brandon_light.otf in Resources */,
 				298E3BC81DB56D7B00B54DD0 /* Style2.json in Resources */,
@@ -276,12 +293,15 @@
 				2908BD1F1DBC0EC10012C924 /* ButtonTableViewCell.swift in Sources */,
 				2908BCEC1DBA621D0012C924 /* ViewStylist.swift in Sources */,
 				2908BD271DBC10EB0012C924 /* SlidersTableViewCell.swift in Sources */,
+				C406E7BC1DBFFF59004865CA /* DarkModeViewController.swift in Sources */,
+				C406E7C21DC0F63C004865CA /* TextViewStylist.swift in Sources */,
 				2908BD291DBC10FF0012C924 /* SteppersTableViewCell.swift in Sources */,
 				2908BCF61DBA636D0012C924 /* ProgressViewStylist.swift in Sources */,
 				2908BCF91DBA89240012C924 /* StylesViewController.swift in Sources */,
 				2908BCF01DBA62AA0012C924 /* SegmentedControlStylist.swift in Sources */,
 				2908BD251DBC10D60012C924 /* LabelsTableViewCell.swift in Sources */,
 				C446D61E1CB540CA00EBC929 /* UIView+StyleKit.swift in Sources */,
+				C406E7C41DC0F81D004865CA /* TextViewsTableViewCell.swift in Sources */,
 				2908BCE71DBA61360012C924 /* LabelStylist.swift in Sources */,
 				C406E7BA1DBFD58F004865CA /* StyleKitSubscriber.swift in Sources */,
 				2908BCF21DBA62E20012C924 /* SliderStylist.swift in Sources */,

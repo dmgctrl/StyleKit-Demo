@@ -210,5 +210,16 @@
             "progressImage": "defaultFilledTrackImage",
             "trackImage": "defaultEmptyTrackImage"
         }
+    },
+    "TextViews": {
+        "TV1": {
+            "textColor": "blueColor",
+            "attributes": {
+                "fontStyle": {
+                    "font": "primaryFontLight",
+                    "size": 20
+                }
+            }
+        }
     }
 }
