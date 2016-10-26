@@ -6,12 +6,14 @@ class TextViewStyle {
     var textColor: UIColor?
     var textAlignment: NSTextAlignment?
     var attributes: AttributedTextStyle?
+    var backgroundColor: UIColor?
     
     enum Properties: String {
         case TextColor = "textColor"
         case TextAlignment = "textAlignment"
         case Attributes = "attributes"
-        static let allValues:[Properties] = [.TextColor, .TextAlignment, .Attributes]
+        case BackgroundColor = "backgroundColor"
+        static let allValues:[Properties] = [.TextColor, .TextAlignment, .Attributes, .BackgroundColor]
     }
     
     static var textAlignmentKeyMap:[String:NSTextAlignment] = ["Left":.Left,
@@ -66,6 +68,10 @@ class TextViewStyle {
                     let attr = try TextViewStyle.serializeFormatAttributesSpec(attributes, resources:resources)
                     textViewStyle.attributes = attr
                 }
+            case TextViewStyle.Properties.BackgroundColor:
+                if let colorKey = value as? String, let color = resources.colors[colorKey] {
+                    textViewStyle.backgroundColor = color
+                }
             }
         }
         return textViewStyle
@@ -116,6 +122,8 @@ extension UITextView {
                     let asdf = TextViewStyle.attributesForTextView(attributes)
                     self.attributedText = NSAttributedString(string: text, attributes:asdf)
                 }
+            case .BackgroundColor:
+                self.backgroundColor = style.backgroundColor
             }
         }
     }

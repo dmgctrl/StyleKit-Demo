@@ -43,13 +43,14 @@
     },
     "TextViews": {
         "TV1": {
-            "textColor": "blueColor",
-            "attributes": {
-                "fontStyle": {
-                    "font": "primaryFontLight",
-                    "size": 20
-                },
-            }
+            "textColor": "blackColor",
+            "textAlignment": "Left",
+            "backgroundColor": "whiteColor"
+        }
+    },
+    "Views": {
+        "V1": {
+            "backgroundColor": "whiteColor"
         }
     }
 }

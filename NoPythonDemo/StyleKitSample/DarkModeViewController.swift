@@ -1,5 +1,10 @@
 import UIKit
 
+enum DarkOrLight: String {
+    case Dark = "Dark"
+    case Light = "Light"
+}
+
 class DarkModeViewController: UIViewController, StyleKitSubscriber {
 
     @IBOutlet weak var textView: UITextView!
@@ -9,10 +14,12 @@ class DarkModeViewController: UIViewController, StyleKitSubscriber {
 
         // Do any additional setup after loading the view.
         Style.sharedInstance.addSubscriber(self)
+        self.loadResource(withType: .Light)
     }
     
     func update() {
         self.textView.style()
+        self.view.style()
     }
     
     @IBAction func switchChanged(sender: AnyObject) {
@@ -20,15 +27,16 @@ class DarkModeViewController: UIViewController, StyleKitSubscriber {
             return
         }
 
-        let filename: String
         if theSwitch.on {
-            filename = "Dark"
+            self.loadResource(withType: .Dark)
         } else {
-            filename = "Light"
+            self.loadResource(withType: .Light)
         }
-
+    }
+    
+    private func loadResource(withType type: DarkOrLight) {
         if let string = NSBundle.mainBundle().infoDictionary?[Style.sharedInstance.bundleKeyForLocation] as? String,
-            srcURL = NSBundle.mainBundle().URLForResource(filename, withExtension: "json"),
+            srcURL = NSBundle.mainBundle().URLForResource(type.rawValue, withExtension: "json"),
             destURL = Utils.documentDirectory?.URLByAppendingPathComponent(string)
         {
             (UIApplication.sharedApplication().delegate as? AppDelegate)?.copyStyleFile(from: srcURL, to: destURL)
