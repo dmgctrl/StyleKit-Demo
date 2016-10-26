@@ -168,7 +168,6 @@
 				2908BCEA1DBA61CB0012C924 /* Stylist */,
 				2908BCF71DBA887B0012C924 /* ViewControllers */,
 				2908BD2E1DBC11310012C924 /* Cells */,
-				C406E7B91DBFD58F004865CA /* StyleKitSubscriber.swift */,
 			);
 			name = StyleKit;
 			sourceTree = "<group>";
@@ -303,7 +302,6 @@
 				C446D61E1CB540CA00EBC929 /* UIView+StyleKit.swift in Sources */,
 				C406E7C41DC0F81D004865CA /* TextViewsTableViewCell.swift in Sources */,
 				2908BCE71DBA61360012C924 /* LabelStylist.swift in Sources */,
-				C406E7BA1DBFD58F004865CA /* StyleKitSubscriber.swift in Sources */,
 				2908BCF21DBA62E20012C924 /* SliderStylist.swift in Sources */,
 				2908BD2B1DBC11120012C924 /* ProgressViewsTableViewCell.swift in Sources */,
 				2908BCEE1DBA62680012C924 /* TextFieldStylist.swift in Sources */,

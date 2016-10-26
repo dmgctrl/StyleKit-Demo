@@ -9,6 +9,7 @@ class ButtonStyle : Stylist {
     var fontStyle: FontStyle?
     var borderWidth: Int?
     var borderColor: UIColor?
+    var backgroundColor: UIColor?
     var cornerRadius: Int?
     var normalColors: ColorStyle?
     var highlightedColors: ColorStyle?
@@ -24,9 +25,10 @@ class ButtonStyle : Stylist {
         case Highlighted = "highlightedState"
         case Selected = "selectedState"
         case Disabled = "disabledState"
+        case BackgroundColor = "backgroundColor"
     }
     
-    static let allValues:[Properties] = [.FontStyle, .BorderWidth, .BorderColor, .CornerRadius, .Normal, .Highlighted, .Selected, .Disabled]
+    static let allValues:[Properties] = [.FontStyle, .BorderWidth, .BackgroundColor, .BorderColor, .CornerRadius, .Normal, .Highlighted, .Selected, .Disabled]
     
     static func serialize(spec: [String:AnyObject], resources:CommonResources) throws -> ButtonStyle {
         let style = ButtonStyle()
@@ -44,6 +46,11 @@ class ButtonStyle : Stylist {
                 if let colorKey = value as? String,
                     let color = resources.colors[colorKey] {
                     style.borderColor = color
+                }
+            case .BackgroundColor:
+                if let colorKey = value as? String,
+                    let color = resources.colors[colorKey] {
+                    style.backgroundColor = color
                 }
             case .BorderWidth:
                 if let width = value as? Int {
@@ -91,6 +98,10 @@ extension UIButton {
             case .BorderColor:
                 if let borderColor = style.borderColor {
                     self.layer.borderColor = borderColor.CGColor
+                }
+            case .BackgroundColor:
+                if let color = style.backgroundColor {
+                    self.backgroundColor = color
                 }
             case .CornerRadius:
                 if let cornerRadius = style.cornerRadius {

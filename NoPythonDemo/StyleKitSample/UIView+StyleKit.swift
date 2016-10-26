@@ -6,6 +6,9 @@ extension UIView {
         static var styleTag = ""
     }
     
+    /**
+         Setting the styleTag automatically applies styles as defined in the stylesheet
+    */
     @IBInspectable var styleTag: String? {
         get {
             return objc_getAssociatedObject(self, &AssociatedKeys.styleTag) as? String

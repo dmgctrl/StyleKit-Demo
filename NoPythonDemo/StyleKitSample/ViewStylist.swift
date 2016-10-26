@@ -55,7 +55,7 @@ class ViewStyle : Stylist {
 
 extension UIView {
     
-    func applyStyle(style:ViewStyle, resources:CommonResources) {
+    private func applyStyle(style:ViewStyle, resources:CommonResources) {
         for property in ViewStyle.allValues {
             switch property {
             case .BorderWidth:
@@ -78,6 +78,9 @@ extension UIView {
         }
     }
     
+    /**
+        Apply the styles of the active stylesheet to the view.
+    */
     func style() {
         guard let styleTag = self.styleTag else {
             print("StyleKit: Warning: Instance of \(self.dynamicType) with no styleTag")
