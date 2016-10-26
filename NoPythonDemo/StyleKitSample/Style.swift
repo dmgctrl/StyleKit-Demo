@@ -26,6 +26,10 @@ protocol Stylist {
     associatedtype Element
 }
 
+protocol StyleKitSubscriber: class {
+    func update()
+}
+
 enum FontProperty: String {
     case name = "font"
     case size = "size"
@@ -68,8 +72,8 @@ class Style: NSObject {
     
     static let sharedInstance = Style()
     
-    let fileName = "Style.json"
-    let bundleKeyForLocation = "StyleKit-StylesheetLocation"
+    private let fileName = "Style.json"
+    private let bundleKeyForLocation = "StyleKit-StylesheetLocation" // Make sure to update docs if this changes
     
     var resources = CommonResources()
     
@@ -239,20 +243,43 @@ class Style: NSObject {
         return nil
     }
     
-    // MARK: - Observer Pattern
+}
+
+extension Style {
     
+    /**
+         You may register for changes to the stylesheet by implementing the `StyleKitSubscriber` protocol and calling `addSubscriber`.
+         
+         StyleKit.sharedInstance.addSubscriber(self)
+         
+         Call 'removeSubscriber(subscriber: StyleKitSubscriber)' to unregister
+    */
     func addSubscriber(subscriber: StyleKitSubscriber) {
         if !subscribers.containsObject(subscriber) {
             subscribers.addObject(subscriber)
         }
     }
-    
+
+    /**
+        Removes a subscriber from the list of subscribers
+     */
     func removeSubscriber(subscriber: StyleKitSubscriber) {
         if subscribers.containsObject(subscriber) {
             subscribers.removeObject(subscriber)
         }
     }
-    
+
+    /**
+        Call this if the stylesheet has changed.
+     
+        StyleKit.sharedInstance.refresh()
+     
+        Since the bundle is readonly, the stylesheet must be at the location specified in the applications plist file for the key 'StyleKit-StylesheetLocation'. The new stylesheet will 'not' automatically get applied to views which have already been tagged/styled. To restyle a view which has already been tagged/styled, call `style()` on the view.
+     
+        You may register for changes to the stylesheet by implementing the `StyleKitSubscriber` protocol and calling `addSubscriber`.
+     
+            StyleKit.sharedInstance.addSubscriber(self)
+    */
     func refresh() {
         self.serialize()
         let enumerator = subscribers.objectEnumerator()
@@ -260,4 +287,5 @@ class Style: NSObject {
             subscriber.update()
         }
     }
+    
 }
