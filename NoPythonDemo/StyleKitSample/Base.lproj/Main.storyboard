@@ -474,9 +474,6 @@ Sending out an S.O.S.
 Sending out an S.O.S.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="styleTag" value="TV1"/>
-                                </userDefinedRuntimeAttributes>
                             </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -488,9 +485,6 @@ Sending out an S.O.S.</string>
                             <constraint firstAttribute="trailing" secondItem="Vc0-5C-vod" secondAttribute="trailing" id="mDd-SD-8I1"/>
                             <constraint firstItem="3ao-XE-Tg2" firstAttribute="top" secondItem="obl-rd-uky" secondAttribute="bottom" constant="20" id="tpq-tT-v0W"/>
                         </constraints>
-                        <userDefinedRuntimeAttributes>
-                            <userDefinedRuntimeAttribute type="string" keyPath="styleTag" value="V1"/>
-                        </userDefinedRuntimeAttributes>
                     </view>
                     <connections>
                         <outlet property="textView" destination="Vc0-5C-vod" id="zpe-Wz-3YQ"/>

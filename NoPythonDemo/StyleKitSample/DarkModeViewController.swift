@@ -18,8 +18,10 @@ class DarkModeViewController: UIViewController, StyleKitSubscriber {
     }
     
     func update() {
-        self.textView.style()
-        self.view.style()
+        UIView.animateWithDuration(0.25) {
+            self.textView.styleTag = "TV1"
+            self.view.styleTag = "V1"
+        }
     }
     
     @IBAction func switchChanged(sender: AnyObject) {
