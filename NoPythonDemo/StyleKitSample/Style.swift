@@ -224,7 +224,7 @@ class Style: NSObject {
                 }
             }
         }
-        return nil
+        return styleSpec
     }
         
     static func serializeFontSpec(spec: [String:AnyObject], resources:CommonResources) -> FontStyle? {
