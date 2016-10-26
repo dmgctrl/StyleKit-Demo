@@ -9,7 +9,7 @@ class StylesViewController: UIViewController, StyleKitSubscriber {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        title = "Stylist"
+        title = "Styles Preview"
         Style.sharedInstance.addSubscriber(self)
     }
 
