@@ -322,15 +322,27 @@
                                     <outlet property="delegate" destination="0Ze-r0-1e2" id="WbR-L3-A92"/>
                                 </connections>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hWM-1d-s3e">
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="buttonTapped:" destination="0Ze-r0-1e2" eventType="touchUpInside" id="JfP-DS-U47"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="2ns-pG-JcV" secondAttribute="trailing" id="41U-iK-8hQ"/>
                             <constraint firstItem="2ns-pG-JcV" firstAttribute="leading" secondItem="9DI-WS-g14" secondAttribute="leading" id="7B2-p6-TYP"/>
+                            <constraint firstItem="hWM-1d-s3e" firstAttribute="centerX" secondItem="9DI-WS-g14" secondAttribute="centerX" id="A2q-Zb-AS6"/>
+                            <constraint firstItem="hWM-1d-s3e" firstAttribute="top" secondItem="zg9-Ed-I02" secondAttribute="bottom" constant="20" id="ThF-RE-SNp"/>
                             <constraint firstItem="bP1-NJ-Wgq" firstAttribute="top" secondItem="2ns-pG-JcV" secondAttribute="bottom" id="d8w-Ah-TAz"/>
-                            <constraint firstItem="2ns-pG-JcV" firstAttribute="top" secondItem="zg9-Ed-I02" secondAttribute="bottom" id="m4z-8M-sPG"/>
+                            <constraint firstItem="2ns-pG-JcV" firstAttribute="top" secondItem="zg9-Ed-I02" secondAttribute="bottom" constant="100" id="m4z-8M-sPG"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="button" destination="hWM-1d-s3e" id="lxQ-KI-NJS"/>
+                        <outlet property="tableView" destination="2ns-pG-JcV" id="N0T-P6-bjd"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nAM-iZ-Qf1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -430,6 +442,9 @@
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="string" keyPath="styleTag" value="B1"/>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="buttonTapped:" destination="qI1-q7-C7V" eventType="touchUpInside" id="BJL-GB-K2K"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
@@ -497,6 +512,9 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="StyleKit" id="cYX-Id-79P"/>
+                    <connections>
+                        <outlet property="button1" destination="dd8-Fy-1jk" id="VlJ-Sv-qMm"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a8I-fd-UGl" sceneMemberID="firstResponder"/>
             </objects>

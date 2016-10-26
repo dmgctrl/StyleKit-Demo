@@ -1,12 +1,16 @@
 
 import UIKit
 
-class StylesViewController: UIViewController {
+class StylesViewController: UIViewController, StyleKitSubscriber {
 
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var button: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         title = "Stylist"
+        Style.sharedInstance.addSubscriber(self)
     }
 
     override func didReceiveMemoryWarning() {
@@ -20,6 +24,14 @@ class StylesViewController: UIViewController {
                                         "Fonts":Array(Style.sharedInstance.resources.fontLabels.keys),
                                         "Images":Array(Style.sharedInstance.resources.imageNames.keys)]
 
+    
+    func update() {
+        self.tableView.reloadData()
+    }
+    
+    @IBAction func buttonTapped(sender: AnyObject) {
+        (UIApplication.sharedApplication().delegate as? AppDelegate)?.downloadStyleFile()
+    }
 }
 
 
@@ -96,7 +108,4 @@ extension StylesViewController: UITableViewDataSource {
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return sectionHeaders[section].rawValue
     }
-    
-    
-    
 }
