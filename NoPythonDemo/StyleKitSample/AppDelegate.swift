@@ -43,7 +43,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func downloadStyleFile() {
-        if let string = NSBundle.mainBundle().infoDictionary?[Style.sharedInstance.bundleKeyForLocation] as? String {
+        if let string = NSBundle.mainBundle().infoDictionary?[Style.bundleKeyForLocation] as? String {
             if let url = NSURL(string:"https://dl.dropboxusercontent.com/u/26582460/Style.json") {
                 NSURLSession.sharedSession().downloadTaskWithURL(url, completionHandler: { tempFileDirectory, response, error in
                     if error == nil {

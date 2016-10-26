@@ -89,7 +89,7 @@ class Style: NSObject {
     static let sharedInstance = Style()
     
     private let fileName = "Style.json"
-    private let bundleKeyForLocation = "StyleKit-StylesheetLocation" // Make sure to update docs if this changes
+    static let bundleKeyForLocation = "StyleKit-StylesheetLocation" // Make sure to update docs if this changes
     
     var resources = CommonResources()
     
@@ -109,7 +109,7 @@ class Style: NSObject {
     }
     
     private func getStylePath() throws -> NSURL {
-        if let string = NSBundle.mainBundle().infoDictionary?[bundleKeyForLocation] as? String,
+        if let string = NSBundle.mainBundle().infoDictionary?[Style.bundleKeyForLocation] as? String,
             documentDirectory = Utils.documentDirectory {
             let pathURL: NSURL?
             if string.containsString(".json") {

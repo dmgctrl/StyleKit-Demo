@@ -37,7 +37,7 @@ class DarkModeViewController: UIViewController, StyleKitSubscriber {
     }
     
     private func loadResource(withType type: DarkOrLight) {
-        if let string = NSBundle.mainBundle().infoDictionary?[Style.sharedInstance.bundleKeyForLocation] as? String,
+        if let string = NSBundle.mainBundle().infoDictionary?[Style.bundleKeyForLocation] as? String,
             srcURL = NSBundle.mainBundle().URLForResource(type.rawValue, withExtension: "json"),
             destURL = Utils.documentDirectory?.URLByAppendingPathComponent(string)
         {
