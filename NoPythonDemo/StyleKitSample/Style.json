@@ -52,6 +52,12 @@
             "borderColor": "blueColor",
             "borderWidth": 2,
             "cornerRadius": 10
+        },
+        "DayTimeReading": {
+            "backgroundColor": "whiteColor"
+        },
+        "NightTimeReading": {
+            "backgroundColor": "blackColor"
         }
     },
     "Labels": {
@@ -178,6 +184,16 @@
                     "size": 20
                 }
             }
+        },
+        "DayTimeReading": {
+            "textColor": "blackColor",
+            "textAlignment": "Left",
+            "backgroundColor": "whiteColor"
+        },
+        "NightTimeReading": {
+            "textColor": "whiteColor",
+            "textAlignment": "Left",
+            "backgroundColor": "blackColor"
         }
     }
     
