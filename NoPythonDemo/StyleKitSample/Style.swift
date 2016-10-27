@@ -22,6 +22,21 @@ class CommonResources {
     var imageNames = [String: String]()
 }
 
+class AttributedTextStyle {
+    var fontStyle: FontStyle?
+    var tracking: Int?
+    var lineSpacing: CGFloat?
+    var ligature: Int?
+    
+    enum Properties: String {
+        case FontStyle = "fontStyle"
+        case Tracking = "tracking"
+        case LineSpacing = "lineSpacing"
+        case Ligature = "ligature"
+        static let allValues:[Properties] = [.FontStyle, .Tracking, .LineSpacing, .Ligature]
+    }
+}
+
 protocol Stylist {
     associatedtype Element
 }
@@ -44,7 +59,8 @@ enum UIElement: String {
     case stepper = "Steppers"
     case progressView = "ProgressViews"
     case view = "Views"
-    static let allValues:[UIElement] = [.view, .segmentedControl, .textField, .button, .label, .slider, .stepper, .progressView]
+    case textView = "TextViews"
+    static let allValues:[UIElement] = [.view, .segmentedControl, .textField, .button, .label, .slider, .stepper, .progressView, .textView]
 }
 
 enum CommonObjects: String {
@@ -62,7 +78,7 @@ enum ColorProperties: String {
 }
 
 
-class Style: NSObject {
+class Style {
     
     enum StyleKitError: ErrorType {
         case StyleFileNotFound(String)
@@ -73,7 +89,7 @@ class Style: NSObject {
     static let sharedInstance = Style()
     
     private let fileName = "Style.json"
-    private let bundleKeyForLocation = "StyleKit-StylesheetLocation" // Make sure to update docs if this changes
+    static let styleSheetLocation = "StyleKit-StylesheetLocation" // Make sure to update docs if this changes
     
     var resources = CommonResources()
     
@@ -83,9 +99,9 @@ class Style: NSObject {
     
     private let subscribers: NSHashTable
     
-    private override init() {
+    private init() {
         self.subscribers = NSHashTable(options: .WeakMemory)
-        super.init()
+        serialize()
     }
 
     private func checkIfImageExist(name:String) -> Bool {
@@ -93,7 +109,7 @@ class Style: NSObject {
     }
     
     private func getStylePath() throws -> NSURL {
-        if let string = NSBundle.mainBundle().infoDictionary?[bundleKeyForLocation] as? String,
+        if let string = NSBundle.mainBundle().infoDictionary?[Style.styleSheetLocation] as? String,
             documentDirectory = Utils.documentDirectory {
             let pathURL: NSURL?
             if string.containsString(".json") {
@@ -187,6 +203,8 @@ class Style: NSObject {
                         styles[labelKey] = try ViewStyle.serialize(specification, resources: resources) as AnyObject
                     case .textField:
                         styles[labelKey] = try TextFieldStyle.serialize(specification, resources: resources) as AnyObject
+                    case .textView:
+                        styles[labelKey] = try TextViewStyle.serialize(specification, resources: resources) as AnyObject
                     }
                 }
                 styleMap[element] = styles
@@ -274,14 +292,14 @@ extension Style {
      
         StyleKit.sharedInstance.refresh()
      
-        Since the bundle is readonly, the stylesheet must be at the location specified in the applications plist file for the key 'StyleKit-StylesheetLocation'. The new stylesheet will 'not' automatically get applied to views which have already been tagged/styled. To restyle a view which has already been tagged/styled, call `style()` on the view.
+        Since the bundle is readonly, the stylesheet must be at the location specified in the applications plist file for the key 'StyleKit-StylesheetLocation'. The new stylesheet will **not** automatically get applied to views which have already been tagged/styled. To restyle a view which has already been tagged/styled, call `style()` on the view.
      
         You may register for changes to the stylesheet by implementing the `StyleKitSubscriber` protocol and calling `addSubscriber`.
      
             StyleKit.sharedInstance.addSubscriber(self)
     */
     func refresh() {
-        self.serialize()
+        serialize()
         let enumerator = subscribers.objectEnumerator()
         while let subscriber = enumerator.nextObject() as? StyleKitSubscriber {
             subscriber.update()

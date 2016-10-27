@@ -1,11 +1,22 @@
 
 import UIKit
 
-class StylesViewController: UIViewController, StyleKitSubscriber {
+class StylesViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var button: UIButton!
+
+    var sectionHeaders = Array(Style.sharedInstance.styleMap.keys)
+    var styleMap = Style.sharedInstance.styleMap
+    var resources:[String:AnyObject] = ["Colors":Array(Style.sharedInstance.resources.colors.keys),
+                                        "Fonts":Array(Style.sharedInstance.resources.fontLabels.keys),
+                                        "Images":Array(Style.sharedInstance.resources.imageNames.keys)]
     
+    
+    @IBAction func buttonTapped(sender: AnyObject) {
+        Utils.downloadStyleFile()
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -17,23 +28,22 @@ class StylesViewController: UIViewController, StyleKitSubscriber {
         super.didReceiveMemoryWarning()
 
     }
-    
-    var sectionHeaders = Array(Style.sharedInstance.styleMap.keys)
-    var styleMap = Style.sharedInstance.styleMap
-    var resources:[String:AnyObject] = ["Colors":Array(Style.sharedInstance.resources.colors.keys),
-                                        "Fonts":Array(Style.sharedInstance.resources.fontLabels.keys),
-                                        "Images":Array(Style.sharedInstance.resources.imageNames.keys)]
-
-    
-    func update() {
-        self.tableView.reloadData()
-    }
-    
-    @IBAction func buttonTapped(sender: AnyObject) {
-        (UIApplication.sharedApplication().delegate as? AppDelegate)?.downloadStyleFile()
+        
+    func updateUI() {
+        sectionHeaders = Array(Style.sharedInstance.styleMap.keys)
+        styleMap = Style.sharedInstance.styleMap
+        resources = ["Colors":Array(Style.sharedInstance.resources.colors.keys),
+                                            "Fonts":Array(Style.sharedInstance.resources.fontLabels.keys),
+                                            "Images":Array(Style.sharedInstance.resources.imageNames.keys)]
+        tableView.reloadData()
     }
 }
 
+extension StylesViewController: StyleKitSubscriber {
+    func update() {
+        self.updateUI()
+    }
+}
 
 extension StylesViewController: UITableViewDelegate {
 
@@ -95,6 +105,9 @@ extension StylesViewController: UITableViewDataSource {
             case .view:
                 (cell as! ViewsTableViewCell).view.styleTag = styleTag
                 (cell as! ViewsTableViewCell).label.text = styleTag
+            case .textView:
+                (cell as! TextViewsTableViewCell).textView.styleTag = styleTag
+                (cell as! TextViewsTableViewCell).textView.text = styleTag
             }
         }
                 

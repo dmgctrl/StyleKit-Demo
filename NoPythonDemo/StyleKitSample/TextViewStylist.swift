@@ -1,20 +1,19 @@
-
-import Foundation
 import UIKit
 
-class LabelStyle: Stylist {
-    
-    typealias Element = UILabel
+class TextViewStyle {
+    typealias Element = UITextView
     
     var textColor: UIColor?
     var textAlignment: NSTextAlignment?
     var attributes: AttributedTextStyle?
+    var backgroundColor: UIColor?
     
     enum Properties: String {
         case TextColor = "textColor"
         case TextAlignment = "textAlignment"
         case Attributes = "attributes"
-        static let allValues:[Properties] = [.TextColor, .TextAlignment, .Attributes]
+        case BackgroundColor = "backgroundColor"
+        static let allValues:[Properties] = [.TextColor, .TextAlignment, .Attributes, .BackgroundColor]
     }
     
     static var textAlignmentKeyMap:[String:NSTextAlignment] = ["Left":.Left,
@@ -23,8 +22,12 @@ class LabelStyle: Stylist {
                                                                "Justified":.Justified,
                                                                "Natural":.Natural]
     
-    static func attributesForLabel(styles:AttributedTextStyle, textAlignment:NSTextAlignment) ->  Dictionary<String, AnyObject> {
-
+    static func attributesForTextView(styles:AttributedTextStyle) ->  Dictionary<String, AnyObject> {
+        let style = NSMutableParagraphStyle()
+        style.alignment = NSTextAlignment.Center
+        if let lineSpace = styles.lineSpacing {
+            style.lineSpacing = lineSpace
+        }
         
         var attributes:[String: AnyObject] = [:]
         
@@ -36,49 +39,42 @@ class LabelStyle: Stylist {
             let characterSpacing = fontSize * tracking / 1000
             attributes[NSKernAttributeName] = characterSpacing
         }
-
-        let style = NSMutableParagraphStyle()
         
-        if let lineSpace = styles.lineSpacing {
-            style.lineSpacing = lineSpace
-        }
-
-        style.alignment = textAlignment
-
-        if let lineSpace = styles.lineSpacing {
-            style.lineSpacing = lineSpace
-        }
         attributes[NSParagraphStyleAttributeName] = style
         
         return attributes
     }
     
-    static func serialize(spec: [String:AnyObject], resources:CommonResources) throws -> LabelStyle {
-        let labelStyle = LabelStyle()
+    static func serialize(spec: [String:AnyObject], resources:CommonResources) throws -> TextViewStyle {
+        let textViewStyle = TextViewStyle()
         for (key,value) in spec {
-            guard let property = LabelStyle.Properties(rawValue: key) else {
+            guard let property = TextViewStyle.Properties(rawValue: key) else {
                 print("StyleKit: Warning: StyleKit does not support \(key) on \(Element.self). Ignored.")
                 continue
             }
             switch property {
                 
-            case LabelStyle.Properties.TextAlignment:
-                if let textAlignmentKey = value as? String, let alignment = LabelStyle.textAlignmentKeyMap[textAlignmentKey] {
-                    labelStyle.textAlignment = alignment
+            case TextViewStyle.Properties.TextAlignment:
+                if let textAlignmentKey = value as? String, let alignment = TextViewStyle.textAlignmentKeyMap[textAlignmentKey] {
+                    textViewStyle.textAlignment = alignment
                 }
-            case LabelStyle.Properties.TextColor:
+            case TextViewStyle.Properties.TextColor:
                 if let colorKey = value as? String, let color = resources.colors[colorKey] {
-                    labelStyle.textColor = color
+                    textViewStyle.textColor = color
                 }
-            case LabelStyle.Properties.Attributes:
+            case TextViewStyle.Properties.Attributes:
                 if let attributes = value as? [String:AnyObject]
                 {
-                    let attr = try LabelStyle.serializeFormatAttributesSpec(attributes, resources:resources)
-                    labelStyle.attributes = attr
+                    let attr = try TextViewStyle.serializeFormatAttributesSpec(attributes, resources:resources)
+                    textViewStyle.attributes = attr
+                }
+            case TextViewStyle.Properties.BackgroundColor:
+                if let colorKey = value as? String, let color = resources.colors[colorKey] {
+                    textViewStyle.backgroundColor = color
                 }
             }
         }
-        return labelStyle
+        return textViewStyle
     }
     
     static func serializeFormatAttributesSpec(spec: [String:AnyObject], resources:CommonResources) throws -> AttributedTextStyle {
@@ -113,22 +109,22 @@ class LabelStyle: Stylist {
     }
 }
 
-extension UILabel {
-    func applyStyle(style:LabelStyle, resources:CommonResources) {
-        for property in LabelStyle.Properties.allValues {
+extension UITextView {
+    func applyStyle(style: TextViewStyle, resources:CommonResources) {
+        for property in TextViewStyle.Properties.allValues {
             switch property {
             case .TextColor:
-                textColor = style.textColor
+                self.textColor = style.textColor
             case .TextAlignment:
-                textAlignment = style.textAlignment ?? self.textAlignment
+                self.textAlignment = style.textAlignment ?? self.textAlignment
             case .Attributes:
                 if let attributes = style.attributes, text = self.text {
-                    let attr = LabelStyle.attributesForLabel(attributes, textAlignment: textAlignment)
-                    self.attributedText = NSAttributedString(string: text, attributes:attr)
+                    let asdf = TextViewStyle.attributesForTextView(attributes)
+                    self.attributedText = NSAttributedString(string: text, attributes:asdf)
                 }
+            case .BackgroundColor:
+                self.backgroundColor = style.backgroundColor
             }
         }
     }
 }
-
-

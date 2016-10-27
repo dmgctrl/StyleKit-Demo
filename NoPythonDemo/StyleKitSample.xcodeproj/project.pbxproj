@@ -30,6 +30,7 @@
 		2908BD291DBC10FF0012C924 /* SteppersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2908BD281DBC10FF0012C924 /* SteppersTableViewCell.swift */; };
 		2908BD2B1DBC11120012C924 /* ProgressViewsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2908BD2A1DBC11120012C924 /* ProgressViewsTableViewCell.swift */; };
 		2908BD2D1DBC11220012C924 /* ViewsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2908BD2C1DBC11220012C924 /* ViewsTableViewCell.swift */; };
+		2908BD591DC24A5D0012C924 /* DemoCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2908BD581DC24A5D0012C924 /* DemoCode.swift */; };
 		295D21791C9214AA001626BD /* Style.json in Resources */ = {isa = PBXBuildFile; fileRef = 295D21781C9214AA001626BD /* Style.json */; };
 		298DC60B1C92073E00BB0D29 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 298DC60A1C92073E00BB0D29 /* AppDelegate.swift */; };
 		298DC60D1C92073E00BB0D29 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 298DC60C1C92073E00BB0D29 /* ViewController.swift */; };
@@ -38,6 +39,9 @@
 		298DC6151C92073E00BB0D29 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 298DC6131C92073E00BB0D29 /* LaunchScreen.storyboard */; };
 		298E3BC81DB56D7B00B54DD0 /* Style2.json in Resources */ = {isa = PBXBuildFile; fileRef = 298E3BC71DB56D7B00B54DD0 /* Style2.json */; };
 		29EBA4911DB69EA500CAFFEA /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29EBA4901DB69EA500CAFFEA /* Utils.swift */; };
+		C406E7BC1DBFFF59004865CA /* ReadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C406E7BB1DBFFF59004865CA /* ReadingViewController.swift */; };
+		C406E7C21DC0F63C004865CA /* TextViewStylist.swift in Sources */ = {isa = PBXBuildFile; fileRef = C406E7C11DC0F63C004865CA /* TextViewStylist.swift */; };
+		C406E7C41DC0F81D004865CA /* TextViewsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C406E7C31DC0F81D004865CA /* TextViewsTableViewCell.swift */; };
 		C446D61D1CB540CA00EBC929 /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = C446D61B1CB540CA00EBC929 /* Style.swift */; };
 		C446D61E1CB540CA00EBC929 /* UIView+StyleKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = C446D61C1CB540CA00EBC929 /* UIView+StyleKit.swift */; };
 /* End PBXBuildFile section */
@@ -66,6 +70,7 @@
 		2908BD281DBC10FF0012C924 /* SteppersTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SteppersTableViewCell.swift; sourceTree = "<group>"; };
 		2908BD2A1DBC11120012C924 /* ProgressViewsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressViewsTableViewCell.swift; sourceTree = "<group>"; };
 		2908BD2C1DBC11220012C924 /* ViewsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewsTableViewCell.swift; sourceTree = "<group>"; };
+		2908BD581DC24A5D0012C924 /* DemoCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoCode.swift; sourceTree = "<group>"; };
 		295D21781C9214AA001626BD /* Style.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; lineEnding = 0; path = Style.json; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.javascript; };
 		298DC6071C92073E00BB0D29 /* StyleKitSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StyleKitSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		298DC60A1C92073E00BB0D29 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -76,6 +81,9 @@
 		298DC6161C92073E00BB0D29 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		298E3BC71DB56D7B00B54DD0 /* Style2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Style2.json; sourceTree = "<group>"; };
 		29EBA4901DB69EA500CAFFEA /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		C406E7BB1DBFFF59004865CA /* ReadingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReadingViewController.swift; sourceTree = "<group>"; };
+		C406E7C11DC0F63C004865CA /* TextViewStylist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextViewStylist.swift; sourceTree = "<group>"; };
+		C406E7C31DC0F81D004865CA /* TextViewsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextViewsTableViewCell.swift; sourceTree = "<group>"; };
 		C446D61B1CB540CA00EBC929 /* Style.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Style.swift; sourceTree = "<group>"; };
 		C446D61C1CB540CA00EBC929 /* UIView+StyleKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+StyleKit.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -115,6 +123,7 @@
 				2908BCF11DBA62E20012C924 /* SliderStylist.swift */,
 				2908BCF31DBA631E0012C924 /* StepperStylist.swift */,
 				2908BCF51DBA636D0012C924 /* ProgressViewStylist.swift */,
+				C406E7C11DC0F63C004865CA /* TextViewStylist.swift */,
 			);
 			name = Stylist;
 			sourceTree = "<group>";
@@ -124,6 +133,7 @@
 			children = (
 				2908BCF81DBA89240012C924 /* StylesViewController.swift */,
 				298DC60C1C92073E00BB0D29 /* ViewController.swift */,
+				C406E7BB1DBFFF59004865CA /* ReadingViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -139,6 +149,7 @@
 				2908BD281DBC10FF0012C924 /* SteppersTableViewCell.swift */,
 				2908BD2A1DBC11120012C924 /* ProgressViewsTableViewCell.swift */,
 				2908BD2C1DBC11220012C924 /* ViewsTableViewCell.swift */,
+				C406E7C31DC0F81D004865CA /* TextViewsTableViewCell.swift */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -146,6 +157,7 @@
 		2932CEE21C93691E00F83F34 /* StyleKit */ = {
 			isa = PBXGroup;
 			children = (
+				2908BD581DC24A5D0012C924 /* DemoCode.swift */,
 				298DC60A1C92073E00BB0D29 /* AppDelegate.swift */,
 				C446D61B1CB540CA00EBC929 /* Style.swift */,
 				29EBA4901DB69EA500CAFFEA /* Utils.swift */,
@@ -269,16 +281,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				298DC60D1C92073E00BB0D29 /* ViewController.swift in Sources */,
+				2908BD591DC24A5D0012C924 /* DemoCode.swift in Sources */,
 				2908BD2D1DBC11220012C924 /* ViewsTableViewCell.swift in Sources */,
 				2908BD1F1DBC0EC10012C924 /* ButtonTableViewCell.swift in Sources */,
 				2908BCEC1DBA621D0012C924 /* ViewStylist.swift in Sources */,
 				2908BD271DBC10EB0012C924 /* SlidersTableViewCell.swift in Sources */,
+				C406E7BC1DBFFF59004865CA /* ReadingViewController.swift in Sources */,
+				C406E7C21DC0F63C004865CA /* TextViewStylist.swift in Sources */,
 				2908BD291DBC10FF0012C924 /* SteppersTableViewCell.swift in Sources */,
 				2908BCF61DBA636D0012C924 /* ProgressViewStylist.swift in Sources */,
 				2908BCF91DBA89240012C924 /* StylesViewController.swift in Sources */,
 				2908BCF01DBA62AA0012C924 /* SegmentedControlStylist.swift in Sources */,
 				2908BD251DBC10D60012C924 /* LabelsTableViewCell.swift in Sources */,
 				C446D61E1CB540CA00EBC929 /* UIView+StyleKit.swift in Sources */,
+				C406E7C41DC0F81D004865CA /* TextViewsTableViewCell.swift in Sources */,
 				2908BCE71DBA61360012C924 /* LabelStylist.swift in Sources */,
 				2908BCF21DBA62E20012C924 /* SliderStylist.swift in Sources */,
 				2908BD2B1DBC11120012C924 /* ProgressViewsTableViewCell.swift in Sources */,

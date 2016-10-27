@@ -1144,5 +1144,16 @@
         }
     },
     "SegmentedControls": {
+    },
+    "TextViews": {
+        "TV1": {
+            "textColor": "blueColor",
+            "attributes": {
+                "fontStyle": {
+                    "font": "primaryFontLight",
+                    "size": 20
+                }
+            }
+        }
     }
 }

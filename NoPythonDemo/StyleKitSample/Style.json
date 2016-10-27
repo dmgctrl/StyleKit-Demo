@@ -52,6 +52,12 @@
             "borderColor": "blueColor",
             "borderWidth": 2,
             "cornerRadius": 10
+        },
+        "DayTimeReading": {
+            "backgroundColor": "whiteColor"
+        },
+        "NightTimeReading": {
+            "backgroundColor": "blackColor"
         }
     },
     "Labels": {
@@ -167,6 +173,27 @@
             "filledTrackColor": "purpleColor",
             "emptyTrackColor": "greenColor",
             "thumbImage": "thumbImageDefault"
+        }
+    },
+    "TextViews": {
+        "TV1": {
+            "textColor": "blueColor",
+            "attributes": {
+                "fontStyle": {
+                    "font": "primaryFontLight",
+                    "size": 20
+                }
+            }
+        },
+        "DayTimeReading": {
+            "textColor": "blackColor",
+            "textAlignment": "Left",
+            "backgroundColor": "whiteColor"
+        },
+        "NightTimeReading": {
+            "textColor": "whiteColor",
+            "textAlignment": "Left",
+            "backgroundColor": "blackColor"
         }
     }
     
